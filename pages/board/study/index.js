@@ -73,7 +73,7 @@ const Study = () => {
                 ]} title = '게시판' />
             </div>
             <div className='content'>
-                <h1>스터디 게시판</h1>
+                <h1>스터디 게시판.</h1>
                 <div className='search'>
                     <select  onChange={checkOption} className='option'>
                         <option value = 'none' >선택</option>
