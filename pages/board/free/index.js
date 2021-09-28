@@ -37,7 +37,7 @@ const Free = () => {
         console.log(optional)
         setOptionInput({option : optional})
     }
-
+    console.log(optionInput)
     const titleData = freeApi.map(data => data.title)
     const bodyData = freeApi.map(data => data.body)
 

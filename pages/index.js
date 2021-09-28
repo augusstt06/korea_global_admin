@@ -1,6 +1,54 @@
+import { useState } from "react"
+import { useEffect } from "react"
+import axios from "axios"
+
 import Side from "../component/Side"
 
 export default function Home() {
+  const [mainApi, setMainApi] = useState({
+      mainAnnonce : [],
+      mainBoard : []
+  })
+  const mainData = async() => {
+      console.log('Now Loading...');
+      const resAnnounce = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
+      const resBoard =  await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
+      setMainApi({mainAnnonce : resAnnounce.data, 
+                  mainBoard : resBoard.data});
+      console.log("Finish Loading");
+  }
+  useEffect(() => {
+    mainData();
+  },[])
+  
+  
+  const [optionInput, setOptionInput] = useState({
+    category : '',
+    option : '',
+    keyword : ''
+  })
+  const searchInput = (e) => {
+    const newInput = {...optionInput};
+    newInput[e.target.name] = e.target.value;
+    setOptionInput(newInput)
+  }
+  const checkOption = (e) => {
+    const optional = e.target.value;
+    setOptionInput({option : optional})
+  }
+  const checkCategory = (e) => {
+    const category = e.target.value;
+    setOptionInput({category : category});
+  }
+  const findData = () => {
+    if  (optionInput.category === 'announce') {
+      if(optionInput.option === 'title'){
+        
+      }
+    } else if (optionInput.category === 'board') {
+
+    }
+  }
   return (
     <div className= 'main'>
       <div className='component'>
@@ -11,14 +59,19 @@ export default function Home() {
       <div className='content'>
         <h1>으아앙</h1>
         <div className='search'>
-          <select className='option'>
+          <select className='option' onChange = {checkCategory}>
+              <option value = 'none' >선택</option>
+              <option value = 'announce'>공지</option>
+              <option value = 'board'>게시판</option>
+          </select>
+          <select className='option' onChange = {checkOption}>
               <option value = 'none' >선택</option>
               <option value = 'title'>제목</option>
               <option value = 'body'>내용</option>
           </select>
           <input type = 'text'
                   name = 'keyword'
-                  // onChange={searchInput}
+                  onChange={searchInput}
                   className='inputText'/>
           <button type = 'submit'
                   // onClick={clickSearch}
