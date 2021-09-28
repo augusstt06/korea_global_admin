@@ -52,7 +52,6 @@ export default function Home() {
                 position: relative;
                 top : 120px
             }
-            
             table{
                 width :  1000px;
             }
