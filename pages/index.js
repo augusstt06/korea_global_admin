@@ -52,56 +52,52 @@ export default function Home() {
   console.log(mainApi)
 
   const findData = () => {
-    if  (optionInput.category === 'announce') {
-      if(optionInput.option === 'title'){
+    if (optionInput.category === "announce" && optionInput.option === "title") {
+      setSearchAnnounce();
+      const copy = [];
+      const searchData = (mainApi.mainAnnonce.map(data => data.title)).filter(data => data.match(optionInput.keyword));
+      searchData.forEach(parents => 
+        (mainApi.mainAnnonce).forEach(childs => {
+          if ((childs.title).includes(parents) === true) {
+            copy.push(childs);
+          }
+        }))
+    return setSearchAnnounce(copy)
+    } else if (optionInput.category === "announce" && optionInput.option === "body"){
         setSearchAnnounce();
         const copy = [];
-        const searchData = (mainApi.mainAnnonce.map(data => data.title)).filter(data => data.match(optionInput.keyword));
+        const searchData = (mainApi.mainAnnonce.map(data => data.body)).filter(data => data.match(optionInput.keyword));
         searchData.forEach(parents => 
           (mainApi.mainAnnonce).forEach(childs => {
+            if ((childs.body).includes(parents) === true) {
+              copy.push(childs);
+            }
+          }))
+      return setSearchAnnounce(copy)
+    } else if (optionInput.category === "board" && optionInput.option === "title"){
+        setSearchBoard();
+        const copy = [];
+        const searchData = (mainApi.mainBoard.map(data => data.title)).filter(data => data.match(optionInput.keyword));
+        searchData.forEach(parents => 
+          (mainApi.mainBoard).forEach(childs => {
             if ((childs.title).includes(parents) === true) {
               copy.push(childs);
             }
           }))
-        return setSearchAnnounce(copy)
-      } else if (optionInput.option === 'body') {
-          setSearchAnnounce();
-          const copy = [];
-          const searchData = (mainApi.mainAnnonce.map(data => data.body)).filter(data => data.map(optionInput.keyword));
-          searchData.forEach(parents => 
-            (mainApi.mainAnnonce).forEach(childs => {
-              if ((childs.body).includes(parents) === true) {
-                copy.push(childs);
-              }
-            }))
-        return setSearchAnnounce(childs)
-      }
-    } else if (optionInput.category === 'board') {
-        if(optionInput.option === 'title'){
-          setSearchBoard();
-          const copy = [];
-          const searchData = (mainApi.mainBoard.map(data => data.title)).filter(data => data.match(optionInput.keyword));
-          searchData.forEach(parents => 
-            (mainApi.mainBoard).forEach(childs => {
-              if ((childs.title).includes(parents) === true) {
-                copy.push(childs);
-              }
-            }))
-          return setSearchBoard(copy)
-        } else if (optionInput.option === 'body') {
-            setSearchBoard();
-            const copy = [];
-            const searchData = (mainApi.mainBoard.map(data => data.body)).filter(data => data.map(optionInput.keyword));
-            searchData.forEach(parents => 
-              (mainApi.mainBoard).forEach(childs => {
-                if ((childs.body).includes(parents) === true) {
-                  copy.push(childs);
-                }
-              }))
-          return setSearchBoard(childs)
-        }
+      return setSearchBoard(copy)
+    } else if (optionInput.category === "board" && optionInput.option === "body"){
+        setSearchBoard();
+        const copy = [];
+        const searchData = (mainApi.mainBoard.map(data => data.body)).filter(data => data.map(optionInput.keyword));
+        searchData.forEach(parents => 
+          (mainApi.mainBoard).forEach(childs => {
+            if ((childs.body).includes(parents) === true) {
+              copy.push(childs);
+            }
+          }))
+      return setSearchBoard(copy)
     } else {
-      return mainApi;
+        return mainApi;
     }
   }
   const clickSearch = () => {
