@@ -20,35 +20,41 @@ export default function Home() {
   useEffect(() => {
     mainData();
   },[])
-  
-  
+
   const [optionInput, setOptionInput] = useState({
     category : '',
     option : '',
     keyword : ''
   })
+  // const [optionInput, setOptionInput] = useState([])
   const searchInput = (e) => {
     const newInput = {...optionInput};
     newInput[e.target.name] = e.target.value;
     setOptionInput(newInput)
   }
   const checkOption = (e) => {
-    const optional = e.target.value;
-    setOptionInput({option : optional})
+    const optional = {...optionInput};
+    optional[e.target.name] = e.target.value;
+    setOptionInput(optional)
+    
   }
   const checkCategory = (e) => {
-    const category = e.target.value;
-    setOptionInput({category : category});
+    const category = {...optionInput};
+    category[e.target.name] = e.target.value;
+    setOptionInput(category)
   }
-  const findData = () => {
-    if  (optionInput.category === 'announce') {
-      if(optionInput.option === 'title'){
-        
-      }
-    } else if (optionInput.category === 'board') {
+  console.log(optionInput)
 
-    }
-  }
+  // const findData = () => {
+  //   if  (optionInput.category === 'announce') {
+  //     if(optionInput.option === 'title'){
+        
+  //     }
+  //   } else if (optionInput.category === 'board') {
+
+  //   }
+  // }
+  
   return (
     <div className= 'main'>
       <div className='component'>
@@ -58,13 +64,13 @@ export default function Home() {
       </div>
       <div className='content'>
         <h1>으아앙</h1>
-        <div className='search'>
-          <select className='option' onChange = {checkCategory}>
+        <div className='search'> 
+          <select className='option' name = "category" onChange = {checkCategory}>
               <option value = 'none' >선택</option>
               <option value = 'announce'>공지</option>
               <option value = 'board'>게시판</option>
           </select>
-          <select className='option' onChange = {checkOption}>
+          <select className='option' name="option" onChange = {checkOption}>
               <option value = 'none' >선택</option>
               <option value = 'title'>제목</option>
               <option value = 'body'>내용</option>
