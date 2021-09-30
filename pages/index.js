@@ -43,7 +43,7 @@ export default function Home() {
     category[e.target.name] = e.target.value;
     setOptionInput(category)
   }
-  console.log(optionInput)
+  console.log(optionInput.category)
 
   // const findData = () => {
   //   if  (optionInput.category === 'announce') {
