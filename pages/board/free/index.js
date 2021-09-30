@@ -71,7 +71,7 @@ const Free = () => {
                     }))
                 return setSearch(copy)
             } else {
-                return freeApi
+                return freeApi;
             }
         
     }

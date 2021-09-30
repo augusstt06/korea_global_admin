@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
+import Link from 'next/link'
 
 import Side from "../component/Side"
 
@@ -45,16 +46,67 @@ export default function Home() {
   }
   console.log(optionInput.category)
 
-  // const findData = () => {
-  //   if  (optionInput.category === 'announce') {
-  //     if(optionInput.option === 'title'){
-        
-  //     }
-  //   } else if (optionInput.category === 'board') {
 
-  //   }
-  // }
-  
+  const [searchAnnounce, setSearchAnnounce] = useState([]);
+  const [searchBoard, setSearchBoard] = useState([]);
+  console.log(mainApi)
+
+  const findData = () => {
+    if  (optionInput.category === 'announce') {
+      if(optionInput.option === 'title'){
+        setSearchAnnounce();
+        const copy = [];
+        const searchData = (mainApi.mainAnnonce.map(data => data.title)).filter(data => data.match(optionInput.keyword));
+        searchData.forEach(parents => 
+          (mainApi.mainAnnonce).forEach(childs => {
+            if ((childs.title).includes(parents) === true) {
+              copy.push(childs);
+            }
+          }))
+        return setSearchAnnounce(copy)
+      } else if (optionInput.option === 'body') {
+          setSearchAnnounce();
+          const copy = [];
+          const searchData = (mainApi.mainAnnonce.map(data => data.body)).filter(data => data.map(optionInput.keyword));
+          searchData.forEach(parents => 
+            (mainApi.mainAnnonce).forEach(childs => {
+              if ((childs.body).includes(parents) === true) {
+                copy.push(childs);
+              }
+            }))
+        return setSearchAnnounce(childs)
+      }
+    } else if (optionInput.category === 'board') {
+        if(optionInput.option === 'title'){
+          setSearchBoard();
+          const copy = [];
+          const searchData = (mainApi.mainBoard.map(data => data.title)).filter(data => data.match(optionInput.keyword));
+          searchData.forEach(parents => 
+            (mainApi.mainBoard).forEach(childs => {
+              if ((childs.title).includes(parents) === true) {
+                copy.push(childs);
+              }
+            }))
+          return setSearchBoard(copy)
+        } else if (optionInput.option === 'body') {
+            setSearchBoard();
+            const copy = [];
+            const searchData = (mainApi.mainBoard.map(data => data.body)).filter(data => data.map(optionInput.keyword));
+            searchData.forEach(parents => 
+              (mainApi.mainBoard).forEach(childs => {
+                if ((childs.body).includes(parents) === true) {
+                  copy.push(childs);
+                }
+              }))
+          return setSearchBoard(childs)
+        }
+    } else {
+      return mainApi;
+    }
+  }
+  const clickSearch = () => {
+    findData();
+  }
   return (
     <div className= 'main'>
       <div className='component'>
@@ -80,12 +132,57 @@ export default function Home() {
                   onChange={searchInput}
                   className='inputText'/>
           <button type = 'submit'
-                  // onClick={clickSearch}
+                  onClick={clickSearch}
                   className='button'
                   >검색</button>
         </div>
         <div className = 'contentBox'>
-          <table>
+          <table className='announcetable'>
+            <thead>
+              <tr className='contentHeader'>
+                <th>번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                searchAnnounce.length === 0 ? (mainApi.mainAnnonce).map(announce => (
+                  <tr className ='contentBody' key = {announce.id}>
+                    <td>xx</td>
+                    <td>
+                      <Link href = {{pathname : `/office/announce/${announce.id}`}}>
+                        <a>{announce.id}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link href = {{pathname : `/office/announce/${announce.id}`}}>
+                        <a>{announce.title}</a>
+                      </Link>
+                    </td>
+                    <td>xx.xxx.xxx</td>
+                  </tr> 
+                )) : searchAnnounce.map(search => (
+                  <tr className ='contentBody' key = {search.id}>
+                    <td>xx</td>
+                    <td>
+                      <Link href = {{pathname : `/office/announce/${search.id}`}}>
+                        <a>{search.id}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link href = {{pathname : `/office/announce/${search.id}`}}>
+                        <a>{search.title}</a>
+                      </Link>
+                    </td>
+                    <td>xx.xxx.xxx</td>
+                  </tr> 
+                ))
+              }
+            </tbody>
+          </table>
+          <table className='boardtable'>
             <thead>
               <tr className='contentHeader'>
                 <th>번호</th>
