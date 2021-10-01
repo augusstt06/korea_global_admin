@@ -51,6 +51,7 @@ export default function Home() {
   const [searchBoard, setSearchBoard] = useState([]);
   console.log(mainApi)
 
+  // 나중에 함수 분리하기
   const findData = () => {
     if (optionInput.category === "announce" && optionInput.option === "title") {
       setSearchAnnounce();
