@@ -179,16 +179,54 @@ export default function Home() {
               }
             </tbody>
           </table>
-          <table className='boardtable'>
+          {/* <table className='boardtable'>
             <thead>
               <tr className='contentHeader'>
                 <th>번호</th>
                 <th>작성자</th>
                 <th>제목</th>
                 <th>날짜</th>
+                <th>카테고리</th>
               </tr>
             </thead>
-          </table>
+            <tbody>
+              {
+                searchBoard.length === 0 ? (mainApi.mainBoard).map(board => (
+                  <tr className='contentBody' key = {board.id}>
+                    <td>xx</td>
+                    <td>
+                      <Link href = {{pathname : `/board/${board.id}`}}>
+                        <a>{board.id}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link href = {{pathname : `/board/${board.id}`}}>
+                        <a>{board.title}</a>
+                      </Link>
+                    </td>
+                    <td>xx.xxx.xxx</td>
+                    <td>흐음</td>
+                  </tr>
+                )) : searchBoard.map(search => (
+                  <tr className='contentBody' key = {search.id}>
+                    <td>xx</td>
+                    <td>
+                      <Link href = {{pathname : `/board/${search.id}`}}>
+                        <a>{search.id}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link href = {{pathname : `/board/${search.id}`}}>
+                        <a>{search.title}</a>
+                      </Link>
+                    </td>
+                    <td>xx.xxx.xxx</td>
+                    <td>흐음</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table> */}
         </div>
       </div>
       <style jsx>{`
@@ -206,7 +244,9 @@ export default function Home() {
                 top : 120px
             }
             table{
-                width :  1000px;
+                width :  800px;
+                height: 50px;
+                /* font-size : 0.5rem; */
             }
             .contentBox {
                 table-layout : fixed;
