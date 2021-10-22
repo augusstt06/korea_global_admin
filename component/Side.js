@@ -15,7 +15,7 @@ const Side = (props) => {
         setInput(newInput)
     }
     return (
-        <nav>
+        <nav className='Side'>
             <div className='login'>
                 <div>
                     내 정보
@@ -46,53 +46,6 @@ const Side = (props) => {
                     </div>
                 ))}
             </div>
-            <style jsx>{`
-                
-                nav {
-                    border : 1px solid black;
-                    width : 190px;
-                }
-                .login {
-                    text-align : center;
-                    padding :10px;
-                    border-bottom : 1px dotted black;
-                }
-                input {
-                    padding: 5px;
-                    margin-top : 5px;
-                }
-                button {
-                    padding: 2px;
-                    margin-top : 5px;
-                }
-                .sideItem {
-                    display : block;
-                    flex-direction : column;
-                    align-items: center;
-                    /* border-top : 1px dotted black; */
-                    text-align : center;
-                }
-                /* .sideTitle {
-                    text-align : center;
-                    padding :10px;
-                } */
-                .sideDetail {
-                    width : 100%;
-                    padding : 10px;
-                    
-                    text-align : center;
-                }
-                .item{
-                    border-bottom : 1px solid black;
-                    padding: 5px;
-                }
-                .item:hover {
-                    background: black;
-                    color : white;
-                }
-            `}
-
-            </style>
         </nav>
     )
 }

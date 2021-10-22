@@ -5,6 +5,8 @@ import Link from 'next/link'
 
 import Side from "../component/Side"
 
+import Pagination from "../component/Pagination"
+
 export default function Home() {
   const [mainApi, setMainApi] = useState({
       mainAnnonce : [],
@@ -12,8 +14,8 @@ export default function Home() {
   })
   const mainData = async() => {
       console.log('Now Loading...');
-      const resAnnounce = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
-      const resBoard =  await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
+      const resAnnounce = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=30');
+      const resBoard =  await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=30');
       setMainApi({mainAnnonce : resAnnounce.data, 
                   mainBoard : resBoard.data});
       console.log("Finish Loading");
@@ -104,6 +106,16 @@ export default function Home() {
   const clickSearch = () => {
     findData();
   }
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(5);
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPost = ( searchAnnounce.length === 0 ? mainApi.mainAnnonce.slice(indexOfFirstPost, indexOfLastPost) : 
+                                                      searchAnnounce.slice(indexOfFirstPost, indexOfLastPost));
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
   return (
     <div className= 'main'>
       <div className='component'>
@@ -144,8 +156,8 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {
-                searchAnnounce.length === 0 ? (mainApi.mainAnnonce).map(announce => (
+            {
+                currentPost.map(announce => (
                   <tr className ='contentBody' key = {announce.id}>
                     <td>xx</td>
                     <td>
@@ -160,135 +172,15 @@ export default function Home() {
                     </td>
                     <td>xx.xxx.xxx</td>
                   </tr> 
-                )) : searchAnnounce.map(search => (
-                  <tr className ='contentBody' key = {search.id}>
-                    <td>xx</td>
-                    <td>
-                      <Link href = {{pathname : `/office/announce/${search.id}`}}>
-                        <a>{search.id}</a>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link href = {{pathname : `/office/announce/${search.id}`}}>
-                        <a>{search.title}</a>
-                      </Link>
-                    </td>
-                    <td>xx.xxx.xxx</td>
-                  </tr> 
                 ))
               }
             </tbody>
           </table>
-          {/* <table className='boardtable'>
-            <thead>
-              <tr className='contentHeader'>
-                <th>번호</th>
-                <th>작성자</th>
-                <th>제목</th>
-                <th>날짜</th>
-                <th>카테고리</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                searchBoard.length === 0 ? (mainApi.mainBoard).map(board => (
-                  <tr className='contentBody' key = {board.id}>
-                    <td>xx</td>
-                    <td>
-                      <Link href = {{pathname : `/board/${board.id}`}}>
-                        <a>{board.id}</a>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link href = {{pathname : `/board/${board.id}`}}>
-                        <a>{board.title}</a>
-                      </Link>
-                    </td>
-                    <td>xx.xxx.xxx</td>
-                    <td>흐음</td>
-                  </tr>
-                )) : searchBoard.map(search => (
-                  <tr className='contentBody' key = {search.id}>
-                    <td>xx</td>
-                    <td>
-                      <Link href = {{pathname : `/board/${search.id}`}}>
-                        <a>{search.id}</a>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link href = {{pathname : `/board/${search.id}`}}>
-                        <a>{search.title}</a>
-                      </Link>
-                    </td>
-                    <td>xx.xxx.xxx</td>
-                    <td>흐음</td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table> */}
+          <div>
+            <Pagination postsperPage={postPerPage} totalPage={(searchAnnounce.length === 0 ? mainApi.mainAnnonce.length : searchAnnounce.length)} paginate={paginate} />
+          </div>
         </div>
       </div>
-      <style jsx>{`
-            
-            .main{
-                display: flex;
-                position :relative;
-            }
-            .component {
-                margin-left : 20px;
-                height : 150px;
-                margin-right : 20px;
-                /* background : gray; */
-                position: relative;
-                top : 120px
-            }
-            table{
-                width :  800px;
-                height: 50px;
-                /* font-size : 0.5rem; */
-            }
-            .contentBox {
-                table-layout : fixed;
-                /* width : 750px */
-                border-top : 1px solid black;
-                /* border-bottom : 1px solid black; */
-                padding : 10px 5px;
-                
-            }
-            tr {
-                padding: 10px;
-            }
-            
-            td {
-                padding: 10px;
-                text-align : center;
-                border-bottom : 1px dotted black;
-            }
-            .write {
-                position: relative;
-                float : right;
-                right : 7px;
-                border : 1px solid black;
-                width : 60px;
-                text-align : center;
-                padding: 5px;
-            }
-            .write:hover {
-                background: black;
-                color : white;
-            }
-            .search {
-                position: relative;
-                /* left : 950px; */
-                
-            }
-            .inputText {
-                margin-right : 10px;
-                margin-left : 10px;
-            }
-            `}
-        </style>
     </div>
   )
 }

@@ -1,4 +1,6 @@
 import '../styles/globals.css'
+import '../styles/Page.modules.scss'
+
 import Header from '../component/Header'
 
 function MyApp({ Component, pageProps }) {
@@ -6,15 +8,6 @@ function MyApp({ Component, pageProps }) {
     <div>
       <Header/>
       <Component {...pageProps} />
-      <style jsx>{`
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding : 0;
-                height: 100%;
-            }
-            `}
-      </style>
     </div>
     
   )
