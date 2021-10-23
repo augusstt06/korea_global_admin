@@ -29,7 +29,7 @@ export default function Home() {
     option : '',
     keyword : ''
   })
-  // const [optionInput, setOptionInput] = useState([])
+
   const searchInput = (e) => {
     const newInput = {...optionInput};
     newInput[e.target.name] = e.target.value;
@@ -46,63 +46,51 @@ export default function Home() {
     category[e.target.name] = e.target.value;
     setOptionInput(category)
   }
-  console.log(optionInput.category)
-
 
   const [searchAnnounce, setSearchAnnounce] = useState([]);
   const [searchBoard, setSearchBoard] = useState([]);
-  console.log(mainApi)
+  
 
-  // 나중에 함수 분리하기
+
   const findData = () => {
-    if (optionInput.category === "announce" && optionInput.option === "title") {
-      setSearchAnnounce();
-      const copy = [];
-      const searchData = (mainApi.mainAnnonce.map(data => data.title)).filter(data => data.match(optionInput.keyword));
-      searchData.forEach(parents => 
-        (mainApi.mainAnnonce).forEach(childs => {
-          if ((childs.title).includes(parents) === true) {
-            copy.push(childs);
-          }
-        }))
-    return setSearchAnnounce(copy)
-    } else if (optionInput.category === "announce" && optionInput.option === "body"){
-        setSearchAnnounce();
-        const copy = [];
-        const searchData = (mainApi.mainAnnonce.map(data => data.body)).filter(data => data.match(optionInput.keyword));
-        searchData.forEach(parents => 
-          (mainApi.mainAnnonce).forEach(childs => {
-            if ((childs.body).includes(parents) === true) {
-              copy.push(childs);
-            }
-          }))
-      return setSearchAnnounce(copy)
-    } else if (optionInput.category === "board" && optionInput.option === "title"){
-        setSearchBoard();
-        const copy = [];
-        const searchData = (mainApi.mainBoard.map(data => data.title)).filter(data => data.match(optionInput.keyword));
-        searchData.forEach(parents => 
-          (mainApi.mainBoard).forEach(childs => {
-            if ((childs.title).includes(parents) === true) {
-              copy.push(childs);
-            }
-          }))
-      return setSearchBoard(copy)
-    } else if (optionInput.category === "board" && optionInput.option === "body"){
-        setSearchBoard();
-        const copy = [];
-        const searchData = (mainApi.mainBoard.map(data => data.body)).filter(data => data.map(optionInput.keyword));
-        searchData.forEach(parents => 
-          (mainApi.mainBoard).forEach(childs => {
-            if ((childs.body).includes(parents) === true) {
-              copy.push(childs);
-            }
-          }))
-      return setSearchBoard(copy)
-    } else {
-        return mainApi;
+    switch(optionInput.category) {
+      case "announce" :
+        switch(optionInput.option) {
+          case "title" :
+            setSearchAnnounce();
+            const correctAnnounceTitle = mainApi.mainAnnonce.filter(data => (data.title).includes(optionInput.keyword) === true);
+            console.log(correctAnnounceTitle);
+            setSearchAnnounce(correctAnnounceTitle);
+            break;
+          case "body" :
+            setSearchAnnounce();
+            const correctAnnounceBody = mainApi.mainAnnonce.filter(data => (data.body).includes(optionInput.keyword) === true);
+            console.log(correctAnnounceBody);
+            setSearchAnnounce(correctAnnounceBody);
+            break;
+        }
+        break;
+      case "board" :
+        switch(optionInput.option){
+          case "title" :
+            setSearchBoard();
+            const correctBoardTitle = mainApi.mainBoard.filter(data => (data.title).includes(optionInput.keyword) === true);
+            console.looG(correctBoardTitle);
+            setSearchBoard(correctBoardTitle);
+            break;
+          case "body" :
+            setSearchBoard();
+            const correctBoardBody = mainApi.mainBoard.filter(data => (data.body).includes(optionInput.keyword) === true);
+            console.log(correctBoardBody);
+            setSearchBoard(correctBoardBody);
+        }
+        break;
+      default :
+      mainApi;
+      break;
     }
   }
+
   const clickSearch = () => {
     findData();
   }
@@ -116,6 +104,10 @@ export default function Home() {
                                                       searchAnnounce.slice(indexOfFirstPost, indexOfLastPost));
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+  console.log(currentPost);
+  console.log(currentPost.length)
   return (
     <div className= 'main'>
       <div className='component'>
@@ -161,12 +153,12 @@ export default function Home() {
                   <tr className ='contentBody' key = {announce.id}>
                     <td>xx</td>
                     <td>
-                      <Link href = {{pathname : `/office/announce/${announce.id}`}}>
+                      <Link href = {{pathname : `/office/announce/${announce.id}`}} key = {announce.name}>
                         <a>{announce.id}</a>
                       </Link>
                     </td>
                     <td>
-                      <Link href = {{pathname : `/office/announce/${announce.id}`}}>
+                      <Link href = {{pathname : `/office/announce/${announce.id}`}} key ={announce.name}>
                         <a>{announce.title}</a>
                       </Link>
                     </td>
