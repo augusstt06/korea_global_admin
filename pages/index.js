@@ -16,7 +16,7 @@ export default function Home() {
       console.log('Now Loading...');
       const resAnnounce = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=30');
       const resBoard =  await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=30');
-      setMainApi({mainAnnonce : resAnnounce.data, 
+      setMainApi({mainAnnonce : resAnnounce.data,
                   mainBoard : resBoard.data});
       console.log("Finish Loading");
   }
@@ -39,7 +39,7 @@ export default function Home() {
     const optional = {...optionInput};
     optional[e.target.name] = e.target.value;
     setOptionInput(optional)
-    
+
   }
   const checkCategory = (e) => {
     const category = {...optionInput};
@@ -49,7 +49,7 @@ export default function Home() {
 
   const [searchAnnounce, setSearchAnnounce] = useState([]);
   const [searchBoard, setSearchBoard] = useState([]);
-  
+
 
 
   const findData = () => {
@@ -94,13 +94,13 @@ export default function Home() {
   const clickSearch = () => {
     findData();
   }
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(5);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPost = ( searchAnnounce.length === 0 ? mainApi.mainAnnonce.slice(indexOfFirstPost, indexOfLastPost) : 
+  const currentPost = ( searchAnnounce.length === 0 ? mainApi.mainAnnonce.slice(indexOfFirstPost, indexOfLastPost) :
                                                       searchAnnounce.slice(indexOfFirstPost, indexOfLastPost));
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -117,7 +117,7 @@ export default function Home() {
       </div>
       <div className='content'>
         <h1>으아앙</h1>
-        <div className='search'> 
+        <div className='search'>
           <select className='option' name = "category" onChange = {checkCategory}>
               <option value = 'none' >선택</option>
               <option value = 'announce'>공지</option>
@@ -163,7 +163,7 @@ export default function Home() {
                       </Link>
                     </td>
                     <td>xx.xxx.xxx</td>
-                  </tr> 
+                  </tr>
                 ))
               }
             </tbody>
