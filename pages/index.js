@@ -24,6 +24,8 @@ export default function Home() {
     mainData();
   },[])
 
+  console.log(mainApi);
+
   const [optionInput, setOptionInput] = useState({
     category : '',
     option : '',
