@@ -1,7 +1,8 @@
-import '../styles/globals.css'
-import '../styles/Page.modules.scss'
+import React from "react";
+import '../styles/globals.css';
+import '../styles/Page.modules.scss';
 
-import Header from '../component/Header'
+import Header from '../component/Header';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       <Header/>
       <Component {...pageProps} />
     </div>
-    
+
   )
 }
 

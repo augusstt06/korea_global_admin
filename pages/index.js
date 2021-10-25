@@ -31,7 +31,7 @@ export default function Home() {
     option : '',
     keyword : ''
   })
-
+  
   const searchInput = (e) => {
     const newInput = {...optionInput};
     newInput[e.target.name] = e.target.value;
