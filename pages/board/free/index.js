@@ -1,18 +1,21 @@
-import React,{useState, useEffect} from 'react'
-import Link from 'next/dist/client/link'
-import axios from 'axios'
+import React,{useState, useEffect} from 'react';
+import Link from 'next/dist/client/link';
+import axios from 'axios';
 
-import Side from '../../../component/Side'
+import Side from '../../../component/Side';
+import Pagination from "../../../component/Pagination";
+
 
 const Free = () => {
     const [freeApi, setFreefreeApi] = useState([]);
 
     const freeData = async() => {
         console.log('Now Loading...');
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
+        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=30');
         setFreefreeApi(res.data);
         console.log('Finish Loading');
     }
+    console.log(freeApi);
     useEffect(() => {
         freeData();
     }, []);
@@ -55,6 +58,16 @@ const Free = () => {
           break;
       }
     };
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postPerPage, setPostPerPage] = useState(5);
+
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPost = (search.length === 0 ? freeApi.slice(indexOfFirstPost, indexOfLastPost) :
+                                                search.slice(indexOfFirstPost, indexOfLastPost));
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    console.log(currentPost);
     return (
 
         <div className='free'>
@@ -93,40 +106,28 @@ const Free = () => {
                 </thead>
                 <tbody>
                 {
-                search.length === 0 ? freeApi.map(free => (
-                <tr className='contentBody' key = {free.id}>
-                  <td>xxx</td>
-                  <td>
-                    <Link href = {{pathname : `/board/${free.id}`, query : {category : 'free'}}}>
+                  currentPost.map(free => (
+                  <tr className = 'contentBody' key = {free.id}>
+                    <td>xx</td>
+                    <td>
+                      <Link href = {{pathname : `/board/${free.id}`, query : {category : 'free'}}} key = {free.id}>
                         <a>{free.id}</a>
-                    </Link>
-                  </td>
-                  <td>
-                    <Link href = {{pathname : `/board/${free.id}`, query : {category : 'free'}}}>
-                        <a>{free.title}</a>
-                    </Link>
-                  </td>
-                  <td>xx.xxx.xxx</td>
-                </tr>
-                )) : search.map(search => (
-                <tr className='contentBody' key = {search.id}>
-                  <td>xxx</td>
-                  <td>
-                    <Link href = {{pathname : `/board/${search.id}`, query : {category : 'free'}}}>
-                        <a>{search.id}</a>
-                    </Link>
-                  </td>
-                  <td>
-                    <Link href = {{pathname : `/board/${search.id}`, query : {category : 'free'}}}>
-                        <a>{search.title}</a>
-                    </Link>
-                  </td>
-                  <td>xx.xxx.xxx</td>
-                </tr>
-                    ))
+                      </Link>
+                    </td>
+                    <td>
+                      <Link href = {{pathname : `/board/${free.id}`, query : {category : 'free'}}} key = {free.id}>
+                          <a>{free.title}</a>
+                      </Link>
+                    </td>
+                      <td>xx.xxx.xxx</td>
+                  </tr>
+                  ))
                 }
                 </tbody>
               </table>
+            </div>
+            <div>
+              <Pagination postsperPage={postPerPage} totalPage={(search.length === 0 ? freeApi.length : search.length)} paginate={paginate} />
             </div>
             <div className='write'>
               <Link href ={{pathname : `/board/write`, query : {category :'free'}}}>
