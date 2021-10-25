@@ -5,6 +5,8 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
+        // "airbnb",
+        // "plugin:prettier/recommended",
         "plugin:react/recommended"
     ],
     "parserOptions": {
@@ -15,8 +17,11 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        // "prettier"
     ],
     "rules": {
+      "no-extra-semi" : "warn"
     }
 };
+.eslintrc.js

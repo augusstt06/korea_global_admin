@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
 import Link from 'next/link'
@@ -22,7 +22,7 @@ export default function Home() {
   }
   useEffect(() => {
     mainData();
-  },[])
+  },[]);
 
   console.log(mainApi);
 
@@ -31,7 +31,7 @@ export default function Home() {
     option : '',
     keyword : ''
   })
-  
+
   const searchInput = (e) => {
     const newInput = {...optionInput};
     newInput[e.target.name] = e.target.value;
