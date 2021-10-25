@@ -11,7 +11,7 @@ const Write = () => {
     const pageId = ( pageCategory === 'free' ? '1' :
                         pageCategory === 'study' ? '2' :
                             pageCategory === 'market' ? '3' : null);
-    
+
     const [inputBoard, setInputBoard] = useState({
         category : pageId,
         title : '',
@@ -23,10 +23,7 @@ const Write = () => {
         newInput[e.target.name] = e.target.value
         setInputBoard(newInput)
     }
-    // console.log(pageCategory, '어디에서 왓나용');
-    // console.log(pageId, '부여 아이디는')
     // post메소드 호출은 나중에
-    // console.log(inputBoard)
     return (
         <div>
             <Side items = {[

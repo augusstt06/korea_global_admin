@@ -1,5 +1,5 @@
 * {
-    z-index: 990;    
+    z-index: 990;
 }
 
 // 메인 페이지
@@ -8,7 +8,7 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    
+
 }
 .component {
     margin-left: 20px;
@@ -40,7 +40,7 @@ table {
 }
 .search {
     position: relative;
-    
+
     margin-bottom: 10px;
     .inputText {
         margin-right: 10px;
@@ -85,6 +85,120 @@ table {
         }
     }
 }
+// board
+.free {
+    display: flex;
+    position :relative;
+}
+.market {
+  display : flex;
+  position: relative;
+}
+.study {
+  display: flex;
+  position: relative;
+}
+.component {
+    margin-left : 20px;
+    height : 150px;
+    margin-right : 20px;
+    /* background : gray; */
+    position: relative;
+    top : 120px
+}
+
+table{
+    width :  1000px;
+}
+.contentBox {
+    table-layout : fixed;
+    /* width : 750px */
+    border-top : 1px solid black;
+    /* border-bottom : 1px solid black; */
+    padding : 10px 5px;
+
+}
+tr {
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align : center;
+    border-bottom : 1px dotted black;
+}
+.write {
+    position: relative;
+    float : right;
+    right : 7px;
+    border : 1px solid black;
+    width : 60px;
+    text-align : center;
+    padding: 5px;
+}
+.write:hover {
+    background: black;
+    color : white;
+}
+.search {
+    position: relative;
+    /* left : 950px; */
+
+}
+.inputText {
+    margin-right : 10px;
+    margin-left : 10px;
+}
+// board-detail
+.detail {
+    display: flex;
+    position :relative;
+}
+.component {
+    margin-left : 20px;
+    height : 150px;
+    margin-right : 20px;
+    /* background : gray; */
+    position: relative;
+    top : 120px
+}
+table {
+    position: sticky;
+    box-sizing :  border-box;
+    border-top : 1px solid black;
+    width: 1000px;
+    height : 150px;
+    padding: 5px;
+}
+table > .tableFirst {
+    /* background: gray; */
+    text-align : center;
+
+}
+table > .tableFirst >th{
+    width : 100px;
+}
+table > .tableFirst >td{
+    width : 100px;
+}
+.tableFourth {
+
+    height : 200px;
+}
+.button {
+    /* position: relative;
+    left : 50%;
+    right : -50%;
+    right : 7px;
+    border : 1px solid black;
+    width : 80px;
+    text-align : center;
+    padding: 5px; */
+}
+.button:hover {
+    background: black;
+    color : white;
+}
 
 
 // Pagination
@@ -93,7 +207,7 @@ table {
         display: flex;
         list-style: none;
         justify-content: space-around;
-        .pageItem { 
+        .pageItem {
             .pageLink {
                 padding: 10px;
                 background: #fff5f5;
@@ -107,4 +221,3 @@ table {
         }
     }
 }
-
