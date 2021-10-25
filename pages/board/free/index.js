@@ -18,7 +18,6 @@ const Free = () => {
     useEffect(() => {
         freeData();
     }, []);
-    // 여긴 option serach
     const [optionInput, setOptionInput] = useState({
         keyword : '',
         option  : ''
@@ -31,7 +30,6 @@ const Free = () => {
 
     const checkOption = (e) => {
         const optional = e.target.value
-        console.log(optional)
         setOptionInput({option : optional})
     };
 
