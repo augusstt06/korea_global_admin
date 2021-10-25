@@ -17,10 +17,10 @@ const Study = () => {
 
     const [optionInput, setOptionInput] = useState({
         keyword : '',
-        option : ''
+        option  : ''
     })
     const searchInput = (e) => {
-        const newInput = {...optionInput}
+        const newInput          = {...optionInput}
         newInput[e.target.name] = e.target.value
         setOptionInput(newInput)
     }
@@ -28,9 +28,6 @@ const Study = () => {
         const optional = e.target.value
         setOptionInput({option : optional})
     }
-    const titleData = studyApi.map(data => data.title);
-    const bodyData = studyApi.map(data => data.body);
-
     const [search, setSearch] = useState([]);
 
     const findData = () => {
@@ -54,84 +51,84 @@ const Study = () => {
         findData()
     }
     return (
-        <div className = 'study'>
-            <div className='component'>
-                <Side items = {[
-                    {id : 1, link : '/board/free', text : '자유게시판'},
-                    {id : 3, link : '/board/market', text : '장터게시판'}
-                ]} title = '게시판' />
-            </div>
-            <div className='content'>
-                <h1>스터디 게시판.</h1>
-                <div className='search'>
-                    <select  onChange={checkOption} className='option'>
-                        <option value = 'none' >선택</option>
-                        <option value = 'title'>제목</option>
-                        <option value = 'body'>내용</option>
-                    </select>
-                    <input type = 'text'
-                            name = 'keyword'
-                            onChange={searchInput}
-                            className='inputText'/>
-                    <button type = 'submit'
-                            onClick={clickSearch}
-                            className='button'
-                            >검색</button>
-                </div>
-                <div className='contentBox'>
-                    <table className='table'>
-                        <thead>
-                            <tr className='contentHeader'>
-                                <th>번호</th>
-                                <th>작성자</th>
-                                <th>제목</th>
-                                <th>날짜</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                search.length === 0 ? studyApi.map(study => (
-                                    <tr className='contentBody' key = {study.id}>
-                                        <td>xxx</td>
-                                        <td>
-                                            <Link href = {{pathname : `/board/${study.id}`, query : {category : 'study'}}}>
-                                                <a>{study.id}</a>
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            <Link href = {{pathname : `/board/${study.id}`, query : {category : 'study'}}}>
-                                                <a>{study.title}</a>
-                                            </Link>
-                                        </td>
-                                        <td>xx.xxx.xxx</td>
-                                    </tr>
-                                )) : search.map(search => (
-                                    <tr className='contentBody' key = {search.id}>
-                                        <td>xxx</td>
-                                        <td>
-                                            <Link href = {{pathname : `/board/${search.id}`, query : {category : 'study'}}}>
-                                                <a>{search.id}</a>
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            <Link href = {{pathname : `/board/${search.id}`, query : {category : 'study'}}}>
-                                                <a>{search.title}</a>
-                                            </Link>
-                                        </td>
-                                        <td>xx.xxx.xxx</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div className='write'>
-                    <Link href ={{pathname : `/board/write`, query : {category :'study'}}}>
-                        <a>글 작성</a>
-                    </Link>
-                </div>
-            </div>
+      <div className = 'study'>
+        <div className='component'>
+          <Side items = {[
+              {id : 1, link : '/board/free', text : '자유게시판'},
+              {id : 3, link : '/board/market', text : '장터게시판'}
+          ]} title = '게시판' />
         </div>
+        <div className='content'>
+          <h1>스터디 게시판.</h1>
+          <div className='search'>
+              <select  onChange={checkOption} className='option'>
+                  <option value = 'none' >선택</option>
+                  <option value = 'title'>제목</option>
+                  <option value = 'body'>내용</option>
+              </select>
+              <input type = 'text'
+                      name = 'keyword'
+                      onChange={searchInput}
+                      className='inputText'/>
+              <button type = 'submit'
+                      onClick={clickSearch}
+                      className='button'
+                      >검색</button>
+          </div>
+          <div className='contentBox'>
+            <table className='table'>
+              <thead>
+                <tr className='contentHeader'>
+                    <th>번호</th>
+                    <th>작성자</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {
+                    search.length === 0 ? studyApi.map(study => (
+                    <tr className='contentBody' key = {study.id}>
+                      <td>xxx</td>
+                      <td>
+                        <Link href = {{pathname : `/board/${study.id}`, query : {category : 'study'}}}>
+                            <a>{study.id}</a>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link href = {{pathname : `/board/${study.id}`, query : {category : 'study'}}}>
+                            <a>{study.title}</a>
+                        </Link>
+                      </td>
+                      <td>xx.xxx.xxx</td>
+                    </tr>
+                    )) : search.map(search => (
+                    <tr className='contentBody' key = {search.id}>
+                      <td>xxx</td>
+                      <td>
+                        <Link href = {{pathname : `/board/${search.id}`, query : {category : 'study'}}}>
+                            <a>{search.id}</a>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link href = {{pathname : `/board/${search.id}`, query : {category : 'study'}}}>
+                            <a>{search.title}</a>
+                        </Link>
+                      </td>
+                      <td>xx.xxx.xxx</td>
+                    </tr>
+                    ))
+                  }
+              </tbody>
+            </table>
+          </div>
+          <div className='write'>
+            <Link href ={{pathname : `/board/write`, query : {category :'study'}}}>
+                <a>글 작성</a>
+            </Link>
+          </div>
+        </div>
+      </div>
     )
 }
 

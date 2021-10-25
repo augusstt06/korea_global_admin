@@ -12,31 +12,32 @@ import Side from '../../component/Side';
 
 // 게시판 테이블은 1개이기에, 게시판카테고리, 게시물인덱스 번호를 담아서 request해야 한다.
 export const getStaticPaths = async() => {
-    const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
-    const data = await res.data;
+    const res   = await axios.get('https://jsonplaceholder.typicode.com/posts?_start =0&_end =10');
+    const data  = await res.data;
     const paths = data.map((data) => ({
-        params : { id : data.id.toString()}
-    }))
+      params : { id : data.id.toString() }
+    }));
+
     return {
         paths,
         fallback : false
     }
-}
+};
 export const getStaticProps = async({params}) => {
-    const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
-    const data = await res.data
+    const res  = await axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
+    const data = await res.data;
 
     return {
         props : {data}
     }
-}
+};
 
 const BoardDetail = ({data}) => {
-    const router = useRouter();
+    const router   = useRouter();
     const category = router.query.category;
-    const pageId = (category === 'free' ? 1 :
-                        category === 'study' ? 2:
-                            category === 'market' ? 3 : null);
+    const pageId   = (category === 'free'   ?  1 :
+                      category === 'study'  ?  2 :
+                      category === 'market' ?  3 : null);
     // 댓글
     const [comment, setComment] = useState({
         author : '',
@@ -46,11 +47,11 @@ const BoardDetail = ({data}) => {
         index : data.id
     })
     const changeInput = (e) => {
-        const newInput = {...comment}
-        newInput[e.target.name] = e.target.value
-        setComment(newInput)
+        const newInput          = {...comment};
+        newInput[e.target.name] = e.target.value;
+        setComment(newInput);
     }
-    console.log(comment)
+    console.log(comment);
     // 버튼 클릭 -> comment에 담긴 내용을 api로 POST REQUEST
     // 댓글 목록 받아올때는 api에서 GET으로 RESPONSE
     // const postData = async() => {
@@ -63,61 +64,61 @@ const BoardDetail = ({data}) => {
     //     setComment();
     // }
     return (
-        <div className='detail'>
-          <div className='component'>
-            <Side items = {[
-                        {id : 2, link : '/board/study', text : '스터디 게시판'},
-                        {id : 3, link : '/board/market', text : '장터 게시판'}
-                    ]} title = '게시판' />
-          </div>
-          <div className='content'>
-            <h1>자유 게시판</h1>
+      <div className='detail'>
+        <div className='component'>
+          <Side items = {[
+                      {id : 2, link : '/board/study', text : '스터디 게시판'},
+                      {id : 3, link : '/board/market', text : '장터 게시판'}
+                  ]} title = '게시판' />
+        </div>
+        <div className='content'>
+          <h1>자유 게시판</h1>
+          <div>
+            <table>
+              <thead>
+                <tr className='tableFirst'>
+                  <th>번호</th>
+                  <td>xxx</td>
+                  <th>작성자</th>
+                  <td>{data.id}</td>
+                  <th>날짜</th>
+                  <td>xx.xxx.xxx</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className='tableSecond'>
+                  <th>제목</th>
+                  <td colSpan='6'>{data.title}</td>
+                </tr>
+                <tr className='tableThird'>
+                  <th colSpan='7'>내용</th>
+                </tr>
+                <tr className='tableFourth'>
+                  <td colSpan='7'>{data.body}</td>
+                </tr>
+              </tbody>
+            </table>
             <div>
-              <table>
-                <thead>
-                  <tr className='tableFirst'>
-                    <th>번호</th>
-                    <td>xxx</td>
-                    <th>작성자</th>
-                    <td>{data.id}</td>
-                    <th>날짜</th>
-                    <td>xx.xxx.xxx</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className='tableSecond'>
-                    <th>제목</th>
-                    <td colSpan='6'>{data.title}</td>
-                  </tr>
-                  <tr className='tableThird'>
-                    <th colSpan='7'>내용</th>
-                  </tr>
-                  <tr className='tableFourth'>
-                    <td colSpan='7'>{data.body}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div>
-                <a>댓글</a>
-                <input typeof='text'
-                      placeholder = '댓글을 입력하세요'
-                      name = 'content'
-                      value = {comment.content}
-                      onChange = {changeInput}
-                      size="40"/>
-                <button>등록</button>
-              </div>
-              <div>
-                  여긴 댓글 목록
-              </div>
-              <div className='button'>
-                <Link href = {`/board/${category}`}>
-                    목록으로
-                </Link>
-              </div>
+              <a>댓글</a>
+              <input typeof='text'
+                    placeholder = '댓글을 입력하세요'
+                    name = 'content'
+                    value = {comment.content}
+                    onChange = {changeInput}
+                    size="40"/>
+              <button>등록</button>
+            </div>
+            <div>
+                여긴 댓글 목록
+            </div>
+            <div className='button'>
+              <Link href = {`/board/${category}`}>
+                  목록으로
+              </Link>
             </div>
           </div>
         </div>
+      </div>
     )
 }
 
