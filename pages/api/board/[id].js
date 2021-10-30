@@ -1,11 +1,21 @@
-import freeApi from './free/index.js';
+import posts from "../../../posts.json";
+import freeData from "./free/index";
+// export default async(req, res) => {
+//     const correctCat = posts.filter(posts.category === req.query.category);
+//     const correctPost = correctCat.filter(({id}) => id === req.query.id);
+//     // const post = posts.filter( ({id}) => id === req.query.id );
+    
 
-let today = new Date();
-let year  = today.getFullYear();
-let month = today.getMonth();
-let date  = today.getDay();
-let currentDay = year + '/' + month + '/' +  date
+//     if (correctPost) {
+//         res.status(200).json({message:"sucess", correctPost});
+//     } else {
+//         res.status(400).json({message:"post not found"})
+//     }
+// }
 
-export default function detailApi(re, res) {
-  res.status(200).json('how can i make a dynamic api?')
+
+// req에 카테고리랑 id를 담아서 보낸다
+export default (req, res) => {
+    const {id} = req.query;
+    const data = posts.filter()
 }

@@ -8,9 +8,9 @@ import Side from '../../component/Side'
 const Write = () => {
     const router       = useRouter();
     const pageCategory = router.query.category
-    const pageId       = ( pageCategory === 'free'   ? '1'  :
-                           pageCategory === 'study'  ? '2'  :
-                           pageCategory === 'market' ? '3'  : null);
+    const pageId       = ( pageCategory === '1'   ? 'free'    :
+                           pageCategory === '2'   ? 'market'  :
+                           pageCategory === '3'  ? 'study'    : null);
 
     const [inputBoard, setInputBoard] = useState({
         category : pageId,

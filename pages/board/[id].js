@@ -35,9 +35,13 @@ export const getStaticProps = async({params}) => {
 const BoardDetail = ({data}) => {
     const router   = useRouter();
     const category = router.query.category;
-    const pageId   = (category === 'free'   ?  1 :
-                      category === 'study'  ?  2 :
-                      category === 'market' ?  3 : null);
+    const pageId   = (category === '1'   ?  'free'   :
+                      category === '2'   ?  'study'  :
+                      category === '3'   ?  'market' : null);
+
+
+    console.log(category);
+    console.log(pageId)
     // 댓글
     const [comment, setComment] = useState({
         author : '',

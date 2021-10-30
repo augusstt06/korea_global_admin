@@ -4,11 +4,14 @@ import axios from 'axios';
 
 import Side from '../../../component/Side'
 
+
+// 여기 api url === /board/{category === study}
+
 const Study = () => {
     const [studyApi, setStudyApi] = useState([]);
 
     const StudyData = async() => {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
+        const res = await axios.get('/api/board/study');
         setStudyApi(res.data)
     }
     useEffect(() => {
@@ -91,12 +94,12 @@ const Study = () => {
                     <tr className='contentBody' key = {study.id}>
                       <td>xxx</td>
                       <td>
-                        <Link href = {{pathname : `/board/${study.id}`, query : {category : 'study'}}}>
+                        <Link href = {{pathname : `/board/${study.id}`, query : {category : '3'}}}>
                             <a>{study.id}</a>
                         </Link>
                       </td>
                       <td>
-                        <Link href = {{pathname : `/board/${study.id}`, query : {category : 'study'}}}>
+                        <Link href = {{pathname : `/board/${study.id}`, query : {category : '3'}}}>
                             <a>{study.title}</a>
                         </Link>
                       </td>
@@ -106,12 +109,12 @@ const Study = () => {
                     <tr className='contentBody' key = {search.id}>
                       <td>xxx</td>
                       <td>
-                        <Link href = {{pathname : `/board/${search.id}`, query : {category : 'study'}}}>
+                        <Link href = {{pathname : `/board/${search.id}`, query : {category : '3'}}}>
                             <a>{search.id}</a>
                         </Link>
                       </td>
                       <td>
-                        <Link href = {{pathname : `/board/${search.id}`, query : {category : 'study'}}}>
+                        <Link href = {{pathname : `/board/${search.id}`, query : {category : '3'}}}>
                             <a>{search.title}</a>
                         </Link>
                       </td>
@@ -123,7 +126,7 @@ const Study = () => {
             </table>
           </div>
           <div className='write'>
-            <Link href ={{pathname : `/board/write`, query : {category :'study'}}}>
+            <Link href ={{pathname : `/board/write`, query : {category :'3'}}}>
                 <a>글 작성</a>
             </Link>
           </div>

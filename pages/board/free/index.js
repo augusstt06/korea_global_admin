@@ -5,14 +5,17 @@ import axios from 'axios';
 import Side from '../../../component/Side';
 import Pagination from "../../../component/Pagination";
 
+// 여기 api url === /board/{category === free}
+
 
 const Free = () => {
     const [freeApi, setFreefreeApi] = useState([]);
 
     const freeData = async() => {
         console.log('Now Loading...');
-        const res = await axios.get('http://localhost:3000/api/board/free');
+        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start =0&_end =20');
         setFreefreeApi(res.data);
+        console.log(res)
         console.log('Finish Loading');
     }
     console.log(freeApi);
@@ -57,7 +60,7 @@ const Free = () => {
       }
     };
     const [currentPage, setCurrentPage] = useState(1);
-    const [postPerPage, setPostPerPage] = useState(5);
+    const [postPerPage, setPostPerPage] = useState(10);
 
     const indexOfLastPost  = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -108,12 +111,12 @@ const Free = () => {
                   <tr className = 'contentBody' key = {free.id}>
                     <td>xx</td>
                     <td>
-                      <Link href = {{pathname : `/board/${free.id}`, query : {category : 'free'}}} key = {free.id}>
+                      <Link href = {{pathname : `/board/${free.id}`, query : {category : '1'}}} key = {free.id}>
                         <a>{free.id}</a>
                       </Link>
                     </td>
                     <td>
-                      <Link href = {{pathname : `/board/${free.id}`, query : {category : 'free'}}} key = {free.id}>
+                    <Link href = {{pathname : `/board/${free.id}`, query : {category : '1'}}} key = {free.id}>
                           <a>{free.title}</a>
                       </Link>
                     </td>
@@ -130,7 +133,7 @@ const Free = () => {
                           paginate={paginate} />
             </div>
             <div className='write'>
-              <Link href ={{pathname : `/board/write`, query : {category :'free'}}}>
+              <Link href ={{pathname : `/board/write`, query : {category :'1'}}}>
                   <a>글 작성</a>
               </Link>
             </div>

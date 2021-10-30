@@ -4,11 +4,13 @@ import axios from 'axios';
 
 import Side from '../../../component/Side'
 
+// 여기 api url === /board/{category === market}
+
 const Market = () => {
     const [marketApi, setMarketApi] = useState([]);
 
     const marketData = async() => {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=10');
+        const res = await axios.get('/api/board/market');
         setMarketApi(res.data)
     }
     useEffect(() => {
@@ -95,12 +97,12 @@ const Market = () => {
                   <tr className='contentBody' key = {market.id}>
                     <td>xxx</td>
                     <td>
-                      <Link href = {{pathname : `/board/${market.id}`, query : {category : 'market'}}}>
+                      <Link href = {{pathname : `/board/${market.id}`, query : {category : '2'}}}>
                           <a>{market.id}</a>
                       </Link>
                     </td>
                     <td>
-                      <Link href = {{pathname : `/board/${market.id}`, query : {category : 'market'}}}>
+                      <Link href = {{pathname : `/board/${market.id}`, query : {category : '2'}}}>
                           <a>{market.title}</a>
                       </Link>
                     </td>
@@ -110,12 +112,12 @@ const Market = () => {
                   <tr className='contentBody' key = {search.id}>
                     <td>xxx</td>
                     <td>
-                      <Link href = {{pathname : `/board/${search.id}`, query : {category : 'market'}}}>
+                      <Link href = {{pathname : `/board/${search.id}`, query : {category : '2'}}}>
                           <a>{search.id}</a>
                       </Link>
                     </td>
                     <td>
-                      <Link href = {{pathname : `/board/${search.id}`, query : {category : 'market'}}}>
+                      <Link href = {{pathname : `/board/${search.id}`, query : {category : '2'}}}>
                           <a>{search.title}</a>
                       </Link>
                     </td>
@@ -127,7 +129,7 @@ const Market = () => {
               </table>
             </div>
             <div className='write'>
-              <Link href ={{pathname : `/board/write`, query : {category :'market'}}}>
+              <Link href ={{pathname : `/board/write`, query : {category :'2'}}}>
                   글 작성
               </Link>
             </div>
