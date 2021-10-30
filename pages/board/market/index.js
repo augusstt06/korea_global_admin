@@ -61,7 +61,7 @@ const Market = () => {
           <div className='component'>
             <Side items = {[
                 {id : 1, link : '/board/free', text : '자유게시판'},
-                {id : 2, link : '/board/study', text : '스터디게시판'}
+                {id : 3, link : '/board/study', text : '스터디게시판'}
             ]} title = '게시판' />
           </div>
           <div className='content'>

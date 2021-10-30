@@ -73,8 +73,8 @@ const BoardDetail = ({data}) => {
       <div className='detail'>
         <div className='component'>
           <Side items = {[
-                      {id : 2, link : '/board/study', text : '스터디 게시판'},
-                      {id : 3, link : '/board/market', text : '장터 게시판'}
+                      {id : 2, link : '/board/market', text : '장터 게시판'},
+                      {id : 3, link : '/board/study', text : '스터디 게시판'}
                   ]} title = '게시판' />
         </div>
         <div className='content'>
@@ -118,7 +118,7 @@ const BoardDetail = ({data}) => {
                 여긴 댓글 목록
             </div>
             <div className='button'>
-              <Link href = {`/board/${category}`}>
+              <Link href = {`/board/${pageId}`}>
                   목록으로
               </Link>
             </div>

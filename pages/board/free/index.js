@@ -74,8 +74,8 @@ const Free = () => {
         <div className='free'>
           <div className='component'>
               <Side items = {[
-                          {id : 2, link : '/board/study',  text : '스터디 게시판'},
-                          {id : 3, link : '/board/market', text : '장터 게시판'}]}
+                          {id : 2, link : '/board/market',  text : '장터 게시판'},
+                          {id : 3, link : '/board/study', text : '스터디 게시판'}]}
                     title = '게시판'/>
           </div>
           <div className='content'>

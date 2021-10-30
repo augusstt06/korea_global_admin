@@ -98,6 +98,10 @@ table {
   display: flex;
   position: relative;
 }
+.posting {
+    display: flex;
+    position: relative;
+}
 .component {
     margin-left : 20px;
     height : 150px;
@@ -186,18 +190,40 @@ table > .tableFirst >td{
     height : 200px;
 }
 .button {
-    /* position: relative;
-    left : 50%;
-    right : -50%;
-    right : 7px;
-    border : 1px solid black;
-    width : 80px;
-    text-align : center;
-    padding: 5px; */
+    //position: relative;
+    //left : 50%;
+    //right : -50%;
+    //right : 7px;
+    //border : 1px solid black;
+    //width : 80px;
+    //text-align : center;
+    //padding: 5px;
 }
 .button:hover {
     background: black;
     color : white;
+}
+
+//board write
+textarea {
+    resize: none;
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.back{
+    align-content: center;
+    text-align: center;
+    display: block;
+    position: relative;
+    top: 400px;
+    right:200px;
+    height: 30px;
+    width: 60px;
+    &:hover {
+        background: black;
+        color: white;
+    }
 }
 
 
