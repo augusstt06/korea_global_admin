@@ -6,6 +6,8 @@ import Link from 'next/link';
 import Side from '../../component/Side';
 
 // 댓글 기능 만들기
+// 현재 댓글 기능에 필요한것 : 로그인 사용자가 누구인지(author), 댓글 내용(content), 작성 시간(time), 어떤 글인지 (index), 어디 카테고리의 글인지 (page)
+// 나중에 로그인까지 만들고 나서 만들어 POST해야 한다.
 // 여기는 공통 상세화면 컴포넌트이므로
 // 어떤 게시판의 글을 클릭했는지 알아야 한다.
 //  즉, router를 이용해 어떤 페이지인지 string으로 이 컴포넌트에 전달

@@ -23,5 +23,5 @@ module.exports = {
     "rules": {
       "no-extra-semi" : "warn"
     }
-};
+}
 .eslintrc.js
