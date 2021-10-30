@@ -11,10 +11,11 @@ const Free = () => {
 
     const freeData = async() => {
         console.log('Now Loading...');
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_end=30');
+        const res = await axios.get('http://localhost:3000/api/board/free');
         setFreefreeApi(res.data);
         console.log('Finish Loading');
     }
+    console.log(freeApi);
     useEffect(() => {
         freeData();
     }, []);
@@ -116,7 +117,7 @@ const Free = () => {
                           <a>{free.title}</a>
                       </Link>
                     </td>
-                      <td>xx.xxx.xxx</td>
+                      <td>{free.upload_date}</td>
                   </tr>
                   ))
                 }
