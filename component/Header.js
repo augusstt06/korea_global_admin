@@ -10,7 +10,6 @@ const Header = () => {
     const handleClick = () => {
         setClick(!click);
     };
-    console.log(click)
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
@@ -18,9 +17,16 @@ const Header = () => {
                     <a>홈</a>
                 </Link>
             </div>
-            <div className={styles.icon} onClick={handleClick}>
-                {click ? <FaTimes /> : <FaBars />}
-            </div>
+            {click ?
+                <div className={styles.icon_click} onClick={handleClick}>
+                    <FaTimes />
+                </div> :
+                <div className={styles.icon} onClick={handleClick}>
+                    <FaBars />
+                </div>}
+            {/*<div className={styles.icon} onClick={handleClick}>*/}
+            {/*    {click ? <FaTimes /> : <FaBars />}*/}
+            {/*</div>*/}
             { click ? 
                 <nav className = {styles.menu_click} onClick = {handleClick} click={click ? 0 : 1}>
                     <div className='announce'>

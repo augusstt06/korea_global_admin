@@ -101,9 +101,6 @@ export default function Home() {
 
   const paginate         = pageNumber => setCurrentPage(pageNumber);
 
-
-  console.log(currentPost);
-  console.log(currentPost.length)
   return (
     <div className= 'main'>
       <div className='component'>
@@ -111,7 +108,14 @@ export default function Home() {
           {id : 1, link : '/board/free', text : '자유게시판'}]}/>
       </div>
       <div className='content'>
-        <h1>으아앙</h1>
+        <div className= "name_container">
+          <div className='name_tag'>
+            <div>최근 공지</div>
+          </div>
+          <div className='name_tag'>
+            <div>최근 게시판</div>
+          </div>
+        </div>
         <div className='search'>
           <select className='option' name = "category" onChange = {checkCategory}>
               <option value = 'none'>선택</option>

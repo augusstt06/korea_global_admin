@@ -21,6 +21,22 @@
     width: 75%;
     position: relative;
 }
+.name_container{
+    margin-top: 15px;
+    height: 15%;
+}
+.name_tag{
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    width : 20%;
+    white-space: nowrap;
+    margin-right: 10px;
+    padding: 5px;
+    &:hover{
+        border-bottom: 2px solid #821225;
+    }
+}
 table {
     height: 50px;
     width: 100%;
