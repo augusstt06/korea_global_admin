@@ -24,7 +24,6 @@
     div{
         &:hover{
             border-bottom: 2px solid #fff;
-
         }
     }
 }
@@ -34,7 +33,10 @@
     align-items: center;
 }
 .icon {
-    display: none;
+    position: absolute;
+    top:-20px;
+    //display: none;
+
 }
 @media screen and (max-width:960px) {
 

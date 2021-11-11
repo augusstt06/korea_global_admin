@@ -28,7 +28,7 @@ const Header = () => {
             {/*    {click ? <FaTimes /> : <FaBars />}*/}
             {/*</div>*/}
             { click ? 
-                <nav className = {styles.menu_click} onClick = {handleClick} click={click ? 0 : 1}>
+                <nav className = {styles.menu_click}  click={click ? 0 : 1}>
                     <div className='announce'>
                         <Link href = '/office/announce'>
                             과공지
@@ -45,7 +45,7 @@ const Header = () => {
                         </Link>
                     </div>
                 </nav> : 
-                <nav className = {styles.menu_noclick} onClick = {handleClick} click={click ? 0 : 1}>
+                <nav className = {styles.menu_noclick}  click={click ? 0 : 1}>
                     <div className='announce'>
                         <Link href = '/office/announce'>
                             과 공지
