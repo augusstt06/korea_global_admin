@@ -6,7 +6,7 @@ import Side from "../../../component/Side";
 
 const Comment = () => {
     return(
-        <div className='comment'>
+        <div className='main'>
             <div className='component'>
                 <Side items = {[
                     {id : 4, link : `/info/post`, text : '내가 쓴 글'},
@@ -14,28 +14,52 @@ const Comment = () => {
                 ]} title = '내 정보' />
             </div>
             <div className='content'>
-                <div>댓글 단 글</div>
-                <table className='infoComment'>
-                    <thead>
-                        <tr className='commentHeader'>
-                            <td>작성자</td>
-                            <td>제목</td>
-                            <td>날짜</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        <tr className='commentBody'>
-                            <td>데이터/작성자</td>
-                            <td>데이터가 들어갈 곳/제목</td>
-                            <td>데이터/날짜</td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
+                <div className='name_container_solo'>
+                    <div className='name_tag_solo'>
+                        <div>댓글 단 글</div>
+                    </div>
+                </div>
+                <div className='search'>
+                    <select className='option'>
+                        <option>선택</option>
+                        <option>제목</option>
+                        <option>내용</option>
+                        <option>제목 + 내용</option>
+                    </select>
+                    <input type= 'text'
+                           className='inputText'/>
+                    <button type='submit'
+                            className='button'>검색</button>
+                </div>
+                <div className='contentBox_info'>
+                    <table className='infoTable'>
+                        <thead>
+                            <tr className='contentHeader'>
+                                <th>작성자</th>
+                                <th>제목</th>
+                                <th>날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            <tr className='contentBody'>
+                                <td>
+                                    <a>데이터/작성자</a>
+                                </td>
+                                <td>
+                                    <a>데이터가 들어갈 곳/제목</a>
+                                </td>
+                                <td>
+                                    <a>데이터/날짜</a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div className='back'>
-                <button>
+                <button className='backButton'>
                     <Link href = {{pathname : `/info`}}>
                         목록으로
                     </Link>
@@ -44,3 +68,4 @@ const Comment = () => {
         </div>
     )
 }
+export default Comment;

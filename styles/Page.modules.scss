@@ -20,6 +20,7 @@
 .content {
     width: 75%;
     position: relative;
+    //background: #0070f3;
 }
 .name_container{
     margin-top: 15px;
@@ -63,48 +64,11 @@ table {
         margin-left: 10px;
     }
 }
-
-// Side
-
-.Side {
-    border: 1px solid black;
-    width: 180px;
-    .login {
-        text-align: center;
-        padding: 10px;
-        border-bottom: 1px dotted black;
-    }
-    input {
-        padding: 5px;
-        margin-top: 5px;
-    }
-    button {
-        padding: 5px;
-        margin-top: 5px;
-    }
-    .sideItem {
-        display: block;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .sideDetail {
-        width: 100%;
-        padding: 10px;
-        text-align: center;
-    }
-    .item {
-        border-bottom: 1px solid black;
-        padding: 5px;
-        &:hover {
-            background: #fff5f5 ;
-        }
-    }
-}
 // board
 .free {
     display: flex;
     position :relative;
+    z-index : 10;
 }
 .market {
   display : flex;
@@ -127,13 +91,13 @@ table {
     top : 120px
 }
 
-table{
-    width :  1000px;
-}
+//table{
+//    width :  1000px;
+//}
 .contentBox {
     table-layout : fixed;
     /* width : 750px */
-    border-top : 1px solid black;
+    //border-top : 1px solid black;
     /* border-bottom : 1px solid black; */
     padding : 10px 5px;
 
@@ -182,14 +146,7 @@ td {
     position: relative;
     top : 120px
 }
-table {
-    position: sticky;
-    box-sizing :  border-box;
-    border-top : 1px solid black;
-    width: 1000px;
-    height : 150px;
-    padding: 5px;
-}
+
 table > .tableFirst {
     /* background: gray; */
     text-align : center;
@@ -215,10 +172,7 @@ table > .tableFirst >td{
     //text-align : center;
     //padding: 5px;
 }
-.button:hover {
-    background: black;
-    color : white;
-}
+
 
 //board write
 textarea {
@@ -236,12 +190,49 @@ textarea {
     right:200px;
     height: 30px;
     width: 60px;
-    &:hover {
-        background: black;
-        color: white;
+}
+// User Info
+.name_container_solo{
+    margin-top: 15px;
+    height: 15%;
+    margin-bottom: 30px;
+}
+.name_tag_solo{
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    width : 20%;
+    white-space: nowrap;
+    margin-right: 10px;
+    padding: 5px;
+}
+.infoTable{
+    height: 50px;
+    width: 100%;
+
+}
+.contentBox_info{
+    table-layout: fixed;
+    border-top: 1px solid black;
+    padding: 10px 5px;
+    tr {
+        padding: 10px;
+    }
+    td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px dotted black;
+    }
+
+}
+.back{
+    position: relative;
+    top: 250px;
+    right: 35%;
+    .backButton{
+        width: 65px;
     }
 }
-
 
 // Pagination
 .pagination {
@@ -260,6 +251,43 @@ textarea {
                     color: #fff5f5;
                 }
             }
+        }
+    }
+}
+// Side
+
+.Side {
+    border: 1px solid black;
+    width: 180px;
+    .login {
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px dotted black;
+    }
+    input {
+        padding: 5px;
+        margin-top: 5px;
+    }
+    button {
+        padding: 5px;
+        margin-top: 5px;
+    }
+    .sideItem {
+        display: block;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .sideDetail {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+    .item {
+        border-bottom: 1px solid black;
+        padding: 5px;
+        &:hover {
+            background: #fff5f5 ;
         }
     }
 }

@@ -96,7 +96,7 @@ export default function Home() {
 
   const indexOfLastPost  = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPost      = ( searchAnnounce.length === 0 ? mainApi.mainAnnonce.slice(indexOfFirstPost, indexOfLastPost) :
+  const currentPost      = ( searchAnnounce.length === 0 ? mainApi.mainAnnounce.slice(indexOfFirstPost, indexOfLastPost) :
                                                       searchAnnounce.slice(indexOfFirstPost, indexOfLastPost));
 
   const paginate         = pageNumber => setCurrentPage(pageNumber);
