@@ -10,7 +10,7 @@ const Comment = () => {
             <div className='component'>
                 <Side items = {[
                     {id : 4, link : `/info/post`, text : '내가 쓴 글'},
-                    {id : 6, link : `/`, text : '쪽지함'}
+                    {id : 6, link : `/info/message`, text : '쪽지함'}
                 ]} title = '내 정보' />
             </div>
             <div className='content'>
@@ -57,13 +57,13 @@ const Comment = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div className='back'>
-                <button className='backButton'>
-                    <Link href = {{pathname : `/info`}}>
-                        목록으로
-                    </Link>
-                </button>
+                <div className='back'>
+                    <button className='backButton'>
+                        <Link href = {{pathname : `/info`}}>
+                            목록으로
+                        </Link>
+                    </button>
+                </div>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ const Info = () => {
                     //여기에 내가 쓴 글, 내가 댓글 단 글, 쪽지함
                     {id : 4, link : `/info/post`, text : '내가 쓴 글'},
                     {id : 5, link : `/info/comment`, text : '댓글 단 글'},
-                    {id : 6, link : `/`, text : '쪽지함'}
+                    {id : 6, link : `/info/message`, text : '쪽지함'}
                 ]} title = '내 정보' />
             </div>
             <div className='content'>

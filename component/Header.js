@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FaBars, FaTimes } from "react-icons/fa";
 
 import styles from '../styles/Header.module.scss';
+import Image from "next/image";
 
 
 const Header = () => {
@@ -44,6 +45,11 @@ const Header = () => {
                             교수
                         </Link>
                     </div>
+                    <div className='my_info'>
+                        <Link href = '/info'>
+                            내 정보
+                        </Link>
+                    </div>
                 </nav> : 
                 <nav className = {styles.menu_noclick}  click={click ? 0 : 1}>
                     <div className='announce'>
@@ -59,6 +65,11 @@ const Header = () => {
                     <div className='professor'>
                         <Link href = '/professor'>
                             교수
+                        </Link>
+                    </div>
+                    <div className='my_info'>
+                        <Link href = '/info'>
+                            내 정보
                         </Link>
                     </div>
                 </nav>}

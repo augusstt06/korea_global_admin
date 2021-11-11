@@ -10,7 +10,7 @@ const Post = () => {
       <div className='component'>
         <Side items = {[
             {id : 5, link : `/info/comment`, text : '댓글 단 글'},
-            {id : 6, link : `/info`, text : "쪽지함"}
+            {id : 6, link : `/info/message`, text : "쪽지함"}
         ]} title = "내 정보" />
       </div>
       <div className='content'>
@@ -59,13 +59,13 @@ const Post = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className='back'>
+        <div className='back'>
           <button className='backButton'>
               <Link href = {{pathname : `/info`}}>
                   목록으로
               </Link>
           </button>
+        </div>
       </div>
     </div>
   )
