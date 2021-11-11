@@ -8,14 +8,14 @@ import Pagination from "../component/Pagination";
 
 export default function Home() {
   const [mainApi, setMainApi] = useState({
-      mainAnnonce : [],
+      mainAnnounce : [],
       mainBoard   : []
   })
   const mainData = async() => {
       console.log('Now Loading...');
       const resAnnounce = await axios.get('https://jsonplaceholder.typicode.com/posts?_start =0&_end =30');
       const resBoard    = await axios.get('https://jsonplaceholder.typicode.com/posts?_start =0&_end =30');
-      setMainApi({mainAnnonce : resAnnounce.data,
+      setMainApi({mainAnnounce : resAnnounce.data,
                   mainBoard   : resBoard.data});
       console.log("Finish Loading");
   }
@@ -169,7 +169,7 @@ export default function Home() {
           </table>
           <div>
             <Pagination postsperPage={postPerPage}
-                        totalPage={(searchAnnounce.length === 0 ? mainApi.mainAnnonce.length : searchAnnounce.length)}
+                        totalPage={(searchAnnounce.length === 0 ? mainApi.mainAnnounce.length : searchAnnounce.length)}
                         paginate={paginate} />
           </div>
         </div>
