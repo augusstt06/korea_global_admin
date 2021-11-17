@@ -1,21 +1,30 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { FaBars, FaTimes } from "react-icons/fa";
-
 import styles from '../styles/Header.module.scss';
-import Image from "next/image";
-
 
 const Header = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => {
         setClick(!click);
     };
+    const [pageLink] = useState({
+        main : '/',
+        mainText : '홈',
+        department : `/department/free`,
+        departmentText : '학생 공간',
+        track : `/track`,
+        trackText : '트랙',
+        reservation : `/reservation`,
+        reservationText : '예약',
+        info : `/info`,
+        infoText : '내 정보'
+    })
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
-                <Link href = '/'>
-                    <a>홈</a>
+                <Link href = {pageLink.main}>
+                    <a>{pageLink.mainText}</a>
                 </Link>
             </div>
             {click ?
@@ -31,45 +40,45 @@ const Header = () => {
             { click ? 
                 <nav className = {styles.menu_click}  click={click ? 0 : 1}>
                     <div className='announce'>
-                        <Link href = '/office/announce'>
-                            과공지
+                        <Link href = {pageLink.department}>
+                            <a>{pageLink.departmentText}</a>
                         </Link>
                     </div>
                     <div className='board'>
-                        <Link href = '/board/free'>
-                            게시판
+                        <Link href = {pageLink.track}>
+                            <a>{pageLink.trackText}</a>
                         </Link>
                     </div>
                     <div className='professor'>
-                        <Link href = '/professor'>
-                            교수
+                        <Link href = {pageLink.reservation}>
+                            <a>{pageLink.reservationText}</a>
                         </Link>
                     </div>
                     <div className='my_info'>
-                        <Link href = '/info'>
-                            내 정보
+                        <Link href = {pageLink.info}>
+                            <a>{pageLink.infoText}</a>
                         </Link>
                     </div>
                 </nav> : 
                 <nav className = {styles.menu_noclick}  click={click ? 0 : 1}>
                     <div className='announce'>
-                        <Link href = '/office/announce'>
-                            과 공지
+                        <Link href = {pageLink.department}>
+                            <a>{pageLink.departmentText}</a>
                         </Link>
                     </div>
                     <div className='board'>
-                        <Link href = '/board/free'>
-                            게시판
+                        <Link href = {pageLink.track}>
+                            <a>{pageLink.trackText}</a>
                         </Link>
                     </div>
                     <div className='professor'>
-                        <Link href = '/professor'>
-                            교수
+                        <Link href = {pageLink.reservation}>
+                            <a>{pageLink.reservationText}</a>
                         </Link>
                     </div>
                     <div className='my_info'>
-                        <Link href = '/info'>
-                            내 정보
+                        <Link href = {pageLink.info}>
+                            <a>{pageLink.infoText}</a>
                         </Link>
                     </div>
                 </nav>}
@@ -77,4 +86,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

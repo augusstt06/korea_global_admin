@@ -4,6 +4,7 @@ import Link from 'next/link';
 const Side = (props) => {
     const items = props.items;
     const title = props.title;
+    console.log(items, items.length);
     
     const  [input, setInput] = useState({
         id : '',
@@ -38,13 +39,13 @@ const Side = (props) => {
             </div>
             {/* <div className='sideTitle'>{title}</div> */}
             <div className='sideItem'>
-                {items.map((item) => (
+                {items.length > 1  ? items.map((item) => (
                     <div className='item' key = {item.id}>
                         <Link href = {{ pathname : `${item.link}`}} key = {item.id}>
                             <a className='sideDetail'>{item.text}</a>
                         </Link>
                     </div>
-                ))}
+                )) : <div>왜 시팔</div>}
             </div>
         </nav>
     )
