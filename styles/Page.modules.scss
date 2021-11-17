@@ -1,3 +1,18 @@
+////// Page //////
+.main {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    .component{
+        width: 20%;
+        height: 100%;
+    }
+    .content{
+
+    }
+}
+
+////// Side Module //////
 .Side {
     border: 1px solid black;
     width: 180px;

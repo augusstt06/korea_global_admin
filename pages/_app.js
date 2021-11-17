@@ -4,14 +4,15 @@ import '../styles/Page.modules.scss';
 import {RecoilRoot} from 'recoil';
 
 import Header from '../component/Header';
+import Footer from "../component/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <RecoilRoot>
-      <Header/>
-      <Component {...pageProps} />
-    </RecoilRoot>
-
+      <RecoilRoot>
+          <Header/>
+          <Component {...pageProps}/>
+          <Footer/>
+      </RecoilRoot>
   )
 }
 
