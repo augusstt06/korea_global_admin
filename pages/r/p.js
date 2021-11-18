@@ -8,12 +8,12 @@ const Post_D = () => {
     const { pageQuery } = useRouter().query;
 
     const [option] = useState({
-        pageTitle : 'Posting',
+        pageTitle : '글 작성',
         sideTitle : '학생공간',
         theadTitle : '제목',
         theadBody : '내용',
-        theadAuthor : 'api',
-        theadDay : 'api'
+        theadAuthor : '작성자',
+        theadDay : '날짜'
     });
     const [postingSide] = useState([
         {id : 1, link : `/department/free`, text : '자유'},
@@ -32,42 +32,34 @@ const Post_D = () => {
                     <a>{option.pageTitle}</a>
                 </div>
                 <table className='postingTable'>
-                    <thead>
-                        <tr>
-                            <th>{option.theadAuthor}</th>
-                            <th>{option.theadDay}</th>
-                        </tr>
-                        <tr>
-                            <th colSpan='2'>{option.theadTitle}</th>
-                        </tr>
-                        <tr>
-                            <th colSpan='2'>{option.theadBody}</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td>작성자 api</td>
-                            <td>날짜 api</td>
+                            <td>{option.theadAuthor}</td>
+                            <td>doverr</td>
+                            <td>{option.theadDay}</td>
+                            <td>2021.08.18</td>
                         </tr>
                         <tr>
-                            <td colSpan='2'>
-                                <textarea placeholder='제목을 입력하세요'
-                                          value='title'/>
+                            <td>{option.theadTitle}</td>
+                            <td colSpan='3'>
+                                <textarea className='titleText'
+                                          placeholder='제목을 입력하세요'/>
                             </td>
                         </tr>
                         <tr>
-                            <td colSpan='2'>
-                                <textarea placeholder='내용을 입력하세요'
-                                          value='body'/>
+                            <td>{option.theadBody}</td>
+                            <td colSpan='3'>
+                                <textarea className='bodyText'
+                                          placeholder='내용을 입력하세요'/>
                             </td>
                         </tr>
                     </tbody>
-                    <div className='btnContainer'>
+                </table>
+                <div className='btnContainer'>
                         <button>
                             <a>작성완료</a>
                         </button>
                     </div>
-                </table>
                 <div className='btnContainer'>
                     <button>
                         <Link href ={{pathname : `/department/${pageQuery}`}}>

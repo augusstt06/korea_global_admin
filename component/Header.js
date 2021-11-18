@@ -11,14 +11,12 @@ const Header = () => {
     const [pageLink] = useState({
         main : '/',
         mainText : '홈',
-        department : `/department/free`,
+        department : `/r/free`,
         departmentText : '학생 공간',
-        track : `/track`,
+        track : `/track/accounting`,
         trackText : '트랙',
         reservation : `/reservation`,
         reservationText : '예약',
-        info : `/info`,
-        infoText : '내 정보'
     })
     return (
         <div className={styles.header}>
@@ -54,11 +52,6 @@ const Header = () => {
                             <a>{pageLink.reservationText}</a>
                         </Link>
                     </div>
-                    <div className='my_info'>
-                        <Link href = {pageLink.info}>
-                            <a>{pageLink.infoText}</a>
-                        </Link>
-                    </div>
                 </nav> : 
                 <nav className = {styles.menu_noclick}  click={click ? 0 : 1}>
                     <div className='announce'>
@@ -74,11 +67,6 @@ const Header = () => {
                     <div className='professor'>
                         <Link href = {pageLink.reservation}>
                             <a>{pageLink.reservationText}</a>
-                        </Link>
-                    </div>
-                    <div className='my_info'>
-                        <Link href = {pageLink.info}>
-                            <a>{pageLink.infoText}</a>
                         </Link>
                     </div>
                 </nav>}

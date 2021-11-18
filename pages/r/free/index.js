@@ -10,13 +10,13 @@ const Free = () => {
     const [option] = useState({
         pageTitle : '자유',
         sideTitle : '학생공간',
-        theadNum : 0,
+        theadNum : 'No',
         theadTitle : '제목',
         theadAuthor : '작성자',
-        theadDay : ''
+        theadDay : '날짜'
     })
     const [pageLink] = useState({
-        postingLink : `/department/posting`
+        postingLink : `/r/p`
     })
     return (
         <div className='main'>
@@ -32,16 +32,22 @@ const Free = () => {
                 </div>
                 <table className='boardTable'>
                     <thead>
-                        <tr>
+                        <tr className='tableHead'>
                             <th>{option.theadNum}</th>
-                            <th>{option.pageTitle}</th>
+                            <th>{option.theadTitle}</th>
                             <th>{option.theadAuthor}</th>
                             <th>{option.theadDay}</th>
                         </tr>
                     </thead>
                     <tbody>
                     {/* 이 부분은 나중에 response 데이터로 맵핑 /// query로 게시글 id값 전달*/}
-                        <tr>
+                        <tr className='tableBody'>
+                            <td>=</td>
+                            <td>=</td>
+                            <td>=</td>
+                            <td>=</td>
+                        </tr>
+                        <tr className='tableBody'>
                             <td>=</td>
                             <td>=</td>
                             <td>=</td>

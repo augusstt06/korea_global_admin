@@ -9,40 +9,40 @@
   text-align: left;
   position: absolute;
   bottom: 0;
+  z-index: 999;
   .univLogo{
     height: 100%;
     margin-right: 10px;
   }
   .univInfo{
     height: 100%;
+    width: 100%;
     margin-right: 10px;
-    ul{
-      list-style: none;
-      padding-left: 0;
-      font-size: 13px;
-      li{
-        &:nth-child(odd){
-          font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    table{
+      font-size: 11px;
+      width: 75%;
+      border-collapse: collapse;
+      tbody{
+        td{
+          //border: 1px solid black;
+          table-layout: fixed;
+          a{
+            &:hover{
+              color: #fff;
+            }
+          }
+          &:nth-child(even){
+            width: 30%;
+          }
+          &:nth-child(odd){
+            width: 15%;
+            text-align: center;
+          }
         }
       }
     }
   }
-  .univRelation{
-    height: 100%;
-    ul{
-      list-style: none;
-      padding-left: 0;
-      font-size: 13px;
-      li{
-        &:nth-child(even){
-          &:hover{
-            color: #fff;
-          }
-        }
-        &:nth-child(odd){
-          font-weight: bold;
-          }
-        }
-      }
-    }
   }

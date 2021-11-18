@@ -10,10 +10,10 @@ const Marketing = () => {
     const [option] = useState({
         pageTitle : '마케팅',
         trackTitle : '트랙',
-        theadNum : 0,
+        theadNum : 'No',
         theadTitle : '제목',
         theadAuthor : '작성자',
-        theadDay : ''
+        theadDay : '날짜'
     })
     return (
         <div className='main'>
@@ -48,7 +48,7 @@ const Marketing = () => {
                 </table>
                 <div className='btnContainer'>
                     <button>
-                        <Link href = {{pathname : `/track/posting`, query : 'marketing'}}>
+                        <Link href = {{pathname : `/track/p`, query : 'marketing'}}>
                             <a>글 작성</a>
                         </Link>
                     </button>

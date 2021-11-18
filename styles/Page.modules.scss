@@ -1,14 +1,102 @@
-////// Page //////
+////// Default Page //////
 .main {
     display: flex;
     height: 100%;
     width: 100%;
+    padding: 10px;
+    position: relative;
+    z-index : 10;
     .component{
         width: 20%;
         height: 100%;
+        margin-right: 10px;
+        margin-top: 10px;
     }
     .content{
-
+        position: relative;
+        height: 100%;
+        width: 100%;
+        .pageTitle{
+            width: 100%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0px;
+        }
+        .boardTable{
+            //background: #0070f3;
+            height: 100%;
+            width: 100%;
+            border-bottom: 1px solid black ;
+            border-top: 1px solid black;
+            border-collapse: collapse;
+            thead{
+                tr{
+                    th{
+                        border-bottom: 3px double black;
+                        padding: 5px;
+                        //border-right: 1px solid gray;
+                        &:not(:nth-child(2)){
+                            width: 20%;
+                        }
+                    }
+                }
+            }
+            tbody{
+                text-align: center;
+                tr{
+                    border-bottom: 1px dashed gray;
+                    td{
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+        .btnContainer{
+            margin-top: 10px;
+            float: right;
+            button{
+                padding: 5px;
+                background: #fff;
+                &:hover{
+                    background: #821225;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+////// Post Page //////
+.postingTable{
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid black ;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+    tbody{
+        tr{
+            border-bottom: 1px solid black;
+            td{
+                padding: 10px;
+                &:first-child{
+                    height: 40px;
+                }
+                .titleText{
+                    width: 100%;
+                    resize: none;
+                    padding: 5px;
+                    font-size: 1rem;
+                    border: none;
+                    outline: none;
+                }
+                .bodyText{
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    resize : none;
+                    height: 30vh;
+                }
+            }
+        }
     }
 }
 

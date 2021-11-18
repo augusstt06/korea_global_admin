@@ -8,12 +8,12 @@ const Post_T = () => {
     const { pageQuery } = useRouter().query;
 
     const [option] = useState({
-        pageTitle : 'Posting',
+        pageTitle : '글 작성',
         sideTitle : '트랙',
         theadTitle : '제목',
         theadBody : '내용',
-        theadAuthor : 'api',
-        theadDay : 'api'
+        theadAuthor : '작성자',
+        theadDay : '날짜'
     });
     const [postingSide] = useState([
         {id : 3, link : `/track/accounting`, text : '회계'},
@@ -23,51 +23,43 @@ const Post_T = () => {
         <div className='main'>
             <div className='component'>
                 <Side items = {[
-                    {id : postingSide[0].id, link : postingSide[0].link, text : postingSide.text},
-                    {id : postingSide[1].id, link : postingSide[1].link, text : postingSide.text}
+                    {id : postingSide[0].id, link : postingSide[0].link, text : postingSide[0].text},
+                    {id : postingSide[1].id, link : postingSide[1].link, text : postingSide[1].text}
                 ]} title = {option.sideTitle}/>
             </div>
             <div className='content'>
                 <div className='pageTitle'>
                     <a>{option.pageTitle}</a>
                 </div>
-                <div className='postingTable'>
-                    <thead>
-                        <tr>
-                            <th>{option.theadAuthor}</th>
-                            <th>{option.theadDay}</th>
-                        </tr>
-                        <tr>
-                            <th colSpan='2'>{option.theadTitle}</th>
-                        </tr>
-                        <tr>
-                            <th colSpan='2'>{option.theadBody}</th>
-                        </tr>
-                    </thead>
+                <table className='postingTable'>
                     <tbody>
                         <tr>
-                            <td>작성자 api</td>
-                            <td>날짜 api</td>
+                            <td>{option.theadAuthor}</td>
+                            <td>doverr</td>
+                            <td>{option.theadDay}</td>
+                            <td>2021.08.18</td>
                         </tr>
                         <tr>
-                            <td colSpan='2'>
-                                <textarea placeholder='제목을 입력하세요'
-                                          value='title'/>
+                            <td>{option.theadTitle}</td>
+                            <td colSpan='3'>
+                                <textarea  className='titleText'
+                                           placeholder='제목을 입력하세요'/>
                             </td>
                         </tr>
                         <tr>
-                            <td colSpan='2'>
-                                <textarea placeholder='내용을 입력하세요'
-                                          value='body'/>
+                            <td>{option.theadBody}</td>
+                            <td colSpan='3'>
+                                <textarea  className='bodyText'
+                                           placeholder='내용을 입력하세요'/>
                             </td>
                         </tr>
                     </tbody>
-                    <div className='btnContainer'>
+                </table>
+                <div className='btnContainer'>
                         <button>
                             <a>작성 완료</a>
                         </button>
                     </div>
-                </div>
                 <div className='btnContainer'>
                     <button>
                         <Link href = {{pathname : `/track/${pageQuery}`}}>

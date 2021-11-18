@@ -11,10 +11,10 @@ const Accounting = () => {
     const [option] = useState({
         pageTitle : '회계',
         trackTitle : '트랙',
-        theadNum : 0,
+        theadNum : 'No',
         theadTitle : '제목',
         theadAuthor : '작성자',
-        theadDay : ''
+        theadDay : '날짜'
     })
     return (
         <div className='main'>
@@ -30,7 +30,7 @@ const Accounting = () => {
                 </div>
                 <table className='boardTable'>
                     <thead>
-                        <tr>
+                        <tr className='tableHead'>
                             <th>{option.theadNum}</th>
                             <th>{option.theadTitle}</th>
                             <th>{option.theadAuthor}</th>
@@ -39,7 +39,7 @@ const Accounting = () => {
                     </thead>
                     <tbody>
                     {/* 이 부분은 나중에 response 데이터로 맵핑 /// link query로 게시글 id값 전달*/}
-                        <tr>
+                        <tr className='tableBody'>
                             <td>=</td>
                             <td>=</td>
                             <td>=</td>
@@ -47,13 +47,13 @@ const Accounting = () => {
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div className='btnContainer'>
+                <div className='btnContainer'>
                 <button>
-                    <Link href = {{pathname : `/track/posting`, query : 'accounting'}}>
+                    <Link href = {{pathname : `/track/p`, query : 'accounting'}}>
                         <a>글 작성</a>
                     </Link>
                 </button>
+            </div>
             </div>
         </div>
     )
