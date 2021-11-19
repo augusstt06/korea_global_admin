@@ -24,9 +24,9 @@ const Main = () => {
                 <div className='pageTitle'>
                     <div>{option.pageTitle}</div>
                 </div>
-                <div className='boardTable'>
+                <table className='boardTable'>
                     <thead>
-                        <tr>
+                        <tr className='tableHead'>
                             <th>{option.theadNum}</th>
                             <th>{option.theadTitle}</th>
                             <th>{option.theadAuthor}</th>
@@ -34,14 +34,14 @@ const Main = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr className='tableBody'>
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
                         </tr>
                     </tbody>
-                </div>
+                </table>
             </div>
         </div>
     )

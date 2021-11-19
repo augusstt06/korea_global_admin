@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useRouter} from "next/router";
 import Link from 'next/link';
 import Side from "../../../../component/Side";
+import {BsArrowReturnLeft} from "react-icons/bs";
 
 const Detail_marketing = () => {
     const { pageQuery } = useRouter().query;
@@ -32,55 +33,54 @@ const Detail_marketing = () => {
                     <a>{option.pageTitle}</a>
                 </div>
                 <table className='detailTable'>
-                    <thead>
-                        <tr>
-                            <th>{option.theadAuthor}</th>
-                            <th>{option.theadDay}</th>
-                        </tr>
-                        <tr>
-                            <th colSpan='2'>{option.pageTitle}</th>
-                        </tr>
-                        <tr>
-                            <th colSpan='2'>{option.theadBody}</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td>작성자 api</td>
-                            <td>날짜 api</td>
+                            <td>{option.theadAuthor}</td>
+                            <td>doverr</td>
+                            <td>{option.theadDay}</td>
+                            <td>2021.08.18</td>
                         </tr>
                         <tr>
-                            <td colSpan='2'>제목 api</td>
+                            <td>{option.theadTitle}</td>
+                            <td colSpan='3'>
+                                제목이 들어갑니다
+                            </td>
                         </tr>
-                        <tr>
-                            <td colSpan='2'>내용 api</td>
+                        <tr className='detailBody'>
+                            <td>{option.theadBody}</td>
+                            <td colSpan='3' >
+                                내용이 들어갑니다
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 <div className='commentContainer'>
                     <div className='postingComment'>
-                        <div className='typingComment'>
-                            <textarea placeholder='댓글을 입력하세요'
-                                      value='comment'/>
+                        <div className='commentUser'>
+                            <a>augusstt06</a>
                         </div>
-                        <div className='btnContainer'>
+                        <div className='typingComment'>
+                            <textarea placeholder='댓글을 입력하세요'/>
+                        </div>
+                        <div className='commentBtn'>
                             <button>
                                 <a>댓글 작성</a>
                             </button>
                         </div>
                     </div>
-                    {/* commentList는 response로 맵핑*/}
+                    {/* 여기는 나중에 Response Data Mapping*/}
                     <div className='commentList'>
                         <div className='commentId'>
-                            댓글 작성자 ID
+                            <a>Id Response</a>
                         </div>
                         <div className='comment'>
-                            <a>댓글 내용</a>
-                            <div className='reComment'>
-                            대댓글
+                            <a>Comment Response</a>
                         </div>
+                        <div className='reComment'>
+                            <BsArrowReturnLeft/>
                         </div>
                     </div>
+                {/*    */}
                 </div>
                 <div className='btnContainer'>
                     <button>

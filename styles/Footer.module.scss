@@ -19,27 +19,18 @@
     width: 100%;
     margin-right: 10px;
     display: flex;
-    flex-direction: column;
     font-size: 13px;
-    table{
-      font-size: 11px;
-      width: 75%;
-      border-collapse: collapse;
-      tbody{
-        td{
-          //border: 1px solid black;
-          table-layout: fixed;
-          a{
-            &:hover{
-              color: #fff;
-            }
-          }
-          &:nth-child(even){
-            width: 30%;
-          }
-          &:nth-child(odd){
-            width: 15%;
-            text-align: center;
+    .ulHead{
+      font-weight: bold;
+    }
+    ul{
+      padding-left: 0px;
+      margin: 5px 10px;
+      li{
+        list-style: none;
+        span{
+          &:hover{
+            color: #fff;
           }
         }
       }
