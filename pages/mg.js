@@ -22,6 +22,7 @@ const Mg_Post = () => {
                 <Side items = {[
                     {id : idSide[0].id, link : idSide[0].link, text : idSide[0].text},
                     {id : idSide[1].id, link : idSide[1].link, text : idSide[1].text},
+                    {id : idSide[2].id, link : idSide[2].link, text : idSide[2].text}
                 ]} title = {option.pageTitle}/>
             </div>
             <div className='content'>

@@ -194,6 +194,143 @@
         }
     }
 }
+////// Message //////
+.msgBox{
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+    .msgList{
+        border-right: 1px solid black;
+        width: 30%;
+        .myNickname{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            height: 6vh;
+            border-bottom: 1px solid black;
+        }
+        .receiveList{
+            //height: 50vh;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 10px;
+            overflow: scroll;
+            border-bottom: 1px dashed gray;
+            &:hover{
+                background-color: gainsboro;
+            }
+            .receivePhoto{
+                padding: 10px;
+                margin-right: 10px;
+            }
+            .receiveOpponent{
+                width: 100%;
+                padding: 10px;
+                .receiveInfo{
+                    font-weight: bold;
+                }
+                .receiveMsg{
+
+                }
+            }
+        }
+    }
+    .msgDetail{
+        width: 70%;
+        height: 50vh;
+        .opponentNickname{
+            border-bottom: 1px solid black;
+            display: flex;
+            align-items: center;
+            height: 6vh;
+            .receivePhoto{
+                padding: 10px;
+                margin-right: 10px;
+            }
+            .receiveInfo{
+                font-weight: bold;
+            }
+        }
+        .msgChatBox{
+            position: relative;
+            height: 80%;
+            .opponentChat{
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                .receivePhoto{
+                    border: 1px solid black;
+                    padding: 10px;
+                    border-radius: 30px;
+                    margin-right: 10px;
+                }
+                .ChatMsg{
+                    border: 1px solid black;
+                    padding: 10px;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                }
+            }
+            .myChat{
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                padding: 10px;
+                .myPhoto{
+                    border: 1px solid black;
+                    padding: 10px;
+                    border-radius: 30px;
+                    margin-left: 10px;
+                }
+                .ChatMsg{
+                    border: 1px solid black;
+                    padding: 10px;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+        .typingMsg{
+            display: flex;
+            width: 100%;
+            .typingChat{
+                width: 90%;
+                height: 100%;
+                border-top: 1px solid gray;
+                textarea{
+                    padding: 5px;
+                    width: 100%;
+                    resize: none;
+                    outline: none;
+                    border: none;
+                }
+            }
+            .typingBtn{
+                padding: 5px;
+                border-top: 1px solid gray;
+                width: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                button{
+                    width: 80%;
+                    height: 80%;
+                    padding: 5px;
+                    background-color: white;
+                    border: none;
+                    font-size: 0.8rem;
+                    a:hover{
+                        color: #821225;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
+
 ////// Side Module //////
 .Side {
     border: 1px solid black;
