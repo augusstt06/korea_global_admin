@@ -10,7 +10,7 @@ const Header = () => {
     };
     const [pageLink] = useState({
         main : '/',
-        mainText : '홈',
+        mainText : '고려대학교 글로벌 경영',
         department : `/r/free`,
         departmentText : '학생 공간',
         track : `/track/accounting`,
@@ -32,9 +32,6 @@ const Header = () => {
                 <div className={styles.icon} onClick={handleClick}>
                     <FaBars />
                 </div>}
-            {/*<div className={styles.icon} onClick={handleClick}>*/}
-            {/*    {click ? <FaTimes /> : <FaBars />}*/}
-            {/*</div>*/}
             { click ? 
                 <nav className = {styles.menu_click}  click={click ? 0 : 1}>
                     <div className='announce'>
