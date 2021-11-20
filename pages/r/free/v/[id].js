@@ -5,7 +5,9 @@ import Side from "../../../../component/Side";
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 const Detail_free =  () => {
-    const { pageQuery } = useRouter().query;
+    const router = useRouter();
+    const query = router.query;
+    console.log(query);
     const [option] = useState({
         pageTitle : '작성 글 상세',
         sideTitle : '학생공간',
@@ -16,7 +18,8 @@ const Detail_free =  () => {
     })
     const [idSide] = useState([
         {id : 1, link : `/r/free`, text : '자유'},
-        {id : 2, link : `/r/market`, text : '장터'}
+        {id : 2, link : `/r/market`, text : '장터'},
+        {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
     ]);
 
     return (
@@ -24,7 +27,8 @@ const Detail_free =  () => {
             <div className='component'>
                 <Side items = {[
                     {id : idSide[0].id, link : idSide[0].link, text : idSide[0].text},
-                    {id : idSide[1].id, link : idSide[1].link, text : idSide[1].text}
+                    {id : idSide[1].id, link : idSide[1].link, text : idSide[1].text},
+                    {id : idSide[2].id, link : idSide[2].link, text : idSide[2].text}
                 ]} title = {option.sideTitle}/>
             </div>
             <div className='content'>
@@ -83,7 +87,7 @@ const Detail_free =  () => {
                 </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href = {{pathname : `/r/${pageQuery}`}}>
+                        <Link href = {{pathname : `/r/${query.page}`}}>
                             <a>목록으로</a>
                         </Link>
                     </button>

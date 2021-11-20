@@ -4,8 +4,8 @@ import Side from "../../../component/Side";
 
 const Marketing = () => {
     const [trackSide] = useState([
-        {id : 3, link : `/track/accounting`, text : '회계'},
-        {id : 4, link : `/track/marketing`, text : '마케팅'}
+        {id : 4, link : `/track/accounting`, text : '회계'},
+        {id : 5, link : `/track/marketing`, text : '마케팅'}
     ]);
     const [option] = useState({
         pageTitle : '마케팅',
@@ -48,7 +48,7 @@ const Marketing = () => {
                 </table>
                 <div className='btnContainer'>
                     <button>
-                        <Link href = {{pathname : `/track/p`, query : 'marketing'}}>
+                        <Link href = {{pathname : `/track/p`, query : {page : 'marketing'}}}>
                             <a>글 작성</a>
                         </Link>
                     </button>

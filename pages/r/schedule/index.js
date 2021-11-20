@@ -1,21 +1,21 @@
 import React, {useState} from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import Side from "../../../component/Side";
 
-const Market = () => {
+const Schedule = () => {
     const [rSide] = useState([
         {id : 1, link : `/r/free`, text : '자유'},
         {id : 2, link : `/r/market`, text : '장터'},
         {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
     ]);
     const [option] = useState({
-        pageTitle : '장터',
+        pageTitle : '시간표 인벤',
         sideTitle : '학생공간',
         theadNum : 'No',
         theadTitle : '제목',
         theadAuthor : '작성자',
         theadDay : '날짜'
-    })
+    });
     const [pageLink] = useState({
         postingLink : `/r/p`
     })
@@ -42,18 +42,17 @@ const Market = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* 이 부분은 나중에 response 데이터로 맵핑 /// query로 게시글 id값 전달*/}
                         <tr className='tableBody'>
-                            <td>=</td>
-                            <td>=</td>
-                            <td>=</td>
-                            <td>=</td>
+                            <td>dd</td>
+                            <td>dd</td>
+                            <td>dd</td>
+                            <td>dd</td>
                         </tr>
                     </tbody>
                 </table>
                 <div className='btnContainer'>
                     <button>
-                        <Link href = {{pathname : pageLink.postingLink , query : {page : 'market'}}}>
+                        <Link href={{pathname : pageLink.postingLink, query : {page : 'schedule'}}}>
                             글 작성
                         </Link>
                     </button>
@@ -61,5 +60,5 @@ const Market = () => {
             </div>
         </div>
     )
-}
-export default Market;
+};
+export default Schedule;

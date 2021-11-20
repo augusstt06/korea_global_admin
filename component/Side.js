@@ -4,7 +4,6 @@ import Link from 'next/link';
 const Side = (props) => {
     const items = props.items;
     const title = props.title;
-    console.log(items, items.length);
     
     const  [input, setInput] = useState({
         id : '',

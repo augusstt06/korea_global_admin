@@ -6,6 +6,7 @@ import Side from "../component/Side";
 // 메인 = 공지
 // Flexible 하게
 const Main = () => {
+    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
     const [option] = useState({
         pageTitle : '공지사항',
         theadNum : 0,

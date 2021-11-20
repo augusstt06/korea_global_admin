@@ -1,5 +1,14 @@
-##### Project Structure
+##### Project ##### 
 
+### JS ###
+1. 모든 함수는 Depth 3이상 넘지 않도록 하기
+2. 모든 함수 기능별로 세분화
+3. 명확한 변수 이름
+**** 
+### HTML, CSS ###
+1. 재사용 가능한 Component => Module
+
+### Structure ###
 1. Main (Announce)
    1. url : '/'
    2. 
@@ -24,4 +33,3 @@
    1. my posting
    2. my comment
    3. message
-   4. my info (default)

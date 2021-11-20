@@ -1,33 +1,53 @@
 ////// Default Page //////
 .main {
     display: flex;
-    //height: 100%;
     height: 74vh;
     width: 100%;
     padding: 10px;
     position: relative;
     overflow: scroll;
     z-index : 10;
-    //background-color: #0070f3;
     .component{
         display: inline-block;
         width: 15%;
         margin-top: 10px;
     }
     .content{
-        //background: antiquewhite;
         position: relative;
         margin-top: 10px;
         height: 10%;
-        width:75%;
+        width:65%;
+        .contentTop{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100%;
+            .searchContainer{
+                width: 70%;
+                select{
+                    margin-right: 5px;
+                    padding: 5px;
+                    border-radius: 15px;
+                }
+                input{
+                    margin-right: 5px;
+                    width: 30%;
+                    padding: 5px;
+                    border-radius: 15px;
+                }
+                button{
+                    padding: 5px;
+                    border-radius: 15px;
+                }
+            }
+        }
         .pageTitle{
-            width: 100%;
+            width: 10%;
             font-weight: bold;
             font-size: 1.2rem;
             margin: 10px 0px;
         }
         .boardTable{
-            //background: #0070f3;
             height: 100%;
             width: 100%;
             border-bottom: 1px solid black ;
@@ -335,6 +355,8 @@
 .Side {
     border: 1px solid black;
     width: 180px;
+    position: sticky;
+    top: 0px;
     .login {
         text-align: center;
         padding: 10px;

@@ -5,7 +5,8 @@ import Side from "../../component/Side";
 
 const Post_D = () => {
     // request : 제목, 내용, 작성자, 첨부파일
-    const { pageQuery } = useRouter().query;
+    const router = useRouter();
+    const query = router.query;
 
     const [option] = useState({
         pageTitle : '글 작성',
@@ -16,15 +17,17 @@ const Post_D = () => {
         theadDay : '날짜'
     });
     const [postingSide] = useState([
-        {id : 1, link : `/department/free`, text : '자유'},
-        {id : 2, link : `/department/market`, text : '장터'}
+        {id : 1, link : `/r/free`, text : '자유'},
+        {id : 2, link : `/r/market`, text : '장터'},
+        {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
     ]);
     return (
         <div className='main'>
             <div className='component'>
                 <Side items = {[
                     {id : postingSide[0].id, link : postingSide[0].link, text : postingSide[0].text},
-                    {id : postingSide[1].id, link : postingSide[1].link, text : postingSide[1].text}
+                    {id : postingSide[1].id, link : postingSide[1].link, text : postingSide[1].text},
+                    {id : postingSide[2].id, link : postingSide[2].link, text : postingSide[2].text}
                 ]} title = {option.sideTitle} />
             </div>
             <div className='content'>
@@ -62,7 +65,7 @@ const Post_D = () => {
                     </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href ={{pathname : `/department/${pageQuery}`}}>
+                        <Link href ={{pathname : `/r/${query.page}`}}>
                             <a>목록으로</a>
                         </Link>
                     </button>

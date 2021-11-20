@@ -5,7 +5,9 @@ import Side from "../../../../component/Side";
 import {BsArrowReturnLeft} from "react-icons/bs";
 
 const Detail_marketing = () => {
-    const { pageQuery } = useRouter().query;
+    const router = useRouter();
+    const query = router.query;
+    console.log(query);
 
     const [option] = useState({
         pageTitle : '작성 글 상세',
@@ -84,7 +86,7 @@ const Detail_marketing = () => {
                 </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href ={{pathname : `/track/${pageQuery}`}}>
+                        <Link href ={{pathname : `/track/${query.page}`}}>
                             <a>목록으로</a>
                         </Link>
                     </button>

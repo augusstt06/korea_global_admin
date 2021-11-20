@@ -5,7 +5,8 @@ import Side from "../../component/Side";
 
 const Post_T = () => {
     // request : 제목, 내용, 작성자, 첨부파일
-    const { pageQuery } = useRouter().query;
+    const router = useRouter();
+    const query = router.query;
 
     const [option] = useState({
         pageTitle : '글 작성',
@@ -62,7 +63,7 @@ const Post_T = () => {
                     </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href = {{pathname : `/track/${pageQuery}`}}>
+                        <Link href = {{pathname : `/track/${query.page}`}}>
                             <a>목록으로</a>
                         </Link>
                     </button>

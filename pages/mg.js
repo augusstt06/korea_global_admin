@@ -3,6 +3,7 @@ import Side from "../component/Side";
 
 
 const Mg_Post = () => {
+    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
     const [option] = useState({
         pageTitle : '작성 게시물',
         sideTitle : '이건 좀 생각을 해보자',

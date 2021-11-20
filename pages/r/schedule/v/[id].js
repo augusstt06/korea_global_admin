@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {useRouter} from "next/router";
-import Link from 'next/link';
+import Link from "next/link";
 import Side from "../../../../component/Side";
-import {BsArrowReturnLeft} from "react-icons/bs";
+import { BsArrowReturnLeft } from 'react-icons/bs';
 
-const Detail_market =  () => {
+const Detail_schedule = () => {
     const router = useRouter();
     const query = router.query;
     console.log(query);
@@ -15,7 +15,7 @@ const Detail_market =  () => {
         theadBody : '내용',
         theadDay : '날짜',
         theadAuthor : '작성자'
-    })
+    });
     const [idSide] = useState([
         {id : 1, link : `/r/free`, text : '자유'},
         {id : 2, link : `/r/market`, text : '장터'},
@@ -28,7 +28,7 @@ const Detail_market =  () => {
                 <Side items = {[
                     {id : idSide[0].id, link : idSide[0].link, text : idSide[0].text},
                     {id : idSide[1].id, link : idSide[1].link, text : idSide[1].text},
-                    {id : idSide[2].id, link : idSide[2].link , text : idSide[2].text}
+                    {id : idSide[2].id, link : idSide[2].link, text : idSide[2].text}
                 ]} title = {option.sideTitle}/>
             </div>
             <div className='content'>
@@ -46,12 +46,12 @@ const Detail_market =  () => {
                         <tr>
                             <td>{option.theadTitle}</td>
                             <td colSpan='3'>
-                                제목이 들어갑니다
+                                제목이 들어갑니다.
                             </td>
                         </tr>
                         <tr className='detailBody'>
                             <td>{option.theadBody}</td>
-                            <td colSpan='3' >
+                            <td colSpan='3'>
                                 내용이 들어갑니다
                             </td>
                         </tr>
@@ -83,7 +83,7 @@ const Detail_market =  () => {
                             <BsArrowReturnLeft/>
                         </div>
                     </div>
-                {/*    */}
+                    {/*    */}
                 </div>
                 <div className='btnContainer'>
                     <button>
@@ -95,5 +95,5 @@ const Detail_market =  () => {
             </div>
         </div>
     )
-}
-export default Detail_market;
+};
+export default Detail_schedule;

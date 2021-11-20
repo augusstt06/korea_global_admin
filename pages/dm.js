@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Side from "../component/Side";
 
 const Dm = () => {
+    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
     const [option] = useState({
         pageTitle : '쪽지함',
         sideTitle : '마이 페이지',
