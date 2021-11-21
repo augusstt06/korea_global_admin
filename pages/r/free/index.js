@@ -7,7 +7,7 @@ const Free = () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
     // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
-    //           Mapping Data => Search
+    //           Mapping Data => Search : Done!
     //           Pagination
 
     // Basic Section
@@ -26,13 +26,16 @@ const Free = () => {
     })
     const [pageLink] = useState({
         postingLink : `/r/p`
-    })
-    // API  Section
+    });
+
+    // API Request Section
     const [free, setFree] = useState([]);
+    const [search, setSearch] = useState([]);
     const freeApi = async () => {
         console.log('Now Loading...');
         const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
         setFree(res.data);
+        setSearch(res.data);
         console.log('Finish Loading!');
     };
     useEffect(() => {
@@ -42,13 +45,14 @@ const Free = () => {
     // Search Section
     const [keyword, setKeyword] = useState('');
     const [optionStatus, setOptionStatus] = useState('');
+
     const keywordInput = (e) => {
         setKeyword(e.target.value);
     };
     const selectOption = (e) => {
         setOptionStatus(e.target.value);
     };
-    const [search, setSearch] = useState([]);
+
     // 검색 기능별로 함수 나누기 => 클릭 이벤트 함수에서 조건부 호출
     const searchTitleData = () => {
         setSearch();
@@ -80,6 +84,30 @@ const Free = () => {
                 break;
         }
     };
+
+    // Pagination Section
+
+    const division = () => {
+        const copy = [...search];
+        const sliceList = [];
+        const arrLen = copy.length;
+        for (let i = 0; i <= Math.ceil(arrLen/10); i++){
+            console.log(arrLen);
+            sliceList.push(copy.splice(0,10));
+        };
+        return sliceList;
+    };
+    const [page, setPage] = useState(0);
+
+    const pagination = () => {
+        const numList = [];
+        const arrLen = division().length;
+        for(let i = 1; i < arrLen; i++){
+            numList.push(i);
+        }
+        return numList;
+    }
+
     return (
         <div className='main'>
             <div className='component'>
@@ -124,7 +152,7 @@ const Free = () => {
                     </thead>
                     <tbody>
                     {/* Response Data Mapping*/}
-                    {free.map(data => (
+                    {division()[page].map(data => (
                         <tr key={data.id}>
                             <td>{data.id}</td>
                             <td>
@@ -138,6 +166,11 @@ const Free = () => {
                     ))}
                     </tbody>
                 </table>
+                <div className='pagination'>
+                    {pagination().map(data => (
+                        <div key={data}>{data}</div>
+                    ))}
+                </div>
                 <div className='btnContainer'>
                     <button>
                         <Link href = {{pathname : pageLink.postingLink , query : {page : 'free'}}}>
