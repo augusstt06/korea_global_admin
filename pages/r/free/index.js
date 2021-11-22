@@ -29,6 +29,7 @@ const Free = () => {
     });
 
     // API Request Section
+
     const [free, setFree] = useState([]);
     const [search, setSearch] = useState([]);
     const freeApi = async () => {
@@ -43,6 +44,7 @@ const Free = () => {
     }, []);
 
     // Search Section
+
     const [keyword, setKeyword] = useState('');
     const [optionStatus, setOptionStatus] = useState('');
 
@@ -53,7 +55,6 @@ const Free = () => {
         setOptionStatus(e.target.value);
     };
 
-    // 검색 기능별로 함수 나누기 => 클릭 이벤트 함수에서 조건부 호출
     const searchTitleData = () => {
         setSearch();
         const titleData = free.filter(data => (data.title).includes(keyword) === true);
@@ -92,7 +93,6 @@ const Free = () => {
         const sliceList = [];
         const arrLen = copy.length;
         for (let i = 0; i <= Math.ceil(arrLen/10); i++){
-            console.log(arrLen);
             sliceList.push(copy.splice(0,10));
         };
         return sliceList;
@@ -106,7 +106,7 @@ const Free = () => {
             numList.push(i);
         }
         return numList;
-    }
+    };
 
     return (
         <div className='main'>
@@ -168,7 +168,9 @@ const Free = () => {
                 </table>
                 <div className='pagination'>
                     {pagination().map(data => (
-                        <div key={data}>{data}</div>
+                        <div key={data}>
+                            <button onClick={() => {setPage(data-1)}}>{data}</button>
+                        </div>
                     ))}
                 </div>
                 <div className='btnContainer'>
