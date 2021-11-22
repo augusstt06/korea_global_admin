@@ -1,12 +1,13 @@
 ////// Default Page //////
 .main {
     display: flex;
-    height: 74vh;
+    height: 78vh;
     width: 100%;
     padding: 10px;
     position: relative;
     overflow: scroll;
     z-index : 10;
+
     .component{
         display: inline-block;
         width: 15%;
@@ -75,40 +76,43 @@
                 }
             }
         }
-        .pagination{
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-            div{
-                padding: 5px;
-                button{
-                    border: none;
-                    border-radius: 30px;
+        .contentBottom{
+            display: grid;
+            grid-template-columns: 7fr 1fr;
+            align-items: center;
+            .pagination{
+                display: flex;
+                justify-content: center;
+                padding: 10px;
+                div{
                     padding: 5px;
-                    font-size: 1rem;
-                    font-weight: bold;
-                    background-color: #fff;
-                    &:hover{
-                        background-color: #821225;
-                        color: #fff;
-                    }
-                    &:focus{
-                        background-color: #821225;
-                        color: #fff;
-                    }
+                    button{
+                        border: none;
+                        border-radius: 30px;
+                        padding: 5px;
+                        font-size: 1rem;
+                        font-weight: bold;
+                        background-color: #fff;
+                        &:hover{
+                            background-color: #821225;
+                            color: #fff;
+                        }
+                        &:focus{
+                            background-color: #821225;
+                            color: #fff;
+                        }
 
+                    }
                 }
             }
-        }
-        .btnContainer{
-            margin-top: 10px;
-            float: right;
-            button{
-                padding: 5px;
-                background: #fff;
-                &:hover{
-                    background: #821225;
-                    color: #fff;
+            .btnContainer{
+                button{
+                    padding: 5px;
+                    background: #fff;
+                    &:hover{
+                        background: #821225;
+                        color: #fff;
+                    }
                 }
             }
         }

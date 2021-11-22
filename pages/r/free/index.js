@@ -8,7 +8,7 @@ const Free = () => {
 
     // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
     //           Mapping Data => Search : Done!
-    //           Pagination
+    //           Pagination : Done!
 
     // Basic Section
     const [rSide] = useState([
@@ -26,6 +26,12 @@ const Free = () => {
     })
     const [pageLink] = useState({
         postingLink : `/r/p`
+    });
+    const [optionValue] = useState({
+        default : '선택',
+        title : '제목',
+        body : '내용',
+        all : '제목+내용'
     });
 
     // API Request Section
@@ -67,7 +73,7 @@ const Free = () => {
     };
     const searchAllData = () => {
         setSearch();
-        const allData = free.filter(data => data.includes(keyword) === true);
+        const allData = free.filter(data => (data.title).includes(keyword) === true || (data.body).includes(keyword) === true);
         setSearch(allData);
     };
     const clickSearch = () => {
@@ -87,6 +93,7 @@ const Free = () => {
     };
 
     // Pagination Section
+    const [page, setPage] = useState(0);
 
     const division = () => {
         const copy = [...search];
@@ -97,8 +104,6 @@ const Free = () => {
         };
         return sliceList;
     };
-    const [page, setPage] = useState(0);
-
     const pagination = () => {
         const numList = [];
         const arrLen = division().length;
@@ -124,13 +129,13 @@ const Free = () => {
                     </div>
                     <div className='searchContainer'>
                         <select onChange={selectOption}>
-                            <option value='none'>선택</option>
+                            <option value='none'>{optionValue.default}</option>
                             <option value='title'
-                                    name='option'>제목</option>
+                                    name='option'>{optionValue.title}</option>
                             <option value='content'
-                                    name='option'>내용</option>
+                                    name='option'>{optionValue.body}</option>
                             <option value='all'
-                                    name='option'>제목+내용</option>
+                                    name='option'>{optionValue.all}</option>
                         </select>
                         <input placeholder='검색어를 입력하세요'
                                type='text'
@@ -164,21 +169,26 @@ const Free = () => {
                             <td><a>2021.08.18</a></td>
                         </tr>
                     ))}
+                    {/**/}
                     </tbody>
                 </table>
-                <div className='pagination'>
-                    {pagination().map(data => (
-                        <div key={data}>
-                            <button onClick={() => {setPage(data-1)}}>{data}</button>
-                        </div>
-                    ))}
-                </div>
-                <div className='btnContainer'>
-                    <button>
-                        <Link href = {{pathname : pageLink.postingLink , query : {page : 'free'}}}>
-                            글 작성
-                        </Link>
-                    </button>
+                <div className='contentBottom'>
+                    <div className='pagination'>
+                        {pagination().map(data => (
+                            <div key={data}>
+                                <button onClick={() => {setPage(data-1)}}>
+                                    {data}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <div className='btnContainer'>
+                        <button>
+                            <Link href = {{pathname : pageLink.postingLink , query : {page : 'free'}}}>
+                                글 작성
+                            </Link>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

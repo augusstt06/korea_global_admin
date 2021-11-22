@@ -5,6 +5,12 @@ import Side from "../../../../component/Side";
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 const Detail_free =  () => {
+    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
+
+    // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
+    //           Comment....
+
+    // Basic Section
     const router = useRouter();
     const query = router.query;
     console.log(query);
