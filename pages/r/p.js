@@ -42,25 +42,19 @@ const Post_D = () => {
         const word = string.replace(/ /g, "")
         return word.length;
     };
+
     // API Request Section ( POST )
 
-    // 클릭 하면 타이틀과 바디를 담아서 => 요청
-    // 제목, 내용을 채우지 않으면 요청 못 보내게 핸들링 하기
-    // 입력시 앞, 뒤 공백은 자동으로 삭제한다.
-    const postApi = async () => {
-        try{
-            console.log('Now Posting...');
-            await axios.post('https://jsonplaceholder.typicode.com/posts', {
-                data : {
-                    page : query.page,
-                    title : title.trim(),
-                    content : content.trim()
-                }
-            })
-            console.log('Posting Complete!')
-        } catch (err) {
-            console.log('Error!')
-        }
+    const postApi = () => {
+        console.log('Now Posting...');
+        axios.post('https://jsonplaceholder.typicode.com/posts', {
+            data : {
+                page : query.page,
+                title : title.trim(),
+                content : content.trim()
+            }
+        });
+        console.log('Posting Complete!');
     };
 
     const clickPost = () => {
