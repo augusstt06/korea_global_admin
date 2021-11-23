@@ -1,13 +1,19 @@
 import React, {useState} from "react";
 import {useRouter} from "next/router";
+import {Router} from "next/router";
+import axios from 'axios';
 import Link from 'next/link';
 import Side from "../../component/Side";
 
 const Post_D = () => {
-    // request : 제목, 내용, 작성자, 첨부파일
+    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
+
+    // 필요 기능 : Post API Request (제목, 내용, 작성자,  첨부파일)
+
+    // Basic Section
     const router = useRouter();
     const query = router.query;
-
+    // console.log(router)
     const [option] = useState({
         pageTitle : '글 작성',
         sideTitle : '학생공간',
@@ -21,6 +27,52 @@ const Post_D = () => {
         {id : 2, link : `/r/market`, text : '장터'},
         {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
     ]);
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState((''));
+
+    const typingTitle = (e) => {
+        setTitle(e.target.value);
+    };
+    const typingContent = (e) => {
+        setContent(e.target.value);
+    };
+
+    const removeSpace = (string) => {
+        const word = string.replace(/ /g, "")
+        return word.length;
+    };
+    // API Request Section ( POST )
+
+    // 클릭 하면 타이틀과 바디를 담아서 => 요청
+    // 제목, 내용을 채우지 않으면 요청 못 보내게 핸들링 하기
+    // 입력시 앞, 뒤 공백은 자동으로 삭제한다.
+    const postApi = async () => {
+        try{
+            console.log('Now Posting...');
+            await axios.post('https://jsonplaceholder.typicode.com/posts', {
+                data : {
+                    page : query.page,
+                    title : title.trim(),
+                    content : content.trim()
+                }
+            })
+            console.log('Posting Complete!')
+        } catch (err) {
+            console.log('Error!')
+        }
+    };
+
+    const clickPost = () => {
+        if(removeSpace(title) !== 0 && removeSpace(content) !== 0) {
+            postApi();
+            alert('작성이 완료되었습니다!');
+            router.push(`/r/free`);
+        } else {
+            alert('제목 또는 내용을 입력해주세요.')
+        }
+    };
+
     return (
         <div className='main'>
             <div className='component'>
@@ -46,20 +98,22 @@ const Post_D = () => {
                             <td>{option.theadTitle}</td>
                             <td colSpan='3'>
                                 <textarea className='titleText'
-                                          placeholder='제목을 입력하세요'/>
+                                          placeholder='제목을 입력하세요'
+                                          onChange={typingTitle}/>
                             </td>
                         </tr>
                         <tr>
                             <td>{option.theadBody}</td>
                             <td colSpan='3'>
                                 <textarea className='bodyText'
-                                          placeholder='내용을 입력하세요'/>
+                                          placeholder='내용을 입력하세요'
+                                          onChange={typingContent}/>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div className='btnContainer'>
-                        <button>
+                        <button onClick={clickPost}>
                             <a>작성완료</a>
                         </button>
                     </div>

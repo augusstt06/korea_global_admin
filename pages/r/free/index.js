@@ -6,7 +6,7 @@ import axios from 'axios';
 const Free = () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
-    // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
+    // 필요 기능 : Get API Request => Response Data Mapping => Rendering
     //           Mapping Data => Search : Done!
     //           Pagination : Done!
 
@@ -34,7 +34,7 @@ const Free = () => {
         all : '제목+내용'
     });
 
-    // API Request Section
+    // API Request Section ( GET )
 
     const [free, setFree] = useState([]);
     const [search, setSearch] = useState([]);

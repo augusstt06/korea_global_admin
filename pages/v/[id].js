@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {useRouter} from "next/router";
-import Link from 'next/link';
-import Side from "../../../../component/Side";
-import { BsArrowReturnLeft } from 'react-icons/bs';
+import Link from "next/link";
+import Side from "../../component/Side";
+import { BsArrowReturnLeft} from "react-icons/bs";
 
-const Detail_free =  () => {
+const Detail_main = () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
     // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
@@ -13,29 +13,23 @@ const Detail_free =  () => {
     // Basic Section
     const router = useRouter();
     const query = router.query;
-    console.log(query);
     const [option] = useState({
         pageTitle : '작성 글 상세',
-        sideTitle : '학생공간',
+        sideTitle : '아직 미정',
         theadTitle : '제목',
         theadBody : '내용',
         theadDay : '날짜',
         theadAuthor : '작성자'
     });
     const [idSide] = useState([
-        {id : 1, link : `/r/free`, text : '자유'},
-        {id : 2, link : `/r/market`, text : '장터'},
-        {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
+        {id : 10, link: `/`, text : 'test'}
     ]);
 
-    // API Request Section ( GET, POST )
     return (
         <div className='main'>
             <div className='component'>
                 <Side items = {[
-                    {id : idSide[0].id, link : idSide[0].link, text : idSide[0].text},
-                    {id : idSide[1].id, link : idSide[1].link, text : idSide[1].text},
-                    {id : idSide[2].id, link : idSide[2].link, text : idSide[2].text}
+                    {id : idSide[0].id, link : idSide[0].link, text : idSide[0].text}
                 ]} title = {option.sideTitle}/>
             </div>
             <div className='content'>
@@ -48,7 +42,7 @@ const Detail_free =  () => {
                             <td>{option.theadAuthor}</td>
                             <td>doverr</td>
                             <td>{option.theadDay}</td>
-                            <td>2021.08.18</td>
+                            <td>2021.08.19</td>
                         </tr>
                         <tr>
                             <td>{option.theadTitle}</td>
@@ -58,7 +52,7 @@ const Detail_free =  () => {
                         </tr>
                         <tr className='detailBody'>
                             <td>{option.theadBody}</td>
-                            <td colSpan='3' >
+                            <td colSpan='3'>
                                 내용이 들어갑니다
                             </td>
                         </tr>
@@ -67,7 +61,7 @@ const Detail_free =  () => {
                 <div className='commentContainer'>
                     <div className='postingComment'>
                         <div className='commentUser'>
-                            <a>augusstt06</a>
+                            <a>augusstt</a>
                         </div>
                         <div className='typingComment'>
                             <textarea placeholder='댓글을 입력하세요'/>
@@ -90,11 +84,11 @@ const Detail_free =  () => {
                             <BsArrowReturnLeft/>
                         </div>
                     </div>
-                {/*    */}
+                    {/*    */}
                 </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href = {{pathname : `/r/${query.page}`}}>
+                        <Link href = {{pathname : `/`}}>
                             <a>목록으로</a>
                         </Link>
                     </button>
@@ -102,5 +96,5 @@ const Detail_free =  () => {
             </div>
         </div>
     )
-}
-export default Detail_free;
+};
+export default Detail_main;
