@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useRouter} from "next/router";
-import {Router} from "next/router";
 import axios from 'axios';
 import Link from 'next/link';
 import Side from "../../component/Side";
@@ -13,7 +12,7 @@ const Post_D = () => {
     // Basic Section
     const router = useRouter();
     const query = router.query;
-    // console.log(router)
+
     const [option] = useState({
         pageTitle : '글 작성',
         sideTitle : '학생공간',
@@ -37,7 +36,6 @@ const Post_D = () => {
     const typingContent = (e) => {
         setContent(e.target.value);
     };
-
     const removeSpace = (string) => {
         const word = string.replace(/ /g, "")
         return word.length;
@@ -61,7 +59,7 @@ const Post_D = () => {
         if(removeSpace(title) !== 0 && removeSpace(content) !== 0) {
             postApi();
             alert('작성이 완료되었습니다!');
-            router.push(`/r/free`);
+            router.push(`/r/${query.page}`);
         } else {
             alert('제목 또는 내용을 입력해주세요.')
         }

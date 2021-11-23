@@ -1,10 +1,15 @@
 import React, {useState} from "react";
 import {useRouter} from 'next/router';
+import axios from "axios";
 import Link from 'next/link';
 import Side from "../../component/Side";
 
 const Post_T = () => {
-    // request : 제목, 내용, 작성자, 첨부파일
+    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
+
+    // 필요 기능 : Post API Request (제목, 내용, 작성자,  첨부파일)
+
+    // Basic Section
     const router = useRouter();
     const query = router.query;
 
@@ -20,6 +25,40 @@ const Post_T = () => {
         {id : 3, link : `/track/accounting`, text : '회계'},
         {id : 4, link : `/track/marketing`, text : '마케팅'}
     ]);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+
+    const typingTitle = (e) => {
+        setTitle(e.target.value);
+    };
+    const typingContent = (e) => {
+        setContent(e.target.value);
+    };
+    const removeSpace = (string) => {
+        const word = string.replace(/ /g, "");
+        return word.length;
+    };
+
+    // API Request Section ( POST )
+
+    const postApi = () => {
+        console.log("Now Posting...");
+        axios.post('https://jsonplaceholder.typicode.com/posts', {
+            data : {
+                page : query.page,
+                title : title.trim(),
+                content : content.trim()
+            }
+        });
+        console.log('Posting Complete!');
+    };
+    const clickPost = () => {
+        if(removeSpace(title) !== 0 && removeSpace(content) !== 0){
+            postApi();
+            alert('작성이 완료되었습니다!');
+            router.push(`/track/${query.page}`);
+        }
+    }
     return (
         <div className='main'>
             <div className='component'>
@@ -57,7 +96,7 @@ const Post_T = () => {
                     </tbody>
                 </table>
                 <div className='btnContainer'>
-                        <button>
+                        <button onClick={clickPost}>
                             <a>작성 완료</a>
                         </button>
                     </div>

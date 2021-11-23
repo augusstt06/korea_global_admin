@@ -14,6 +14,7 @@ const Detail_free =  () => {
     const router = useRouter();
     const query = router.query;
     console.log(query);
+    console.log(router)
     const [option] = useState({
         pageTitle : '작성 글 상세',
         sideTitle : '학생공간',
