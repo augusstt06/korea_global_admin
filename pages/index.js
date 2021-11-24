@@ -4,12 +4,21 @@ import Side from "../component/Side";
 import axios from "axios";
 
 // Flexible 하게
-const Main = () => {
+
+export const getServerSideProps = async() => {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    const data = res.data
+    return {
+        props : {data}
+    };
+};
+const Main = ({data}) => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
     // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
     //           Mapping Data => Search : Done!
     //           Pagination : Done!
+    //           Apply Server Side Rendering : Done!
 
     // Basic Section
     const [option] = useState({
@@ -30,16 +39,11 @@ const Main = () => {
 
     const [main, setMain] = useState([]);
     const [search, setSearch] = useState([]);
-    const mainApi = async() => {
-        console.log('Now Loading...');
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        setMain(res.data);
-        setSearch(res.data);
-        console.log('Finish Loading!');
-    };
+
     useEffect(() => {
-        mainApi();
-    }, []);
+        setMain(data);
+        setSearch(data);
+    }, [data]);
 
     // Search Section
 
@@ -55,17 +59,17 @@ const Main = () => {
 
     const searchTitleData = () => {
         setSearch();
-        const titleData = main.filter(data => (data.title).includes(keyword) === true);
+        const titleData = main.filter(main => (main.title).includes(keyword) === true);
         setSearch(titleData);
     };
     const searchBodyData = () => {
         setSearch();
-        const bodyData = main.filter(data => (data.body).includes(keyword) === true);
+        const bodyData = main.filter(main => (main.body).includes(keyword) === true);
         setSearch(bodyData);
     };
     const searchAllData = () => {
         setSearch();
-        const allData = main.filter(data => (data.title).includes(keyword) === true || (data.body).includes(keyword) === true);
+        const allData = main.filter(main => (main.title).includes(keyword) === true || (main.body).includes(keyword) === true);
         setSearch(allData);
     };
     const clickSearch = () => {
@@ -176,5 +180,7 @@ const Main = () => {
             </div>
         </div>
     )
-}
+};
+
+
 export default Main;
