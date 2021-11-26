@@ -192,7 +192,7 @@
             margin : 0px 5px;
         }
         .typingComment{
-            width: 85%;
+            width: 80%;
             height: 100%;
             display: flex;
             align-items: center;
@@ -206,15 +206,20 @@
         }
         .commentBtn{
             height: 100%;
-            font-size: 0.9rem;
+            width: 5%;
+            text-align: center;
             button{
                 padding: 5px;
                 background-color: white;
                 border: none;
+                text-align: center;
                 a:hover{
                     color: #821225;
                     font-weight: bold;
                 }
+                Fisend{
+                padding: 5px;
+            }
             }
         }
     }
@@ -222,24 +227,53 @@
 .commentList{
     overflow: scroll;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    flex-direction: column;
     padding: 5px;
-    .commentId{
-        margin-left: 5px;
+    border-top: 1px solid gainsboro;
+    .commentBox{
+        display: flex;
+        width: 100%;
+        .commentId{
+            margin : 0px 5px;
+            padding: 5px;
+        }
+        .comment{
+            width: 85%;
+
+            padding: 5px;
+        }
+        .reComment{
+            width: 10%;
+
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding : 5px
+        }
+
     }
-    .comment{
-        width: 85%;
+    .reply{
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        background-color: gainsboro;
         padding: 5px;
-    }
-    .reComment{
-        margin-right: 5px;
-        width: 5%;
-        font-size: 1.3rem;
-        font-weight: bold;
-        &:hover{
-            color: #821225;
+        textarea{
+            border: none;
+            background-color: gainsboro;
+            width: 95%;
+            resize: none;
+            outline: none;
+        }
+        button{
+            padding: 5px;
+            background-color: gainsboro;
+            border: none;
+            text-align: center;
+            height: 100%;
+            width: 5%;
         }
     }
 }

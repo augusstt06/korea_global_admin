@@ -37,7 +37,7 @@ const Post_D = () => {
         setContent(e.target.value);
     };
     const removeSpace = (string) => {
-        const word = string.replace(/ /g, "")
+        const word = string.replace(/ /g, "");
         return word.length;
     };
 
