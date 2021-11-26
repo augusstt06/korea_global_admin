@@ -61,7 +61,7 @@ const Post_D = () => {
             alert('작성이 완료되었습니다!');
             router.push(`/r/${query.page}`);
         } else {
-            alert('제목 또는 내용을 입력해주세요.')
+            alert('제목 또는 내용을 입력해주세요.');
         }
     };
 

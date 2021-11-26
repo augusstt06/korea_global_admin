@@ -116,8 +116,20 @@
                 }
             }
         }
+        .btnContainer{
+            button{
+                padding: 5px;
+                background-color: #fff;
+                margin: 5px 5px;
+                &:hover{
+                    background-color: #821225;
+                    color: #fff;
+                }
+            }
+        }
     }
 }
+
 ////// Post Page //////
 .postingTable{
     height: 100%;

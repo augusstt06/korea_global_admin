@@ -21,8 +21,15 @@ const Detail_free =  () => {
     const query = router.query;
     const postId = query.id;
 
+    const [contentTest, setContentTest] = useState({
+            id : 'augusstt',
+            title : '제목 테스트',
+            content : '내용 테스트'
+        })
+
     const [option] = useState({
         pageTitle : '작성 글 상세',
+        updateTitle : '작성 글 수정',
         sideTitle : '학생공간',
         theadTitle : '제목',
         theadBody : '내용',
@@ -34,6 +41,8 @@ const Detail_free =  () => {
         {id : 2, link : `/r/market`, text : '장터'},
         {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
     ]);
+
+
     // API Request Section ( GET, POST, PUT, DELETE )
 
     // GET Request
@@ -81,10 +90,11 @@ const Detail_free =  () => {
         const word = string.replace(/ /g, "");
         return word.length
     };
+
     // 댓글 POST Request 함수
     const postComment = () => {
         console.log('Now Posting Comment...');
-        axios.post('/', {
+        axios.post('https://jsonplaceholder.typicode.com/posts', {
             data : {
                 id : postId,
                 user_name : '',
@@ -128,6 +138,48 @@ const Detail_free =  () => {
     };
     // 댓글 PUT Request
     // 댓글에서 Response된 사용자와 현재 user의 사용자가 같으면 활성화 되게 만든다.
+    // 수정버튼 클릭하면 컴포넌트 상태 true로 바뀌면서 상세화면 대신 상세화면수정화면으로 change
+
+    const [goUpdate, setGoUpdate] = useState(false);
+
+    const [updateTitle, setUpdateTitle] = useState(`${contentTest.title}`);
+    const [updateContent, setUpdateContent] = useState(`${contentTest.content}`);
+
+    const putTitle = (e) => {
+        setUpdateTitle(e.target.value);
+    };
+    const putContent = (e) => {
+        setUpdateContent(e.target.value);
+    };
+
+    const putApi = () => {
+        console.log('Now Update...');
+        setContentTest({
+            id : contentTest.id,
+            title : updateTitle,
+            content: updateContent
+        });
+        axios.put('https://jsonplaceholder.typicode.com/posts/1', {
+            data : {
+                page : query.page,
+                title : updateTitle.trim(),
+                content : updateContent.trim()
+            }
+        });
+        console.log('Update Complete!');
+    };
+    const clickUpdate = () => {
+        if (removeSpace(updateTitle) !== 0 && removeSpace(updateContent) !== 0) {
+            putApi();
+            alert('수정이 완료되었습니다!')
+            setGoUpdate(!goUpdate);
+            // window.location.reload();
+        } else{
+            alert('제목 또는 내용을 입력해주세요');
+        }
+    };
+    console.log()
+
     return (
         <div className='main'>
             <div className='component'>
@@ -137,6 +189,7 @@ const Detail_free =  () => {
                     {id : idSide[2].id, link : idSide[2].link, text : idSide[2].text}
                 ]} title = {option.sideTitle}/>
             </div>
+            {goUpdate === false ?
             <div className='content'>
                 <div className='pageTitle'>
                     <a>{option.pageTitle}</a>
@@ -145,20 +198,20 @@ const Detail_free =  () => {
                     <tbody>
                         <tr>
                             <td>{option.theadAuthor}</td>
-                            <td>doverr</td>
+                            <td>{contentTest.id}</td>
                             <td>{option.theadDay}</td>
                             <td>2021.08.18</td>
                         </tr>
                         <tr>
                             <td>{option.theadTitle}</td>
                             <td colSpan='3'>
-                                제목이 들어갑니다
+                                {contentTest.title}
                             </td>
                         </tr>
                         <tr className='detailBody'>
                             <td>{option.theadBody}</td>
                             <td colSpan='3' >
-                                내용이 들어갑니다
+                                {contentTest.content}
                             </td>
                         </tr>
                     </tbody>
@@ -213,8 +266,60 @@ const Detail_free =  () => {
                             <a>목록으로</a>
                         </Link>
                     </button>
+                    {/* 사용자 정보에 따라 수정 기능 활성화*/}
+                    <button onClick={() => {setGoUpdate(!goUpdate)}}>
+                        {/*<Link href = {{pathname : `/r/${query.page}`}}>*/}
+                            <a>수정하기</a>
+                        {/*</Link>*/}
+                    </button>
+                {/*    */}
                 </div>
             </div>
+
+                :
+
+            <div className='content'>
+                <div className='pageTitle'>
+                    <a>{option.updateTitle}</a>
+                </div>
+                <table className='postingTable'>
+                    <tbody>
+                        <tr>
+                            <td>{option.theadAuthor}</td>
+                            <td>{contentTest.id}</td>
+                            <td>{option.theadDay}</td>
+                            <td>2021.08.18</td>
+                        </tr>
+                        <tr>
+                            <td>{option.theadTitle}</td>
+                            <td colSpan='3'>
+                                <textarea className='titleText'
+                                          placeholder='제목을 입력하세요'
+                                          defaultValue={contentTest.title}
+                                          onChange={putTitle}/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{option.theadBody}</td>
+                            <td colSpan='3'>
+                                <textarea className='bodyText'
+                                          placeholder='내용을 입력하세요'
+                                          defaultValue={contentTest.content}
+                                          onChange={putContent}/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className='btnContainer'>
+                    <button onClick={clickUpdate}>
+                        <a>작성완료</a>
+                    </button>
+                    <button onClick={() => {setGoUpdate(!goUpdate)}}>
+                        <a>작성취소</a>
+                    </button>
+                </div>
+            </div>
+            }
         </div>
     )
 }
