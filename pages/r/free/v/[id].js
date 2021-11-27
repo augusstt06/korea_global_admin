@@ -136,6 +136,7 @@ const Detail_free =  () => {
             alert('내용을 입력해 주세요')
         }
     };
+
     // 댓글 PUT Request
     // 댓글에서 Response된 사용자와 현재 user의 사용자가 같으면 활성화 되게 만든다.
     // 수정버튼 클릭하면 컴포넌트 상태 true로 바뀌면서 상세화면 대신 상세화면수정화면으로 change
@@ -178,7 +179,20 @@ const Detail_free =  () => {
             alert('제목 또는 내용을 입력해주세요');
         }
     };
-    console.log()
+
+    // 게시글 DELETE Request
+    // Url parameter로 넘어온 ID값을 기준으로 DELETE Request
+    // 나중에 로그인 상태 확인해서 활성화
+    const deleteApi = () => {
+        console.log('Now Delete...');
+        axios.delete(`${router.asPath}`);
+        console.log('Delete Complete!');
+    };
+    const clickDelete = () => {
+        deleteApi();
+        alert('삭제이 완료되었습니다!');
+        router.push(`/r/${query.page}`);
+    };
 
     return (
         <div className='main'>
@@ -266,13 +280,14 @@ const Detail_free =  () => {
                             <a>목록으로</a>
                         </Link>
                     </button>
-                    {/* 사용자 정보에 따라 수정 기능 활성화*/}
+                    {/* 로그인 상태에 따라 수정/삭제 기능 활성화*/}
                     <button onClick={() => {setGoUpdate(!goUpdate)}}>
-                        {/*<Link href = {{pathname : `/r/${query.page}`}}>*/}
-                            <a>수정하기</a>
-                        {/*</Link>*/}
+                        <a>수정하기</a>
                     </button>
-                {/*    */}
+                    <button onClick={() => {clickDelete()}}>
+                        <a>삭제하기</a>
+                    </button>
+                    {/*    */}
                 </div>
             </div>
 
@@ -312,10 +327,10 @@ const Detail_free =  () => {
                 </table>
                 <div className='btnContainer'>
                     <button onClick={clickUpdate}>
-                        <a>작성완료</a>
+                        <a>수정완료</a>
                     </button>
                     <button onClick={() => {setGoUpdate(!goUpdate)}}>
-                        <a>작성취소</a>
+                        <a>수정취소</a>
                     </button>
                 </div>
             </div>
