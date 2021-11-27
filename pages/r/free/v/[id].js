@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {useRouter} from "next/router";
+import React, { useState } from 'react';
+import { useRouter } from "next/router";
 import Side from "../../../../component/Side";
 import Detail_free from "./detail_free";
-import Update_free from "./update_detail";
+import Update_free from "./update_free";
 
 const Detail_Container =  () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
@@ -35,7 +35,6 @@ const Detail_Container =  () => {
         });
 
     const testState = {contentTest, setContentTest};
-
     const [goUpdate, setGoUpdate] = useState(false);
     const updateState = {goUpdate, setGoUpdate};
 

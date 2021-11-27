@@ -2,8 +2,11 @@ import React, {useState} from "react";
 import axios from "axios";
 
 const Update_free = (props) => {
+
+    // Basic Section
     const [updateTitle, setUpdateTitle] = useState(`${props.testState.contentTest.title}`);
     const [updateContent, setUpdateContent] = useState(`${props.testState.contentTest.content}`);
+
     const putTitle = (e) => {
         setUpdateTitle(e.target.value);
     };
@@ -14,6 +17,8 @@ const Update_free = (props) => {
         const word = string.replace(/ /g, "");
         return word.length
     };
+
+    // PUT Request
     const putApi = () => {
         console.log('Now Update...');
         props.testState.setContentTest({
@@ -39,6 +44,7 @@ const Update_free = (props) => {
             alert('제목 또는 내용을 입력해주세요');
         }
     };
+
     return (
         <div className='content'>
             <div className='pageTitle'>
