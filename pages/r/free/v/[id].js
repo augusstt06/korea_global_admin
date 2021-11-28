@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import Side from "../../../../component/Side";
-import Detail_free from "./detail_free";
-import Update_free from "./update_free";
+import DetailFree from "./detailFree";
+import UpdateFree from "./updateFree";
 
 const Detail_Container =  () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
@@ -38,6 +38,7 @@ const Detail_Container =  () => {
     const [goUpdate, setGoUpdate] = useState(false);
     const updateState = {goUpdate, setGoUpdate};
 
+    console.log(goUpdate);
     return (
         <div className='main'>
             <div className='component'>
@@ -48,15 +49,15 @@ const Detail_Container =  () => {
                 ]} title = {option.sideTitle}/>
             </div>
             {goUpdate === false ?
-                <Detail_free pageData ={option}
-                             testState = {testState}
-                             router = {router}
-                             updateState = {updateState}/>
+                <DetailFree pageData ={option}
+                            testState = {testState}
+                            router = {router}
+                            updateState = {updateState}/>
                 :
-                <Update_free pageData = {option}
-                             testState = {testState}
-                             router = {router}
-                             updateState = {updateState}/>
+                <UpdateFree pageData = {option}
+                            testState = {testState}
+                            router = {router}
+                            updateState = {updateState}/>
             }
         </div>
     )

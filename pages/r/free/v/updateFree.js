@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 
-const Update_free = (props) => {
+const UpdateFree = (props) => {
 
     // Basic Section
     const [updateTitle, setUpdateTitle] = useState(`${props.testState.contentTest.title}`);
@@ -89,4 +89,4 @@ const Update_free = (props) => {
         </div>
     )
 };
-export default Update_free;
+export default UpdateFree;

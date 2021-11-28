@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import axios from "axios";
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { FiSend } from 'react-icons/fi';
 
-const Detail_free = (props) => {
+const DetailFree = (props) => {
     console.log(props)
 
     // Basic Section
@@ -26,13 +26,17 @@ const Detail_free = (props) => {
 
     // GET Request
     const [detail, setDetail] = useState([]);
-
+    console.log(props.router.query.category)
+    console.log(props.router.query.id)
     const getApi = async() => {
-        const res = await axios.get('/');
+        // const res = await axios.get('/');
+        const res = await axios.get(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
         const data = res.data;
         setDetail(data);
     };
-
+    useEffect(() => {
+        getApi();
+    }, [])
     // 댓글 POST Request
     const postComment = () => {
         console.log('Now Posting Comment...');
@@ -90,26 +94,29 @@ const Detail_free = (props) => {
         props.router.push(`/r/${props.router.query.page}`);
     };
 
+    console.log(detail)
+    console.log(detail[0])
     return (
         <div className='content'>
             <div className='pageTitle'>
                 {props.pageData.pageTitle}
+                작성글 상세
             </div>
             <table className='detailTable'>
                 <tbody>
                     <tr>
                         <td>{props.pageData.theadAuthor}</td>
-                        <td>{props.testState.contentTest.id}</td>
+                        <td>{detail[0].author}</td>
                         <td>{props.pageData.theadDay}</td>
-                        <td>2021.08.18</td>
+                        {/*<td>{detail[0]['created_at']}</td>*/}
                     </tr>
                     <tr>
                         <td>{props.pageData.theadTitle}</td>
-                        <td colSpan='3'>{props.testState.contentTest.title}</td>
+                        {/*<td colSpan='3'>{detail[0]['title']}</td>*/}
                     </tr>
                     <tr className='detailBody'>
                         <td>{props.pageData.theadBody}</td>
-                        <td colSpan='3'>{props.testState.contentTest.content}</td>
+                        {/*<td colSpan='3'>{detail[0]['text']}</td>*/}
                     </tr>
                 </tbody>
             </table>
@@ -172,4 +179,4 @@ const Detail_free = (props) => {
         </div>
     )
 };
-export default Detail_free;
+export default DetailFree;

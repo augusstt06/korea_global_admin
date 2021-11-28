@@ -12,6 +12,10 @@ const Post_D = () => {
     // Basic Section
     const router = useRouter();
     const query = router.query;
+    const virtualName = 'mingyu'
+
+    const page = ( query.category === '1' ? 'free' :
+                    query.category === '2' ? 'market' : null);
 
     const [option] = useState({
         pageTitle : '글 작성',
@@ -42,24 +46,21 @@ const Post_D = () => {
     };
 
     // API Request Section ( POST )
-
+    console.log(router)
     const postApi = () => {
         console.log('Now Posting...');
-        axios.post('https://jsonplaceholder.typicode.com/posts', {
-            data : {
-                page : query.page,
-                title : title.trim(),
-                content : content.trim()
-            }
-        });
-        console.log('Posting Complete!');
+        axios.post(`http://127.0.0.1:8000/r/p?author=${virtualName}&category_id=${query.category}`, {
+            "title": title.trim(),
+            "text" : content.trim()
+        }).then(r => console.log(r));
+         console.log('Posting Complete!');
     };
 
     const clickPost = () => {
         if(removeSpace(title) !== 0 && removeSpace(content) !== 0) {
             postApi();
             alert('작성이 완료되었습니다!');
-            router.push(`/r/${query.page}`);
+            router.push(`/r/${page}`);
         } else {
             alert('제목 또는 내용을 입력해주세요.');
         }
@@ -111,7 +112,7 @@ const Post_D = () => {
                     </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href ={{pathname : `/r/${query.page}`}}>
+                        <Link href ={{pathname : `/r/${page}`}}>
                             <a>목록으로</a>
                         </Link>
                     </button>

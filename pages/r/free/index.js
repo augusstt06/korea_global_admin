@@ -40,11 +40,14 @@ const Free = () => {
     const [search, setSearch] = useState([]);
     const freeApi = async () => {
         console.log('Now Loading...');
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        // const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        const res = await axios.get('http://127.0.0.1:8000/r/1');
+        console.log(res)
         setFree(res.data);
         setSearch(res.data);
         console.log('Finish Loading!');
     };
+    // console.log()
     useEffect(() => {
         freeApi();
     }, []);
@@ -161,7 +164,7 @@ const Free = () => {
                         <tr key={data.id}>
                             <td>{data.id}</td>
                             <td>
-                                <Link href={{pathname : `/r/free/v/${data.id}`, query : {page : 'free'}}}>
+                                <Link href={{pathname : `/r/free/v/${data.id}`, query : {author : 'mingyu', category : 1}}}>
                                     {data.title}
                                 </Link>
                             </td>
@@ -184,7 +187,7 @@ const Free = () => {
                     </div>
                     <div className='btnContainer'>
                         <button>
-                            <Link href = {{pathname : pageLink.postingLink , query : {page : 'free'}}}>
+                            <Link href = {{pathname : pageLink.postingLink , query : {author : 'mingyu',category : 1}}}>
                                 글 작성
                             </Link>
                         </button>
