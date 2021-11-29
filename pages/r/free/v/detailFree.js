@@ -26,15 +26,14 @@ const DetailFree = (props) => {
     };
 
     // GET Request
-    const [detail, setDetail] = useState([]);
+    // const [detail, setDetail] = useState([]);
 
     const getApi = async() => {
         const res = await axios.get(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
         const data = res.data;
-        setDetail(data);
+        props.detailState.setDetail(data);
     };
-    console.log(detail, typeof(detail))
-    console.log(detail.map(data=>data))
+
     useEffect(() => {
         getApi();
     }, [])
@@ -84,9 +83,9 @@ const DetailFree = (props) => {
     };
 
     // 게시글 DELETE Request
+    // 사용자 로그인 상태에 따라 활성화/비활성화
     const deleteApi = () => {
         console.log('Now Delete...');
-        // axios.delete(`${props.router.asPath}`);
         axios.delete(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
         console.log('Delete Complete!');
     };
@@ -102,7 +101,7 @@ const DetailFree = (props) => {
                 {props.pageData.pageTitle}
             </div>
             <table className='detailTable'>
-                {detail.map(data => (
+            {props.detailState.detail.map(data => (
                 <tbody key={data.id}>
                     <tr>
                         <td>{props.pageData.theadAuthor}</td>

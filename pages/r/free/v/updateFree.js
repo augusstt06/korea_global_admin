@@ -4,14 +4,15 @@ import axios from "axios";
 const UpdateFree = (props) => {
 
     // Basic Section
-    const [updateTitle, setUpdateTitle] = useState(`${props.testState.contentTest.title}`);
-    const [updateContent, setUpdateContent] = useState(`${props.testState.contentTest.content}`);
+    const [updateTitle, setUpdateTitle] = useState(`${(props.detailState.detail)[0].title}`);
+    const [updateText, setUpdateText] = useState(`${(props.detailState.detail)[0].text}`);
+    console.log(updateTitle,updateText)
 
     const putTitle = (e) => {
         setUpdateTitle(e.target.value);
     };
     const putContent = (e) => {
-        setUpdateContent(e.target.value);
+        setUpdateText(e.target.value);
     };
     const removeSpace = (string) => {
         const word = string.replace(/ /g, "");
@@ -19,24 +20,17 @@ const UpdateFree = (props) => {
     };
 
     // PUT Request
+    // 사용자 로그인 상태에 따라 활성화/비활성화
     const putApi = () => {
         console.log('Now Update...');
-        props.testState.setContentTest({
-            id : props.testState.contentTest.id,
-            title : updateTitle,
-            content : updateContent
-        });
-        axios.put('https://jsonplaceholder.typicode.com/posts/1', {
-            data : {
-                page : props.router.query.page,
-                title : updateTitle.trim(),
-                content : updateContent.trim()
-            }
+        axios.put(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`,{
+            "title" : updateTitle.trim(),
+            "text" : updateText.trim()
         });
         console.log('Update Complete!');
     };
     const clickUpdate = () => {
-        if (removeSpace(updateTitle) !== 0 && removeSpace(updateContent) !== 0){
+        if (removeSpace(updateTitle) !== 0 && removeSpace(updateText) !== 0){
             putApi();
             alert('수정이 완료되었습니다!');
             props.updateState.setGoUpdate(!props.updateState.goUpdate);
@@ -51,32 +45,34 @@ const UpdateFree = (props) => {
                 <a>{props.pageData.updateTitle}</a>
             </div>
             <table className='postingTable'>
-                <tbody>
-                    <tr>
-                        <td>{props.pageData.theadAuthor}</td>
-                        <td>{props.testState.contentTest.id}</td>
-                        <td>{props.pageData.theadDay}</td>
-                        <td>2021.08.18</td>
-                    </tr>
-                    <tr>
-                        <td>{props.pageData.theadTitle}</td>
-                        <td colSpan='3'>
-                            <textarea className='titleText'
-                                      placeholder='제목을 입력하세요'
-                                      defaultValue={props.testState.contentTest.title}
-                                      onChange={putTitle}/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{props.pageData.theadBody}</td>
-                        <td colSpan='3'>
-                            <textarea className='bodyText'
-                                      placeholder='내용을 입력하세요'
-                                      defaultValue={props.testState.contentTest.content}
-                                      onChange={putContent}/>
-                        </td>
-                    </tr>
-                </tbody>
+                {props.detailState.detail.map(data => (
+                    <tbody>
+                        <tr>
+                            <td>{props.pageData.theadAuthor}</td>
+                            <td>{data.author}</td>
+                            <td>{props.pageData.theadDay}</td>
+                            <td>2021.08.18</td>
+                        </tr>
+                        <tr>
+                            <td>{props.pageData.theadTitle}</td>
+                            <td colSpan='3'>
+                                <textarea className='titleText'
+                                          placeholder='제목을 입력하세요'
+                                          defaultValue={updateTitle}
+                                          onChange={putTitle}/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{props.pageData.theadBody}</td>
+                            <td colSpan='3'>
+                                <textarea className='bodyText'
+                                          placeholder='내용을 입력하세요'
+                                          defaultValue={updateText}
+                                          onChange={putContent}/>
+                            </td>
+                        </tr>
+                    </tbody>
+                ))}
             </table>
             <div className='btnContainer'>
                 <button onClick={clickUpdate}>

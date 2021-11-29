@@ -29,13 +29,9 @@ const Detail_Container =  () => {
     ]);
 
     // 이건 API 연결하면 삭제하면 됨 수정 잘 되나 테스트임 => 나중에 삭제할거
-    const [contentTest, setContentTest] = useState({
-            id : 'augusstt',
-            title : '제목 테스트',
-            content : '내용 테스트'
-        });
+    const [detail, setDetail] = useState([]);
+    const detailState = {detail, setDetail};
 
-    const testState = {contentTest, setContentTest};
     const [goUpdate, setGoUpdate] = useState(false);
     const updateState = {goUpdate, setGoUpdate};
 
@@ -51,14 +47,14 @@ const Detail_Container =  () => {
             </div>
             {goUpdate === false ?
                 <DetailFree pageData ={option}
-                            testState = {testState}
                             router = {router}
-                            updateState = {updateState}/>
+                            updateState = {updateState}
+                            detailState = {detailState}/>
                 :
                 <UpdateFree pageData = {option}
-                            testState = {testState}
                             router = {router}
-                            updateState = {updateState}/>
+                            updateState = {updateState}
+                            detailState = {detailState}/>
             }
         </div>
     )
