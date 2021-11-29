@@ -11,6 +11,7 @@ const Detail_Container =  () => {
     const router = useRouter();
     const query = router.query;
     const postId = query.id;
+    console.log(router)
 
     const [option] = useState({
         pageTitle : '작성 글 상세',

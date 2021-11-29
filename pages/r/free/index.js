@@ -47,7 +47,7 @@ const Free = () => {
         setSearch(res.data);
         console.log('Finish Loading!');
     };
-    // console.log()
+    console.log(search, typeof(search))
     useEffect(() => {
         freeApi();
     }, []);

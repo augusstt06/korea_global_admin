@@ -6,8 +6,9 @@ import { FiSend } from 'react-icons/fi';
 
 const DetailFree = (props) => {
     console.log(props)
-
     // Basic Section
+    const pageMove = (props.router.query.category === "1" ? "free" :
+                        props.router.query.category === "2" ? "market" : null);
     const [comment, setComment] = useState({
         comment : '',
         reply : ''
@@ -26,14 +27,14 @@ const DetailFree = (props) => {
 
     // GET Request
     const [detail, setDetail] = useState([]);
-    console.log(props.router.query.category)
-    console.log(props.router.query.id)
+
     const getApi = async() => {
-        // const res = await axios.get('/');
         const res = await axios.get(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
         const data = res.data;
         setDetail(data);
     };
+    console.log(detail, typeof(detail))
+    console.log(detail.map(data=>data))
     useEffect(() => {
         getApi();
     }, [])
@@ -85,40 +86,40 @@ const DetailFree = (props) => {
     // 게시글 DELETE Request
     const deleteApi = () => {
         console.log('Now Delete...');
-        axios.delete(`${props.router.asPath}`);
+        // axios.delete(`${props.router.asPath}`);
+        axios.delete(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
         console.log('Delete Complete!');
     };
     const clickDelete = () => {
         deleteApi();
         alert('삭제가 완료되었습니다!');
-        props.router.push(`/r/${props.router.query.page}`);
+        props.router.push(`/r/${pageMove}`);
     };
 
-    console.log(detail)
-    console.log(detail[0])
     return (
         <div className='content'>
             <div className='pageTitle'>
                 {props.pageData.pageTitle}
-                작성글 상세
             </div>
             <table className='detailTable'>
-                <tbody>
+                {detail.map(data => (
+                <tbody key={data.id}>
                     <tr>
                         <td>{props.pageData.theadAuthor}</td>
-                        <td>{detail[0].author}</td>
+                        <td>{data.author}</td>
                         <td>{props.pageData.theadDay}</td>
-                        {/*<td>{detail[0]['created_at']}</td>*/}
+                        <td>{data.created_at}</td>
                     </tr>
                     <tr>
                         <td>{props.pageData.theadTitle}</td>
-                        {/*<td colSpan='3'>{detail[0]['title']}</td>*/}
+                        <td colSpan='3'>{data.title}</td>
                     </tr>
                     <tr className='detailBody'>
                         <td>{props.pageData.theadBody}</td>
-                        {/*<td colSpan='3'>{detail[0]['text']}</td>*/}
+                        <td colSpan='3'>{data.text}</td>
                     </tr>
                 </tbody>
+                ))}
             </table>
             <div className='commentContainer'>
                 <div className='postingComment'>
@@ -163,7 +164,7 @@ const DetailFree = (props) => {
             </div>
             <div className='btnContainer'>
                 <button>
-                    <Link href = {{pathname : `/r/${props.router.query.page}`}}>
+                    <Link href = {{pathname : `/r/${pageMove}`}}>
                         <a>목록으로</a>
                     </Link>
                 </button>
