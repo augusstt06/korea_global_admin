@@ -46,7 +46,7 @@ const Post_D = () => {
     };
 
     // API Request Section ( POST )
-    console.log(router)
+
     const postApi = () => {
         console.log('Now Posting...');
         axios.post(`http://127.0.0.1:8000/r/p?author=${virtualName}&category_id=${query.category}`, {

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import axios from "axios";
-import { BsArrowReturnLeft } from 'react-icons/bs';
 import { FiSend } from 'react-icons/fi';
+import {useRouter} from "next/router";
+import {Comment_free} from "./comment";
+import {ReplyArea} from "./comment";
 
 const DetailFree = (props) => {
-    console.log(props)
+
+    // 댓글은 props.detailState.detail.board_comment에 담긴다.
+
     // Basic Section
     const pageMove = (props.router.query.category === "1" ? "free" :
                         props.router.query.category === "2" ? "market" : null);
@@ -14,66 +18,71 @@ const DetailFree = (props) => {
         reply : ''
     });
     const [clickReply, setClickReply] = useState(false);
+    const clickState = {clickReply, setClickReply};
 
     const typingComment = (e) => {
         const newInput = {...comment};
         newInput[e.target.name] = e.target.value;
         setComment(newInput);
     };
+
     const removeSpace = (string) => {
         const word = string.replace(/ /g, "");
         return word.length;
     };
 
-    // GET Request
-    // const [detail, setDetail] = useState([]);
+    // // API Request Section
+
+    //  GET
 
     const getApi = async() => {
         const res = await axios.get(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
         const data = res.data;
         props.detailState.setDetail(data);
     };
-
     useEffect(() => {
         getApi();
-    }, [])
-    // 댓글 POST Request
+    }, []);
+
+    //  POST (Comment)
+
     const postComment = () => {
         console.log('Now Posting Comment...');
-        axios.post('https://jsonplaceholder.typicode.com/posts', {
-            data : {
-                id : props.router.query.id,
-                user_name : '',
-                text : comment.comment.trim()
-            }
-        });
+        axios.post(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}?board_id=${props.router.query.category}&nickname=${props.router.query.author}`, {
+            "text": comment.comment
+        }).then(r => console.log(r));
+
         console.log('Posting Comment Complete!');
     };
     const clickCommentSubmit = () => {
         if(removeSpace(comment.comment)){
             postComment();
             alert('작성이 완료되었습니다!');
-            window.location.reload();
+            // window.location.reload(true);
+            window.location.href;
+            // props.router.push('/r/free');
         } else {
             alert('내용을 입력해 주세요');
         }
     };
 
-    // 대댓글 POST Request
+    // POST (Reply)
     const replyComment = () => {
         console.log('Now Relying...');
+
         axios.post('/',{
             data : {
                 board_id : '',
                 username : '',
                 id : '',
-                text : comment.reply.trim()
+                text : comment.text.trim()
             }
         });
         console.log('Replying Complete!');
     };
     const clickReplyingSubmit = () => {
         if(removeSpace(comment.reply)){
+            history.pushState({c_id : 2}, null, `${props.router.asPath}`+'&c_id=2')
             replyComment();
             alert('작성이 완료되었습니다!');
             window.location.reload();
@@ -82,8 +91,8 @@ const DetailFree = (props) => {
         }
     };
 
-    // 게시글 DELETE Request
-    // 사용자 로그인 상태에 따라 활성화/비활성화
+    // DELETE
+
     const deleteApi = () => {
         console.log('Now Delete...');
         axios.delete(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
@@ -95,10 +104,22 @@ const DetailFree = (props) => {
         props.router.push(`/r/${pageMove}`);
     };
 
+    const router1 = useRouter();
+    const test = () => {
+        console.log(window.history.state)
+        console.log(router1)
+        history.pushState({c_id : 1}, null, `${props.router.asPath}`+`&c_id=1`)
+        console.log(window.history.state)
+        console.log(router1)
+    }
+
     return (
         <div className='content'>
             <div className='pageTitle'>
                 {props.pageData.pageTitle}
+                <button onClick={test}>
+                    ㅌㅔ스트
+                </button>
             </div>
             <table className='detailTable'>
             {props.detailState.detail.map(data => (
@@ -139,27 +160,43 @@ const DetailFree = (props) => {
                     </div>
                 </div>
                 <div className='commentList'>
-                    <div className='commentBox'>
-                        <div className='commentId'>
-                            <a>ID</a>
-                        </div>
-                        <div className='comment'>
-                            <a>Comment Response</a>
-                        </div>
-                        <div className='reComment'>
-                            <BsArrowReturnLeft onClick={() => {setClickReply(!clickReply)}}/>
-                        </div>
-                    </div>
-                    {clickReply === true ?
-                    <div className='reply'>
-                        <textarea placeholder='댓글을 입력하세요'
-                                  onChange={typingComment}
-                                  name='reply'/>
-                        <button onClick={clickReplyingSubmit}>
-                            <FiSend size='15'/>
-                        </button>
-                    </div> : <></>}
+                    {/*여기 맵핑*/}
+                    <Comment_free commentData = {props.detailState.detail}
+                                  typingComment = {typingComment}
+                                  clickReplyingSubmit = {clickReplyingSubmit}
+                                  clickState = {clickState}/>
+                    {/*    */}
+                    {/* 여기맵핑 */}
+                    <ReplyArea typingComment = {typingComment}
+                               clickReplyingSubit = {clickReplyingSubmit}
+                               clickState = {clickState}
+                                />
+                    {/*    */}
                 </div>
+                {/*<div className='commentList'>*/}
+                {/*    {props.detailState.detail.map(data => data.board_comment.map(data2 => (*/}
+                {/*        <div className='commentBox' key = {data2.id}>*/}
+                {/*            <div className='commentId'>*/}
+                {/*                <a>{data2.user_name}</a>*/}
+                {/*            </div>*/}
+                {/*            <div className='comment'>*/}
+                {/*                <a>{data2.text}</a>*/}
+                {/*            </div>*/}
+                {/*            <div className='recomment'>*/}
+                {/*                <BsArrowReturnLeft onClick={() => {setClickReply(!clickReply)}}/>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    )))}*/}
+                {/*    {clickReply === true ?*/}
+                {/*    <div className='reply'>*/}
+                {/*        <textarea placeholder='댓글을 입력하세요'*/}
+                {/*                  onChange={typingComment}*/}
+                {/*                  name='reply'/>*/}
+                {/*        <button onClick={clickReplyingSubmit}>*/}
+                {/*            <FiSend size='15'/>*/}
+                {/*        </button>*/}
+                {/*    </div> : <></>}*/}
+                {/*</div>*/}
             </div>
             <div className='btnContainer'>
                 <button>

@@ -6,10 +6,6 @@ import axios from 'axios';
 const Free = () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
-    // 필요 기능 : Get API Request => Response Data Mapping => Rendering
-    //           Mapping Data => Search : Done!
-    //           Pagination : Done!
-
     // Basic Section
     const [rSide] = useState([
         {id : 1, link : `/r/free`, text : '자유'},
@@ -38,16 +34,14 @@ const Free = () => {
 
     const [free, setFree] = useState([]);
     const [search, setSearch] = useState([]);
+
     const freeApi = async () => {
         console.log('Now Loading...');
-        // const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
         const res = await axios.get('http://127.0.0.1:8000/r/1');
-        console.log(res)
         setFree(res.data);
         setSearch(res.data);
         console.log('Finish Loading!');
     };
-    console.log(search, typeof(search))
     useEffect(() => {
         freeApi();
     }, []);
@@ -159,7 +153,7 @@ const Free = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {/* Response Data Mapping*/}
+                    {/*/!* Response Data Mapping*!/*/}
                     {division()[page].map(data => (
                         <tr key={data.id}>
                             <td>{data.id}</td>
@@ -168,7 +162,7 @@ const Free = () => {
                                     {data.title}
                                 </Link>
                             </td>
-                            <td>{data.userId}</td>
+                            <td>{data.author}</td>
                             <td><a>2021.08.18</a></td>
                         </tr>
                     ))}

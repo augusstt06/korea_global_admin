@@ -11,7 +11,6 @@ const Detail_Container =  () => {
     const router = useRouter();
     const query = router.query;
     const postId = query.id;
-    console.log(router)
 
     const [option] = useState({
         pageTitle : '작성 글 상세',
@@ -27,15 +26,13 @@ const Detail_Container =  () => {
         {id : 2, link : `/r/market`, text : '장터'},
         {id : 3, link : `/r/schedule`, text : '시간표 인벤'}
     ]);
-
-    // 이건 API 연결하면 삭제하면 됨 수정 잘 되나 테스트임 => 나중에 삭제할거
+    // props로 넘길 것 들
     const [detail, setDetail] = useState([]);
     const detailState = {detail, setDetail};
 
     const [goUpdate, setGoUpdate] = useState(false);
     const updateState = {goUpdate, setGoUpdate};
 
-    console.log(goUpdate);
     return (
         <div className='main'>
             <div className='component'>
