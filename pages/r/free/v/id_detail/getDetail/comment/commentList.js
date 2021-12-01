@@ -4,6 +4,7 @@ import Reply from "./reply/reply";
 
 
 const CommentList = (props) => {
+    // props 필요없는 것 합치거나 삭제하기
     return (
         <div className='commentList'>
             {props.detailState.detail.map(data => data.board_comment.map(data2 => (

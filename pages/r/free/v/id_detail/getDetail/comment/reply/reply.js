@@ -2,7 +2,6 @@ import React from "react";
 import CommentReply from "./commentReply";
 
 const Reply = (props) => {
-    console.log(props)
     return (
         <div className='commentReply'>
             {props.reply_comment.map(data => (

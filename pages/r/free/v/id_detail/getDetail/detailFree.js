@@ -6,8 +6,6 @@ import CommentList from "./comment/commentList";
 
 const DetailFree = (props) => {
 
-    // 댓글은 props.detailState.detail.board_comment에 담긴다.
-
     // Basic Section
     const pageMove = (props.router.query.category === "1" ? "free" :
                         props.router.query.category === "2" ? "market" : null);
@@ -15,8 +13,6 @@ const DetailFree = (props) => {
         comment : '',
         reply : ''
     });
-    // const [clickReply, setClickReply] = useState(false);
-
 
     const typingComment = (e) => {
         const newInput = {...comment};
@@ -63,7 +59,9 @@ const DetailFree = (props) => {
             alert('내용을 입력해 주세요');
         }
     };
+
     // POST (Reply)
+
     const replyComment = (c_id) => {
         console.log('Now Relying...');
         axios.post(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}?board_id=${props.router.query.category}&nickname=${props.router.query.author}&c_id=${c_id}`, {
