@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import {BsArrowReturnRight} from "react-icons/bs";
 import {FiSend} from "react-icons/fi";
+import {BiCommentAdd} from "react-icons/bi";
 
-const Comment = (props) => {
+const CommentSingle = (props) => {
     const [replyBtn, setReplyBtn] = useState(false);
     const clickReply = () => {
         setReplyBtn(!replyBtn);
     };
-    console.log(props)
     return (
         <div className='commentList'>
             <div className='commentBox'>
@@ -20,7 +19,7 @@ const Comment = (props) => {
                 </div>
                 <div className='recomment'>
                     <a onClick={() => clickReply()}>
-                        대댓글
+                        <BiCommentAdd size='15'/>
                     </a>
                 </div>
             </div>
@@ -36,4 +35,4 @@ const Comment = (props) => {
         </div>
     )
 };
-export default Comment;
+export default CommentSingle;

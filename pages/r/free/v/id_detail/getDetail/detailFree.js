@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import axios from "axios";
 import { FiSend } from 'react-icons/fi';
-import CommentList from "./commentList";
+import CommentList from "./comment/commentList";
 
 const DetailFree = (props) => {
 
@@ -42,15 +42,15 @@ const DetailFree = (props) => {
         getApi();
     }, []);
 
-    //  POST (Comment)
+    //  POST (Comment_single)
 
     const postComment = () => {
-        console.log('Now Posting Comment...');
+        console.log('Now Posting Comment_single...');
         axios.post(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}?board_id=${props.router.query.category}&nickname=${props.router.query.author}`, {
             "text": comment.comment
         }).then(r => console.log(r));
 
-        console.log('Posting Comment Complete!');
+        console.log('Posting Comment_single Complete!');
     };
     const clickCommentSubmit = () => {
         if(removeSpace(comment.comment)){
@@ -138,6 +138,7 @@ const DetailFree = (props) => {
                         </button>
                     </div>
                 </div>
+
                 <CommentList detailState={props.detailState}
                              comment={comment}
                              typingComment={typingComment}

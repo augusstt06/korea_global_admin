@@ -34,6 +34,7 @@ const Free = () => {
 
     const [free, setFree] = useState([]);
     const [search, setSearch] = useState([]);
+    console.log(free)
 
     const freeApi = async () => {
         console.log('Now Loading...');

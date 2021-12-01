@@ -8,7 +8,7 @@ const Detail_main = () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
     // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
-    //           Comment....
+    //           Comment_single....
 
     // Basic Section
     const router = useRouter();
