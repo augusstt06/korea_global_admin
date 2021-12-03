@@ -2,45 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e804789-b14f-4a82-8a11-6a10db90c281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/component/Footer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/department/[id].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/department/free/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/department/market/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/department/posting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/myinfo/comment/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/myinfo/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/myinfo/post/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/reservation/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/track/[id].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/track/accounting/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/track/marketing/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/track/posting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/structure.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/watcherTasks.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/component/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/board/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/board/free/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/board/market/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/board/study/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/board/write.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/info/comment/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/info/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/info/message/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/info/message/private/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/info/post/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/office/announce/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/office/announce/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/office/question/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/office/question/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/office/question/write.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/professor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/professor/info/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/professor/info/ask.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/professor/info/detail/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Page.modules.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Page.modules.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/Footer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/Pagination.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/Side.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/board/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/board/free/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/board/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/board/market/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/board/study/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/mg.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/commentList.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/reply/commentReply.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/reply/reply.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/single/commentSingle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/detailFree.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/putDetail/updateFree.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/market/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/market/v/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/p.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/schedule/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/r/schedule/v/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reservation/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/track/accounting/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/track/accounting/v/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/track/marketing/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/track/marketing/v/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/track/p.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/v/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/korea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/korea_name.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recoilState/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/structure.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Footer.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Header.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Home.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Page.modules.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +65,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="fix" />
+        <entry key="$USER_HOME$" value="fix" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
@@ -77,6 +92,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -92,6 +108,7 @@
       <workItem from="1635586237990" duration="193000" />
       <workItem from="1635608626770" duration="20000" />
       <workItem from="1637053399522" duration="31000" />
+      <workItem from="1638545067487" duration="119000" />
     </task>
     <servers />
   </component>

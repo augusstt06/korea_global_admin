@@ -31,5 +31,7 @@ yarn-error.log*
 .env.production.local
 
 # vercel
+.idea
 .vercel
 .DS_Store
+frontend/.idea
