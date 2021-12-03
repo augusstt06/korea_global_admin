@@ -1,0 +1,39 @@
+// Footer
+
+.footerContainer{
+  display: flex;
+  height: 60px;
+  width: 100%;
+  background: #A6A6A6;
+  align-items: flex-start;
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+  z-index: 999;
+  .univLogo{
+    height: 100%;
+    margin-right: 10px;
+  }
+  .univInfo{
+    height: 100%;
+    width: 100%;
+    margin-right: 10px;
+    display: flex;
+    font-size: 13px;
+    .ulHead{
+      font-weight: bold;
+    }
+    ul{
+      padding-left: 0px;
+      margin: 5px 10px;
+      li{
+        list-style: none;
+        span{
+          &:hover{
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  }
