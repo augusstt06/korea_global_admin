@@ -34,7 +34,6 @@ const Free = () => {
 
     const [free, setFree] = useState([]);
     const [search, setSearch] = useState([]);
-    console.log(free)
 
     const freeApi = async () => {
         console.log('Now Loading...');
@@ -111,6 +110,7 @@ const Free = () => {
         return numList;
     };
 
+
     return (
         <div className='main'>
             <div className='component'>
@@ -160,7 +160,9 @@ const Free = () => {
                             <td>{data.id}</td>
                             <td>
                                 <Link href={{pathname : `/r/free/v/${data.id}`, query : {author : 'mingyu', category : 1}}}>
-                                    {data.title}
+                                    <div>
+                                        {data.title}
+                                    </div>
                                 </Link>
                             </td>
                             <td>{data.author}</td>

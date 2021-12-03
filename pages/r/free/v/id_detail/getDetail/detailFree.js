@@ -7,12 +7,12 @@ import CommentList from "./comment/commentList";
 const DetailFree = (props) => {
 
     // Basic Section
-    const pageMove = (props.router.query.category === "1" ? "free" :
-                        props.router.query.category === "2" ? "market" : null);
     const [comment, setComment] = useState({
         comment : '',
         reply : ''
     });
+    const preId = props.preData[0].id;
+    const preAuthor = props.preData[0].author;
 
     const typingComment = (e) => {
         const newInput = {...comment};
@@ -27,44 +27,29 @@ const DetailFree = (props) => {
 
     // // API Request Section
 
-    //  GET
-
-    const getApi = async() => {
-        const res = await axios.get(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
-        const data = res.data;
-        props.detailState.setDetail(data);
-    };
-    useEffect(() => {
-        getApi();
-    }, []);
-
     //  POST (Comment_single)
-
     const postComment = () => {
         console.log('Now Posting Comment_single...');
-        axios.post(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}?board_id=${props.router.query.category}&nickname=${props.router.query.author}`, {
+        axios.post(`http://127.0.0.1:8000/r/1/v/${preId}?board_id=${preId}&nickname=${preAuthor}`, {
             "text": comment.comment
         }).then(r => console.log(r));
-
         console.log('Posting Comment_single Complete!');
     };
     const clickCommentSubmit = () => {
         if(removeSpace(comment.comment)){
             postComment();
             alert('작성이 완료되었습니다!');
-            // window.location.reload(true);
-            window.location.href;
-            // props.router.push('/r/free');
+            window.location.reload(true);
         } else {
             alert('내용을 입력해 주세요');
         }
     };
 
     // POST (Reply)
-
+    console.log(props.preData[0].id)
     const replyComment = (c_id) => {
         console.log('Now Relying...');
-        axios.post(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}?board_id=${props.router.query.category}&nickname=${props.router.query.author}&c_id=${c_id}`, {
+        axios.post(`http://127.0.0.1:8000/r/1/v/${preId}?board_id=${preId}&nickname=${preAuthor}&c_id=${c_id}`, {
             "text": comment.reply.trim()
         }).then(r => console.log(r));
         console.log('Replying Complete!');
@@ -74,7 +59,7 @@ const DetailFree = (props) => {
             history.pushState({c_id : c_id}, null, `${props.router.asPath}`+`&c_id=${c_id}`);
             replyComment(c_id);
             alert('작성이 완료되었습니다!');
-            // window.location.reload();
+            window.location.reload();
         } else {
             alert('내용을 입력해주세요')
         }
@@ -84,13 +69,13 @@ const DetailFree = (props) => {
 
     const deleteApi = () => {
         console.log('Now Delete...');
-        axios.delete(`http://127.0.0.1:8000/r/${props.router.query.category}/v/${props.router.query.id}`);
+        axios.delete(`http://127.0.0.1:8000/r/1/v/${preId}`);
         console.log('Delete Complete!');
     };
     const clickDelete = () => {
         deleteApi();
         alert('삭제가 완료되었습니다!');
-        props.router.push(`/r/${pageMove}`);
+        props.router.push(`/r/free`);
     };
 
     return (
@@ -99,7 +84,7 @@ const DetailFree = (props) => {
                 {props.pageData.pageTitle}
             </div>
             <table className='detailTable'>
-            {props.detailState.detail.map(data => (
+            {props.preData.map(data => (
                 <tbody key={data.id}>
                     <tr>
                         <td>{props.pageData.theadAuthor}</td>
@@ -136,8 +121,7 @@ const DetailFree = (props) => {
                         </button>
                     </div>
                 </div>
-
-                <CommentList detailState={props.detailState}
+                <CommentList preData={props.preData}
                              comment={comment}
                              typingComment={typingComment}
                              replyComment={replyComment}
@@ -145,7 +129,7 @@ const DetailFree = (props) => {
             </div>
             <div className='btnContainer'>
                 <button>
-                    <Link href = {{pathname : `/r/${pageMove}`}}>
+                    <Link href = {{pathname : `/r/free`}}>
                         <a>목록으로</a>
                     </Link>
                 </button>

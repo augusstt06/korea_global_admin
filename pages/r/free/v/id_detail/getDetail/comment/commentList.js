@@ -7,9 +7,9 @@ const CommentList = (props) => {
     // props 필요없는 것 합치거나 삭제하기
     return (
         <div className='commentList'>
-            {props.detailState.detail.map(data => data.board_comment.map(data2 => (
+            {props.preData.map(data => data.board_comment.map(data2 => (
                 <div key={data2.id}>
-                    <CommentSingle detailState={props.detailState}
+                    <CommentSingle preData={props.preData}
                                     comment={props.comment}
                                     user_name={data2.user_name}
                                     text={data2.text}
@@ -17,7 +17,8 @@ const CommentList = (props) => {
                                     replyComment={props.replyComment}
                                     clickReplyingSubmit={props.clickReplyingSubmit}
                                     typingComment={props.typingComment}/>
-                    <Reply detailState={props.detailState}
+
+                    <Reply preData={props.preData}
                            commment={props.comment}
                            replyComment={props.replyComment}
                            clickReplyingSubmit={props.clickReplyingSubmit}

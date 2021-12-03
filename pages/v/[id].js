@@ -40,7 +40,7 @@ const Detail_main = () => {
                     <tbody>
                         <tr>
                             <td>{option.theadAuthor}</td>
-                            <td>doverr</td>
+                            <td>doverr??</td>
                             <td>{option.theadDay}</td>
                             <td>2021.08.19</td>
                         </tr>
