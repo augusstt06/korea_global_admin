@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Side from "../../component/Side";
 
+
 const Post_D = () => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
 
