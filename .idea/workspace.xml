@@ -1,61 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e804789-b14f-4a82-8a11-6a10db90c281" name="Changes" comment="">
+    <list default="true" id="7e804789-b14f-4a82-8a11-6a10db90c281" name="Changes" comment="Split Repository">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/Footer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/Header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/Pagination.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/Side.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/board/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/board/free/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/board/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/board/market/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/board/study/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/dm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/mg.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/commentList.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/reply/commentReply.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/reply/reply.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/comment/single/commentSingle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/getDetail/detailFree.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/free/v/id_detail/putDetail/updateFree.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/market/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/market/v/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/p.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/schedule/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/r/schedule/v/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/reservation/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/track/accounting/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/track/accounting/v/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/track/marketing/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/track/marketing/v/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/track/p.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/v/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/korea.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/korea_name.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recoilState/state.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structure.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Footer.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Header.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Home.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Page.modules.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,8 +59,23 @@
       <workItem from="1635586237990" duration="193000" />
       <workItem from="1635608626770" duration="20000" />
       <workItem from="1637053399522" duration="31000" />
-      <workItem from="1638545067487" duration="119000" />
+      <workItem from="1638545067487" duration="914000" />
     </task>
+    <task id="LOCAL-00001" summary="Split Repository">
+      <created>1638545323252</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1638545323252</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Split Repository">
+      <created>1638545811426</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1638545811426</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,5 +104,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Split Repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="Split Repository" />
   </component>
 </project>
