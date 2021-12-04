@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 const Side = (props) => {
     const items = props.items;
-    const title = props.title;
     
     const  [input, setInput] = useState({
         id : '',
@@ -36,11 +35,10 @@ const Side = (props) => {
                     <button>로그인</button>
                 </div>
             </div>
-            {/* <div className='sideTitle'>{title}</div> */}
             <div className='sideItem'>
                 {items.length > 1  ? items.map((item) => (
                     <div className='item' key = {item.id}>
-                        <Link href = {{ pathname : `${item.link}`}} key = {item.id}>
+                        <Link href = {{ pathname : `${item.link}`, query : {pages : item.query}}} key = {item.id}>
                             <a className='sideDetail'>{item.text}</a>
                         </Link>
                     </div>

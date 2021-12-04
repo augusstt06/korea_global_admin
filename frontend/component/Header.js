@@ -17,7 +17,14 @@ const Header = () => {
         trackText : '트랙',
         reservation : `/reservation`,
         reservationText : '예약',
-    })
+    });
+    const pageUrl = useState([
+        {name : '학생공간', url : '/r', query : {pages : 'free'}},
+        {name : '트랙', url : '/track', query : {pages : 'accounting'}},
+        {name : '쪽지함', url : '/dm'}
+    ]);
+    console.log(pageUrl[0].map(data=>console.log(data.name)));
+
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
@@ -32,40 +39,25 @@ const Header = () => {
                 <div className={styles.icon} onClick={handleClick}>
                     <FaBars />
                 </div>}
-            { click ? 
-                <nav className = {styles.menu_click}  click={click ? 0 : 1}>
-                    <div className='announce'>
-                        <Link href = {pageLink.department}>
-                            <a>{pageLink.departmentText}</a>
-                        </Link>
-                    </div>
-                    <div className='board'>
-                        <Link href = {pageLink.track}>
-                            <a>{pageLink.trackText}</a>
-                        </Link>
-                    </div>
-                    <div className='professor'>
-                        <Link href = {pageLink.reservation}>
-                            <a>{pageLink.reservationText}</a>
-                        </Link>
-                    </div>
-                </nav> : 
-                <nav className = {styles.menu_noclick}  click={click ? 0 : 1}>
-                    <div className='announce'>
-                        <Link href = {pageLink.department}>
-                            <a>{pageLink.departmentText}</a>
-                        </Link>
-                    </div>
-                    <div className='board'>
-                        <Link href = {pageLink.track}>
-                            <a>{pageLink.trackText}</a>
-                        </Link>
-                    </div>
-                    <div className='professor'>
-                        <Link href = {pageLink.reservation}>
-                            <a>{pageLink.reservationText}</a>
-                        </Link>
-                    </div>
+            {click ?
+                <nav className={styles.menu_click} click={click ? 0 : 1}>
+                    {pageUrl[0].map(data => (
+                        <div key={data.name}>
+                            {/*<Link href={{pathname : data.url, query : {pages :data.query}}}>*/}
+                            <Link href = {{pathname : data.url , query : data.query}}>
+                                <a>{data.name}</a>
+                            </Link>
+                        </div>
+                    ))}
+                </nav> :
+                <nav className={styles.menu_noclick} click={click ? 0 : 1}>
+                    {pageUrl[0].map(data => (
+                        <div key={data.name}>
+                            <Link href={{pathname : data.url, query : data.query}}>
+                                <a>{data.name}</a>
+                            </Link>
+                        </div>
+                    ))}
                 </nav>}
         </div>
     )

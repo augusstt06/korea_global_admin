@@ -14,12 +14,6 @@ export const getServerSideProps = async() => {
 };
 const Main = ({data}) => {
     // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
-
-    // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
-    //           Mapping Data => Search : Done!
-    //           Pagination : Done!
-    //           Apply Server Side Rendering : Done!
-
     // Basic Section
     const [option] = useState({
         pageTitle : '공지사항',
