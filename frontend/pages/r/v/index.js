@@ -5,7 +5,6 @@ import Side from "../../../component/Side";
 import GetDetailView from "./detailView/getView/GetDetailView";
 import PutDetailView from "./detailView/putView/putDetailView";
 
-// SSR 사용
 export const pageQuery = () => {
     const router = useRouter();
     const query = router.query;
