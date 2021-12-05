@@ -23,7 +23,6 @@ const Header = () => {
         {name : '트랙', url : '/track', query : {pages : 'accounting'}},
         {name : '쪽지함', url : '/dm'}
     ]);
-    console.log(pageUrl[0].map(data=>console.log(data.name)));
 
     return (
         <div className={styles.header}>
@@ -43,7 +42,6 @@ const Header = () => {
                 <nav className={styles.menu_click} click={click ? 0 : 1}>
                     {pageUrl[0].map(data => (
                         <div key={data.name}>
-                            {/*<Link href={{pathname : data.url, query : {pages :data.query}}}>*/}
                             <Link href = {{pathname : data.url , query : data.query}}>
                                 <a>{data.name}</a>
                             </Link>
