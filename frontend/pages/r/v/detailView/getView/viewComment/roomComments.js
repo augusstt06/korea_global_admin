@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import {FiSend} from "react-icons/fi";
 import {BiCommentAdd} from "react-icons/bi";
 
-export const Comment = (props) => {
-    // 댓글
+export const RoomComment = (props) => {
     const [replyBtn, setReplyBtn] = useState(false);
     const clickReply = () => {
         setReplyBtn(!replyBtn);
@@ -36,24 +35,21 @@ export const Comment = (props) => {
     )
 };
 
-export const Reply = (props) => {
-    // 대댓글
+export const RoomReply = (props) => {
     return (
         <div className='commentReply'>
             {props.commentsReplies.map(data => (
                 <div key={data.boardId}>
-                    <ReplyComment ssrData={props.ssrData}
-                                  comment={props.comment}
-                                  username={data.username}
-                                  text={data.text}/>
+                    <RoomReplyComment ssrData  = {props.ssrData}
+                                      username = {data.username}
+                                      text     = {data.text}/>
                 </div>
             ))}
         </div>
     )
 };
 
-export const ReplyComment = (props) => {
-    // 대댓글 안의 입력 없는 댓글
+export const RoomReplyComment = (props) => {
     return (
         <div className='commentList'>
             <div className='commentBox'>

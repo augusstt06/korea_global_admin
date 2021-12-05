@@ -4,25 +4,28 @@ import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
 
-
-const Room = () => {
+const Track = () => {
     // Page Info
     const router = useRouter();
     const query  = router.query;
 
     const [sideInfo] = useState([
-        {id : 1, link : '/r', text : '자유', query : 'free'},
-        {id : 2, link : '/r', text : '장터', query : 'market'},
+        {id : 1, link : '/track', text : '창업',  query : 'startup'},
+        {id : 2, link : '/track', text : '마케팅', query : 'marketing'},
+        {id : 2, link : '/track', text : 'SCM', query : 'scm'},
+        {id : 2, link : '/track', text : '회계/세무',   query : 'accounting'},
     ]);
     const [pageInfo] = useState({
-        pageTitle   : (router.query.pages === 'free'   ? '자유' :
-                       router.query.pages === 'market' ? '장터' : null),
-        sideTitle   : '학생공간',
+        pageTitle   : (router.query.pages === 'startup'       ? '창업' :
+                       router.query.pages === 'marketing'     ? '마케팅':
+                       router.query.pages === 'scm'           ? 'SCM' :
+                       router.query.pages === 'accounting'    ? '회계/세무' : null),
+        sideTitle   : '트랙',
         theadNum    : 'No',
         theadTitle  : '제목',
         theadAuthor : '작성자',
         theadDay    : '날짜',
-        postingLink : '/r/p'
+        postingLink : '/track/p'
     });
     const [optionValue] = useState({
         default : '선택',
@@ -32,24 +35,23 @@ const Room = () => {
     });
 
     // API Request Section ( GET )
-    const [room,     setRoom] = useState([]);
+    const [track,   setTrack] = useState([]);
     const [search, setSearch] = useState([]);
 
-    const getRoomList = async() => {
-        console.log("Now Loading...")
-        const res = await axios.get(`http://127.0.0.1:8000/r?pages=${query.pages}`);
-        setRoom(res.data);
+    const getTrackList = async() => {
+        console.log('Now Loading...');
+        const res = await axios.get(`http://127.0.0.1:8000/track?pages=${query.pages}`);
+        setTrack(res.data);
         setSearch(res.data);
-        console.log("Finish Loading!");
+        console.log('Finish Loading!')
     };
-
     useEffect(() => {
-        getRoomList()
+        getTrackList()
             .then(r => console.log(r));
     }, []);
 
     // Search Section
-    const [keyword, setKeyword] = useState('');
+    const [keyword,           setKeyword] = useState('');
     const [optionStatus, setOptionStatus] = useState('');
 
     const keywordInput = (e) => {
@@ -61,17 +63,17 @@ const Room = () => {
 
     const searchTitleData = () => {
         setSearch();
-        const titleData = room.filter(data => (data.title).includes(keyword) === true);
+        const titleData = track.filter(data => (data.title).includes(keyword) === true);
         setSearch(titleData);
     };
     const searchBodyData = () => {
         setSearch();
-        const bodyData = room.filter(data => (data.body).includes(keyword) === true);
+        const bodyData = track.filter(data => (data.body).includes(keyword) === true);
         setSearch(bodyData);
     };
     const searchAllData = () => {
         setSearch();
-        const allData = room.filter(data => (data.title).includes(keyword) === true || (data.body).includes(keyword) === true);
+        const allData = track.filter(data => (data.title).includes(keyword) === true || (data.body).includes(keyword) === true);
         setSearch(allData);
     };
 
@@ -119,6 +121,8 @@ const Room = () => {
                 <Side items = {[
                     {id : sideInfo[0].id, link : sideInfo[0].link, text : sideInfo[0].text, query : sideInfo[0].query},
                     {id : sideInfo[1].id, link : sideInfo[1].link, text : sideInfo[1].text, query : sideInfo[1].query},
+                    {id : sideInfo[2].id, link : sideInfo[2].link, text : sideInfo[2].text, query : sideInfo[2].query},
+                    {id : sideInfo[3].id, link : sideInfo[3].link, text : sideInfo[3].text, query : sideInfo[3].query},
                 ]} title = {pageInfo.sideTitle}/>
             </div>
             <div className='content'>
@@ -157,10 +161,10 @@ const Room = () => {
                     </thead>
                     <tbody>
                     {division()[page].map(data => (
-                        <tr key={data.id}>
+                        <tr key={data.title}>
                             <td>{data.id}</td>
                             <td>
-                                <Link href={{pathname : `/r/v`, query : { board_id : data.id , pages : router.query.pages}}}>
+                                <Link href={{pathname : `/track/v`, query : { board_id : data.id , pages : query.pages}}}>
                                     <a>{data.title}</a>
                                 </Link>
                             </td>
@@ -192,5 +196,4 @@ const Room = () => {
         </div>
     )
 };
-
-export default Room;
+export default Track;

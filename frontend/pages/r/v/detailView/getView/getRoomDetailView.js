@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import Link from "next/link";
 import axios from "axios";
 import { FiSend } from 'react-icons/fi';
-import CommentList from "./viewComment/commentList";
+import RoomCommentList from "./viewComment/roomCommentList";
 
 
-const GetDetailView = (props) => {
+const GetRoomDetailView = (props) => {
     // Basic Section
     const [comment, setComment] = useState({
         comment : '',
@@ -108,23 +108,23 @@ const GetDetailView = (props) => {
                         <a>augusstt06</a>
                     </div>
                     <div className='typingComment'>
-                        <textarea placeholder='댓글을 입력하세요'
-                                  name='comment'
-                                  defaultValue=''
-                                  onChange={typingComment}/>
+                        <textarea placeholder  = '댓글을 입력하세요'
+                                  name         = 'comment'
+                                  defaultValue = ''
+                                  onChange     = {typingComment}/>
                     </div>
                     <div className='commentBtn'>
-                        <button onClick={clickCommentSubmit}
-                                type='submit'>
+                        <button onClick = {clickCommentSubmit}
+                                type    = 'submit'>
                             <FiSend size='25'/>
                         </button>
                     </div>
                 </div>
-                <CommentList ssrData={props.ssrData}
-                             comment={comment}
-                             typingComment={typingComment}
-                             replyComment={replyComment}
-                             clickReplyingSubmit={clickReplyingSubmit}/>
+                <RoomCommentList ssrData             = {props.ssrData}
+                                 comment             = {comment}
+                                 typingComment       = {typingComment}
+                                 replyComment        = {replyComment}
+                                 clickReplyingSubmit = {clickReplyingSubmit}/>
             </div>
             <div className='btnContainer'>
                 <button>
@@ -144,4 +144,4 @@ const GetDetailView = (props) => {
         </div>
     )
 };
-export default GetDetailView;
+export default GetRoomDetailView;

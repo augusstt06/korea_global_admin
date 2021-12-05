@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
 
-const PutDetailView = (props) => {
+const PutRoomDetailView = (props) => {
     // Basic Section
-
     const [updateTitle, setUpdateTitle] = useState(`${props.ssrData[0].title}`);
     const [updateText, setUpdateText] = useState(`${props.ssrData[0].text}`);
 
@@ -19,13 +18,13 @@ const PutDetailView = (props) => {
         const word = string.replace(/ /g, "");
         return word.length
     };
-    // API Request Section ( PUT )
 
+    // API Request Section ( PUT )
     const putApi = () => {
         console.log('Now Update...');
         axios.put(`http://127.0.0.1:8000/r/v?board_id${board_id}`,{
             "title" : updateTitle.trim(),
-            "text" : updateText.trim()
+            "text"  : updateText.trim()
         });
         console.log('Update Complete!');
     };
@@ -84,4 +83,4 @@ const PutDetailView = (props) => {
         </div>
     )
 };
-export default  PutDetailView;
+export default  PutRoomDetailView;

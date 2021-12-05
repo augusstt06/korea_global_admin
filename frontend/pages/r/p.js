@@ -24,9 +24,9 @@ const RoomPosting = () => {
         {id : 1, link : '/r', text : '자유', query : 'free'},
         {id : 2, link : '/r', text : '장터', query : 'market'},
     ]);
-
+    // content 원래 ('')였음
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState((''));
+    const [content, setContent] = useState('');
 
     const typingTitle = (e) => {
         setTitle(e.target.value);
@@ -38,14 +38,10 @@ const RoomPosting = () => {
         const word = string.replace(/ /g, "");
         return word.length;
     };
-    // API Request Section ( POST )
 
+    // API Request Section ( POST )
     const postApi = () => {
         console.log('Now Posting...');
-        axios.post(`http://127.0.0.1:8000/r/p?author=${virtualName}&category_id=${query.pages}`, {
-            "title": title.trim(),
-            "text" : content.trim()
-        }).then(r => console.log(r));
         axios.post(`http://127.0.0.1:8000/r/p?author=${virtualName}&category_id=${query.pages}`, {
             "title": title.trim(),
             "text" : content.trim()
@@ -108,7 +104,7 @@ const RoomPosting = () => {
                     </div>
                 <div className='btnContainer'>
                     <button>
-                        <Link href ={{pathname : `/r?pages=${query.pages}`}}>
+                        <Link href ={{pathname : `/r`, query : {pages : query.pages}}}>
                             <a>목록으로</a>
                         </Link>
                     </button>

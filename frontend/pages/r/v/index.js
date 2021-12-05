@@ -2,27 +2,25 @@ import React, {useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 import Side from "../../../component/Side";
-import GetDetailView from "./detailView/getView/GetDetailView";
-import PutDetailView from "./detailView/putView/putDetailView";
+import GetRoomDetailView from "./detailView/getView/getRoomDetailView";
+import PutRoomDetailView from "./detailView/putView/PutRoomDetailView";
 
 export const pageQuery = () => {
     const router = useRouter();
-    const query = router.query;
+    const query  = router.query;
     return {query}
 };
-
 export const getServerSideProps = async({query}) => {
-    const res = await axios.get(`http://127.0.0.1:8000/r/v?board_id=${query.board_id}&pages=${query.pages}`);
+    const res  = await axios.get(`http://127.0.0.1:8000/r/v?board_id=${query.board_id}&pages=${query.pages}`);
     const data = res.data
 
     return {
         props : {data}
     };
 };
-
 const RoomView = ({data}) => {
     // Page Info
-    const router = useRouter();
+    const router     = useRouter();
     const [sideInfo] = useState([
         {id : 1, link : '/r', text : '자유', query : 'free'},
         {id : 2, link : '/r', text : '장터', query : 'market'},
@@ -49,14 +47,14 @@ const RoomView = ({data}) => {
                 ]} title = {pageInfo.sideTitle}/>
             </div>
             {goUpdate ?
-            <GetDetailView pageInfo = {pageInfo}
-                           router = {router}
-                           ssrData = {data}
-                           updateState = {updateState}/> :
-            <PutDetailView pageInfo = {pageInfo}
-                           router = {router}
-                           ssrData = {data}
-                           updateState = {updateState}/>}
+            <GetRoomDetailView pageInfo    = {pageInfo}
+                               router      = {router}
+                               ssrData     = {data}
+                               updateState = {updateState}/> :
+            <PutRoomDetailView pageInfo    = {pageInfo}
+                               router      = {router}
+                               ssrData     = {data}
+                               updateState = {updateState}/>}
         </div>
     )
 };

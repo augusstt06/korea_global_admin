@@ -41,7 +41,7 @@ const Header = () => {
             {click ?
                 <nav className={styles.menu_click} click={click ? 0 : 1}>
                     {pageUrl[0].map(data => (
-                        <div key={data.name}>
+                        <div key={data.url}>
                             <Link href = {{pathname : data.url , query : data.query}}>
                                 <a>{data.name}</a>
                             </Link>
