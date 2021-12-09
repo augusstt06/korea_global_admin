@@ -66,13 +66,16 @@ const Room = () => {
     //         alert('에러임')
     //     }
     // };
+
+    console.log(getCookie())
+
     const getRoomList = async () => {
         await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
                 headers : {
-                    access_token_cookie : `access_token_cookie=${getCookie("access_token_cookie")}`,
-                    refresh_token_cookie : `refresh_token_cookie=${getCookie(('refresh_token_cookie'))}`
+                    "access_token_cookie" : getCookie("access_token_cookie"),
+                    "refresh_token_cookie" : getCookie("refresh_token_cookie")
             },
-                mode : 'cors',
+                // mode : 'cors',
                 withCredentials : true
             }).then(response => {
                 setRoom(response.data);
@@ -81,7 +84,7 @@ const Room = () => {
                 console.log('SUCCESS!');
         }).catch((e) => {
             console.log(e);
-            alert('Fail to API Connect');
+            alert('Fail to Connect API');
         })
     }
     useEffect(() => {
@@ -164,7 +167,6 @@ const Room = () => {
                 <div className='contentTop'>
                     <div className='pageTitle'>
                         <a>{pageInfo.pageTitle}</a>
-                        <a>{getCookie("access_token_cookie")}</a>
                     </div>
                     <div className='searchContainer'>
                         <select onChange={selectOption}>
@@ -205,7 +207,7 @@ const Room = () => {
                                 </Link>
                             </td>
                             <td>{data.author}</td>
-                            <td><a>{data.updated_at[0,9]}</a></td>
+                            <td><a>{data.updated_at}</a></td>
                         </tr>
                     ))}
                     </tbody>

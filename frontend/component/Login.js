@@ -24,7 +24,6 @@ const Login = () => {
         newInput[e.target.name] = e.target.value
         setLogIn(newInput)
     };
-
     const doLogin = async() => {
         try{
             const res = await axios.post(`http://127.0.0.1:8000/login`, {
@@ -33,9 +32,8 @@ const Login = () => {
             });
             console.log(res.data);
             // 비동기 요청으로 변수에 Response 담은 후 Response Token을 쿠키에 넣어서 저장
-            setAccessCookie(res.data);
-            setRefreshCookie(res.data);
-            console.log(res);
+            setAccessCookie(res.data[0]);
+            setRefreshCookie(res.data[1]);
             changeLoginState();
         } catch (err){
             console.log(err.response);

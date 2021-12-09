@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import axios from 'axios';
 import Link from 'next/link';
 import Side from "../../component/Side";
+import {getCookie} from "../../Cookie/HandleCookie";
 
 const RoomPosting = () => {
     // Basic Section
@@ -40,14 +41,23 @@ const RoomPosting = () => {
     };
 
     // API Request Section ( POST )
-    const postApi = () => {
-        console.log('Now Posting...');
-        axios.post(`http://127.0.0.1:8000/r/p?pages=${query.pages}`, {
-            "title": title.trim(),
-            "text" : content.trim()
-        }).then(r => console.log(r));
-         console.log('Posting Complete!');
-    };
+    const postApi = async() => {
+        await axios.post(`http://localhost:8000/r/p?pages=${query.pages}`,{
+            "title" : title.trim(),
+            "text"  : content.trim()
+        },{
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            }, mode : "cors", withCredentials : true
+        }).then(response => {
+            console.log('SUCCESS POSTING!');
+            console.log(response)
+        }).catch((e) => {
+            console.log(e)
+            alert('Fail to Connect API');
+        })
+    }
 
     const clickPost = () => {
         if(removeSpace(title) !== 0 && removeSpace(content) !== 0) {
