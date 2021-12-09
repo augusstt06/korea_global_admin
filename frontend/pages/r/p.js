@@ -42,7 +42,7 @@ const RoomPosting = () => {
     // API Request Section ( POST )
     const postApi = () => {
         console.log('Now Posting...');
-        axios.post(`http://127.0.0.1:8000/r/p?author=${virtualName}&category_id=${query.pages}`, {
+        axios.post(`http://127.0.0.1:8000/r/p?pages=${query.pages}`, {
             "title": title.trim(),
             "text" : content.trim()
         }).then(r => console.log(r));

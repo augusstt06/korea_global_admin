@@ -3,20 +3,34 @@ import {useRouter} from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
+import {useRecoilState} from "recoil";
+import {LoginCookieValue, LoginState} from "../../recoilState/state";
+import {getCookie} from "../../Cookie/HandleCookie";
+import headers from "../../next.config";
 
+// export const getServerSideProps = ({req, res}) =>{
+//
+//     return{
+//         props : {}
+//     }
+// }
 
 const Room = () => {
     // Page Info
     const router = useRouter();
     const query  = router.query;
 
+    const [roomAtom, setRoomAtom] = useRecoilState(LoginCookieValue);
+    const [LoginAtom, setLoginAtom] = useRecoilState(LoginState);
+
     const [sideInfo] = useState([
         {id : 1, link : '/r', text : '자유', query : 'free'},
         {id : 2, link : '/r', text : '장터', query : 'market'},
     ]);
     const [pageInfo] = useState({
-        pageTitle   : (router.query.pages === 'free'   ? '자유' :
-                       router.query.pages === 'market' ? '장터' : null),
+        pageTitle   : (query.pages === 'free'   ? '자유' :
+                       query.pages === 'market' ? '장터' :
+                       query.pages === undefined ? "자유" : null),
         sideTitle   : '학생공간',
         theadNum    : 'No',
         theadTitle  : '제목',
@@ -35,17 +49,43 @@ const Room = () => {
     const [room,     setRoom] = useState([]);
     const [search, setSearch] = useState([]);
 
-    const getRoomList = async() => {
-        console.log("Now Loading...")
-        const res = await axios.get(`http://127.0.0.1:8000/r?pages=${query.pages}`);
-        setRoom(res.data);
-        setSearch(res.data);
-        console.log("Finish Loading!");
-    };
-
+    // const getRoomList = async () => {
+    //     try{
+    //         console.log("Now Loading...")
+    //         const res = await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
+    //             headers : {Cookies : `access_token_cookie=${getCookie("access_token_cookie")}`
+    //             },
+    //             withCredentials: true
+    //         });
+    //         // const res = await axios.get(`http://localhost:8000/r?pages=${query.pages}`,);
+    //         setRoom(res.data);
+    //         setSearch(res.data);
+    //         console.log("Finish Loading!");
+    //     } catch (err){
+    //         console.log(err)
+    //         alert('에러임')
+    //     }
+    // };
+    const getRoomList = async () => {
+        await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
+                headers : {
+                    access_token_cookie : `access_token_cookie=${getCookie("access_token_cookie")}`,
+                    refresh_token_cookie : `refresh_token_cookie=${getCookie(('refresh_token_cookie'))}`
+            },
+                mode : 'cors',
+                withCredentials : true
+            }).then(response => {
+                setRoom(response.data);
+                setSearch(response.data);
+                console.log(response.data);
+                console.log('SUCCESS!');
+        }).catch((e) => {
+            console.log(e);
+            alert('Fail to API Connect');
+        })
+    }
     useEffect(() => {
-        getRoomList()
-            .then(r => console.log(r));
+        getRoomList().then(r => console.log(r));
     }, []);
 
     // Search Section
@@ -112,7 +152,6 @@ const Room = () => {
         }
         return numList;
     };
-
     return (
         <div className='main'>
             <div className='component'>
@@ -125,6 +164,7 @@ const Room = () => {
                 <div className='contentTop'>
                     <div className='pageTitle'>
                         <a>{pageInfo.pageTitle}</a>
+                        <a>{getCookie("access_token_cookie")}</a>
                     </div>
                     <div className='searchContainer'>
                         <select onChange={selectOption}>

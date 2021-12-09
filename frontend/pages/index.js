@@ -3,8 +3,6 @@ import Link from 'next/link';
 import Side from "../component/Side";
 import axios from "axios";
 
-// Flexible 하게
-
 export const getServerSideProps = async() => {
     const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
     const data = res.data
@@ -13,7 +11,6 @@ export const getServerSideProps = async() => {
     };
 };
 const Main = ({data}) => {
-    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
     // Basic Section
     const [option] = useState({
         pageTitle : '공지사항',

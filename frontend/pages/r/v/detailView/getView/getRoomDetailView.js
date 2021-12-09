@@ -55,7 +55,8 @@ const GetRoomDetailView = (props) => {
     };
     const clickReplyingSubmit = (c_id) => {
         if(removeSpace(comment.reply)){
-            history.pushState({c_id : c_id}, null, `${props.router.asPath}`+`&c_id=${c_id}`);
+            // 밑에 history.pushState 사용하지 않아도 잘 작동 됨.
+            // history.pushState({c_id : c_id}, null, `${props.router.asPath}`+`&c_id=${c_id}`);
             replyComment(c_id);
             alert('작성이 완료되었습니다!');
             window.location.reload();

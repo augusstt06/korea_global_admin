@@ -19,8 +19,9 @@ const Header = () => {
         reservationText : '예약',
     });
     const pageUrl = useState([
-        {name : '학생공간', url : '/r', query : {pages : 'free'}},
-        {name : '트랙', url : '/track', query : {pages : 'accounting'}},
+        {name : '학생공간', url : '/r', query : 'free'},
+        // {name : '학생공간', url : '/r'},
+        {name : '트랙', url : '/track', query :'accounting'},
         {name : '쪽지함', url : '/dm'}
     ]);
 
@@ -42,7 +43,8 @@ const Header = () => {
                 <nav className={styles.menu_click} click={click ? 0 : 1}>
                     {pageUrl[0].map(data => (
                         <div key={data.url}>
-                            <Link href = {{pathname : data.url , query : data.query}}>
+                            <Link href = {{pathname : data.url , query : {pages : data.query}}}>
+                            {/*<Link href = {{pathname : data.url}}>*/}
                                 <a>{data.name}</a>
                             </Link>
                         </div>
@@ -51,7 +53,8 @@ const Header = () => {
                 <nav className={styles.menu_noclick} click={click ? 0 : 1}>
                     {pageUrl[0].map(data => (
                         <div key={data.name}>
-                            <Link href={{pathname : data.url, query : data.query}}>
+                            <Link href={{pathname : data.url, query : {pages : data.query}}}>
+                            {/*<Link href={{pathname : data.url}}>*/}
                                 <a>{data.name}</a>
                             </Link>
                         </div>

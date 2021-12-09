@@ -1,39 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Link from 'next/link';
+import Login from "./Login";
+
 
 const Side = (props) => {
     const items = props.items;
-    
-    const  [input, setInput] = useState({
-        id : '',
-        password : ''
-    })
-    const changeInput = (e) => {
-        const newInput = {...input}
-        newInput[e.target.name] = e.target.value
-        setInput(newInput)
-    }
+
     return (
         <nav className='Side'>
             <div className='login'>
                 <div>
                     내 정보
                 </div>
-                <div className = 'inputLogin'>
-                    <input type='text'
-                            placeholder ='ID'
-                            name = 'id'
-                            value = {input.id}
-                            onChange={changeInput}/>
-                    <input type='password'
-                            placeholder ='PWD'
-                            name = 'password'
-                            value = {input.password}
-                            onChange = {changeInput}/>
-                </div>
-                <div>
-                    <button>로그인</button>
-                </div>
+                <Login/>
             </div>
             <div className='sideItem'>
                 {items.length > 1  ? items.map((item) => (
