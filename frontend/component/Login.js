@@ -23,29 +23,38 @@ const Login = () => {
         newInput[e.target.name] = e.target.value
         setLogIn(newInput)
     };
-
     const doLogin = async() => {
-        try{
-            const res = await axios.post(`http://127.0.0.1:8000/login`, {
-                "username" : logIn.username,
-                "password" : logIn.password
-            });
-            setAccessCookie(res.data[0]);
-            setRefreshCookie(res.data[1]);
+        await axios.post(`http://localhost:8000/login`,{
+            "username" : logIn.username,
+            "password" : logIn.password
+        }).then(r => {
+            setAccessCookie(r.data[0]);
+            setRefreshCookie(r.data[1]);
             changeLoginState();
             window.location.reload();
-        } catch (err){
-            console.log(err.response);
-        }
-    };
+        }).catch(e => {
+            console.log(e)
+        })
+    }
     const doLogout = async() => {
-        removeCookie("access_token_cookie");
-        removeCookie("refresh_token_cookie");
-        if(router.pathname === '/r/v'){
-            history.go(-1)
-        } else{
-         window.location.reload()
-        }
+        await axios.delete(`http://localhost:8000/logout`,{
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+        }).then(r => {
+            removeCookie("access_token_cookie");
+            removeCookie("refresh_token_cookie");
+            if(router.pathname === '/r/v'){
+                history.go(-1)
+            } else{
+             window.location.reload()
+            }
+        }).catch(e => {
+            console.log(e)
+        })
     };
 
     return (

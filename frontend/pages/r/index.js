@@ -4,21 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
 
-// export const getServerSideProps = async(context) => {
-//     const {query} = context;
-//     const ssrUrl = `http://localhost:8000/r?pages=${query.pages}`
-//     const res = await axios.get(ssrUrl, {
-//         headers : (context.req.headers.cookie !== undefined ? {
-//             Cookie : context.req.headers.cookie
-//         } : '?'),
-//         mode : "cors",
-//         withCredentials : true
-//     });
-//     const data = res.data;
-//     return {
-//         props : {data}
-//     }
-// }
 export const getServerSideProps = async(context) => {
     let data;
     const {query} = context;
@@ -34,7 +19,7 @@ export const getServerSideProps = async(context) => {
         data = res.data;
 
     } else{
-        data = []
+        data = null
     }
     return {
         props : {data}
@@ -42,7 +27,6 @@ export const getServerSideProps = async(context) => {
 }
 
 const Room = ({data}) => {
-    console.log(data.length)
     // Page Info
     const router = useRouter();
     const query  = router.query;
@@ -52,9 +36,6 @@ const Room = ({data}) => {
         {id : 2, link : '/r', text : '장터', query : 'market'},
     ]);
     const [pageInfo] = useState({
-        pageTitle   : (data.pages === 'free'   ? '자유' :
-                       data.pages === 'market' ? '장터' :
-                       data.pages === undefined ? "자유" : null),
         sideTitle   : '학생공간',
         theadNum    : 'No',
         theadTitle  : '제목',
@@ -77,7 +58,7 @@ const Room = ({data}) => {
     useEffect(() => {
         setRoom(data);
         setSearch(data);
-    }, []);
+    }, [query.pages]);
 
     // Search Section
     const [keyword, setKeyword] = useState('');
@@ -152,11 +133,12 @@ const Room = ({data}) => {
                     {id : sideInfo[1].id, link : sideInfo[1].link, text : sideInfo[1].text, query : sideInfo[1].query},
                 ]} title = {pageInfo.sideTitle}/>
             </div>
-            { data.length !== 0 ?
+            { data !== null ?
             <div className='content'>
                 <div className='contentTop'>
                     <div className='pageTitle'>
-                        <a>{pageInfo.pageTitle}</a>
+                        {query.pages === "free" ? <a>자유</a> :
+                        query.pages === "market" ? <a>장터</a> : <a>자유</a>}
                     </div>
                     <div className='searchContainer'>
                         <select onChange={selectOption}>

@@ -9,7 +9,6 @@ const RoomPosting = () => {
     // Basic Section
     const router = useRouter();
     const query = router.query;
-    console.log(router)
     // 나중에 로그인 정보로 바꾸기
     const virtualName = 'mingyu'
 
@@ -50,21 +49,18 @@ const RoomPosting = () => {
                 "access_token_cookie" : getCookie("access_token_cookie"),
                 "refresh_token_cookie" : getCookie("refresh_token_cookie")
             }, mode : "cors", withCredentials : true
-        }).then(response => {
-            console.log('SUCCESS POSTING!');
-            console.log(response)
+        }).then(r => {
+            console.log(r)
+            alert('작성이 완료되었습니다!');
+            router.push(`/r?pages=${query.pages}`);
         }).catch((e) => {
             console.log(e)
-            alert('Fail to Connect API');
         })
     }
 
     const clickPost = () => {
         if(removeSpace(title) !== 0 && removeSpace(content) !== 0) {
-            postApi();
-            alert('작성이 완료되었습니다!');
-            router.push(`/r?pages=${query.pages}`)
-                .then(r => console.log(r));
+            postApi().then(r => r);
         } else {
             alert('제목 또는 내용을 입력해주세요.');
         }

@@ -29,7 +29,6 @@ const GetRoomDetailView = (props) => {
     // // API Request Section
     //  POST (Comment_single)
     const postComment = () => {
-        console.log('Now Posting Comment_single...');
         axios.post(`http://localhost:8000/r/v?board_id=${board_id}&pages=${pages}`, {
             "text": comment.comment
         },{
@@ -41,12 +40,10 @@ const GetRoomDetailView = (props) => {
             withCredentials : true
         }).then(r => {
             console.log(r)
-            console.log("SUCCESS")
             alert('작성이 완료되었습니다!');
             window.location.reload()
         }).catch((e) => {
             console.log(e)
-            console.log("Fail to Request")
         })
     };
     const clickCommentSubmit = () => {
@@ -59,7 +56,6 @@ const GetRoomDetailView = (props) => {
 
     // POST (Reply)
     const replyComment = (c_id) => {
-        console.log('Now Relying...');
         axios.post(`http://localhost:8000/r/v?board_id=${board_id}&pages=${pages}&c_id=${c_id}`, {
             "text": comment.reply.trim()
         },{
@@ -86,7 +82,6 @@ const GetRoomDetailView = (props) => {
     // DELETE
 
     const deleteApi = () => {
-        console.log('Now Delete...');
         axios.delete(`http://localhost:8000/r/v?board_id=${board_id}&pages=${pages}`,{
             headers : {
                 "access_token_cookie" : getCookie("access_token_cookie"),
@@ -100,7 +95,6 @@ const GetRoomDetailView = (props) => {
                 alert('삭제가 완료되었습니다!'),
                 props.router.push(`/r?pages=${pages}`)
             });
-        console.log('Delete Complete!');
     };
     const clickDelete = () => {
         deleteApi();

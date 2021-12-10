@@ -8,27 +8,17 @@ const Header = () => {
     const handleClick = () => {
         setClick(!click);
     };
-    const [pageLink] = useState({
-        main : '/',
-        mainText : '고려대학교 글로벌 경영',
-        department : `/r/free`,
-        departmentText : '학생 공간',
-        track : `/track/accounting`,
-        trackText : '트랙',
-        reservation : `/reservation`,
-        reservationText : '예약',
-    });
     const pageUrl = useState([
         {name : '학생공간', url : '/r', query : 'free'},
         {name : '트랙', url : '/track', query :'accounting'},
-        {name : '쪽지함', url : '/dm'}
+        {name : '쪽지함', url : '/dm'},
+        {name : '고려대학교 글로벌 경영', url : '/'}
     ]);
-
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
-                <Link href = {pageLink.main}>
-                    <a>{pageLink.mainText}</a>
+                <Link href = {pageUrl[0][3].url}>
+                    <a>{pageUrl[0][3].name}</a>
                 </Link>
             </div>
             {click ?

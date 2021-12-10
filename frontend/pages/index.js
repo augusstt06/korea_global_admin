@@ -2,9 +2,6 @@ import React,{useState, useEffect} from 'react';
 import Link from 'next/link';
 import Side from "../component/Side";
 import axios from "axios";
-import {AccessCookieValue} from "../recoilState/state";
-import {useRecoilState} from "recoil";
-import {getCookie} from "../Cookie/HandleCookie";
 
 export const getServerSideProps = async() => {
     const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
@@ -14,7 +11,6 @@ export const getServerSideProps = async() => {
     };
 };
 const Main = ({data}) => {
-    const [accessAtom] = useRecoilState(AccessCookieValue);
     // Basic Section
     const [option] = useState({
         pageTitle : '공지사항',
@@ -31,7 +27,6 @@ const Main = ({data}) => {
     });
 
     // API Request Section
-
     const [main, setMain] = useState([]);
     const [search, setSearch] = useState([]);
 

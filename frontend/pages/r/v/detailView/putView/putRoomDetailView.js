@@ -22,7 +22,6 @@ const PutRoomDetailView = (props) => {
 
     // API Request Section ( PUT )
     const putApi = () => {
-        console.log('Now Update...');
         axios.put(`http://localhost:8000/r/v?board_id=${board_id}`,{
             "title" : updateTitle.trim(),
             "text"  : updateText.trim()

@@ -27,7 +27,8 @@ export const getServerSideProps = async(context) => {
     return {
         props : {data, user}
     }
-}
+};
+
 const RoomView = ({data, user}) => {
     // Page Info
     const router     = useRouter();
