@@ -20,7 +20,6 @@ const Header = () => {
     });
     const pageUrl = useState([
         {name : '학생공간', url : '/r', query : 'free'},
-        // {name : '학생공간', url : '/r'},
         {name : '트랙', url : '/track', query :'accounting'},
         {name : '쪽지함', url : '/dm'}
     ]);

@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import axios from "axios";
 import {LoginState} from "../recoilState/state";
 import {useRecoilState} from "recoil";
-import {LoginCookieValue} from "../recoilState/state";
+import {AccessCookieValue,RefreshCookieValue} from "../recoilState/state";
 import {setAccessCookie, setRefreshCookie, getCookie} from "../Cookie/HandleCookie";
 
 const Login = () => {
     // Basic Section
-
-    // const [accessAtom, setAccessAtom] = useRecoilState(LoginCookieValue);
     const [loginAtom, setLoginAtom] = useRecoilState(LoginState);
+    const [accessAtom, setAccessAtom] = useRecoilState(AccessCookieValue);
+    const [refreshAtom, setRefreshAtom] = useRecoilState(RefreshCookieValue);
 
     const changeLoginState = () => {
         setLoginAtom(!loginAtom);
@@ -19,6 +19,7 @@ const Login = () => {
         username : '',
         password : ''
     })
+
     const changeInput = (e) => {
         const newInput = {...logIn}
         newInput[e.target.name] = e.target.value
@@ -30,29 +31,23 @@ const Login = () => {
                 "username" : logIn.username,
                 "password" : logIn.password
             });
-            console.log(res.data);
             // 비동기 요청으로 변수에 Response 담은 후 Response Token을 쿠키에 넣어서 저장
+            console.log(res.data)
             setAccessCookie(res.data[0]);
+            setAccessAtom(res.data[0])
             setRefreshCookie(res.data[1]);
+            setRefreshAtom(res.data[1]);
             changeLoginState();
         } catch (err){
             console.log(err.response);
         }
     };
-
+    console.log(getCookie("access_token_cookie"))
     return (
         <>
-        {loginAtom === false ?
+        {getCookie("access_token_cookie") === undefined ?
             <div>
-                <a>로그인하셈</a>
-                {/*<a>Cookie : {getCookie("access_token_cookie")}</a>*/}
-            </div>
-
-            :
-            <div>굿 로그인</div>
-        }
-            {loginAtom === false ?
-            <>
+                <div>로그인</div>
                 <div className = 'inputLogin'>
                     <input type='text'
                             placeholder ='ID'
@@ -68,13 +63,15 @@ const Login = () => {
                 <div>
                     <button onClick={doLogin}>로그인</button>
                 </div>
-            </> :
-                <div>
-                    <button>
-                        로그아웃
-                    </button>
-                </div>
-            }
+            </div>
+            :
+            <div>
+                <div>로그인</div>
+                <button>
+                    Log Out
+                </button>
+            </div>
+        }
         </>
     )
 };

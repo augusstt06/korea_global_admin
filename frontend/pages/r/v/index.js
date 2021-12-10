@@ -4,20 +4,43 @@ import axios from "axios";
 import Side from "../../../component/Side";
 import GetRoomDetailView from "./detailView/getView/getRoomDetailView";
 import PutRoomDetailView from "./detailView/putView/PutRoomDetailView";
+import {AccessCookieValue,RefreshCookieValue} from "../../../recoilState/state";
+import {useRecoilState} from "recoil";
+import {getCookie} from "../../../Cookie/HandleCookie";
 
-export const pageQuery = () => {
-    const router = useRouter();
-    const query  = router.query;
-    return {query}
-};
-export const getServerSideProps = async({query}) => {
-    const res  = await axios.get(`http://127.0.0.1:8000/r/v?board_id=${query.board_id}&pages=${query.pages}`);
-    const data = res.data
 
+// export const getServerSideProps = async(context) => {
+//     const ssrUrl = `http://127.0.0.1:8000/r/v?board_id=${context.query.board_id}&pages=${context.query.pages}`
+//     const cookie = context.req ? context.req.cookie : '???';
+//     const res = await axios.get(ssrUrl, {
+//         headers : {
+//             "access_token_cookie" : cookie,
+//             "refresh_token_cookie" : cookie
+//         },
+//         mode : "cors",
+//         withCredentials : true
+//     });
+//     const data = res.data;
+//
+//     return {
+//         props : {data}
+//     }
+// }
+export const getServerSideProps = async(context) => {
+    const {req, query} = context;
+    const ssrUrl = `http://127.0.0.1:8000/r/v?board_id=${query.board_id}&pages=${query.pages}`;
+    const res = await axios.get(ssrUrl,{
+        headers : (context.req ? {
+            Cookie : context.req.headers.cookie
+        } : "Error!"),
+        mode : "cors",
+        withCredentials : true
+    });
+    const data = res.data;
     return {
         props : {data}
-    };
-};
+    }
+}
 const RoomView = ({data}) => {
     // Page Info
     const router     = useRouter();
@@ -46,15 +69,17 @@ const RoomView = ({data}) => {
                     {id : sideInfo[1].id, link : sideInfo[1].link, text : sideInfo[1].text, query : sideInfo[1].query},
                 ]} title = {pageInfo.sideTitle}/>
             </div>
-            {goUpdate ?
+            {goUpdate === false?
             <GetRoomDetailView pageInfo    = {pageInfo}
                                router      = {router}
                                ssrData     = {data}
-                               updateState = {updateState}/> :
+                               updateState = {updateState}/>
+                :
             <PutRoomDetailView pageInfo    = {pageInfo}
                                router      = {router}
                                ssrData     = {data}
-                               updateState = {updateState}/>}
+                               updateState = {updateState}/>
+            }
         </div>
     )
 };

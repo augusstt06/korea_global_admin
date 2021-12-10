@@ -8,8 +8,11 @@ export const LoginState = atom({
     default : false
 });
 
-export const LoginCookieValue = atom({
-    key: "LoginCookieValue",
-    default : []
+export const AccessCookieValue = atom({
+    key : "AccessCookieValue",
+    default : ''
 });
-
+export const RefreshCookieValue = atom({
+    key : "RefreshCookieValue",
+    default : ''
+})

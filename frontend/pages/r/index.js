@@ -4,33 +4,43 @@ import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
 import {useRecoilState} from "recoil";
-import {LoginCookieValue, LoginState} from "../../recoilState/state";
+import {AccessCookieValue,RefreshCookieValue, LoginState} from "../../recoilState/state";
 import {getCookie} from "../../Cookie/HandleCookie";
 import headers from "../../next.config";
 
-// export const getServerSideProps = ({req, res}) =>{
-//
-//     return{
-//         props : {}
-//     }
-// }
+export const getServerSideProps = async(context) => {
+    const {req, query} = context;
+    const ssrUrl = `http://localhost:8000/r?pages=${query.pages}`
+    const res = await axios.get(ssrUrl, {
+        headers : (context.req ? {
+            Cookie : context.req.headers.cookie
+        } : 'Error!'),
+        mode : "cors",
+        withCredentials : true
+    });
+    const data = res.data;
+    return {
+        props : {data}
+    }
+}
 
-const Room = () => {
+const Room = ({data}) => {
     // Page Info
     const router = useRouter();
     const query  = router.query;
+    console.log(data)
 
-    const [roomAtom, setRoomAtom] = useRecoilState(LoginCookieValue);
+    const [accessAtom, setAccessAtom] = useRecoilState(AccessCookieValue);
+    const [refreshAtom, setRefreshAtom] = useRecoilState(RefreshCookieValue);
     const [LoginAtom, setLoginAtom] = useRecoilState(LoginState);
-
     const [sideInfo] = useState([
         {id : 1, link : '/r', text : '자유', query : 'free'},
         {id : 2, link : '/r', text : '장터', query : 'market'},
     ]);
     const [pageInfo] = useState({
-        pageTitle   : (query.pages === 'free'   ? '자유' :
-                       query.pages === 'market' ? '장터' :
-                       query.pages === undefined ? "자유" : null),
+        pageTitle   : (data.pages === 'free'   ? '자유' :
+                       data.pages === 'market' ? '장터' :
+                       data.pages === undefined ? "자유" : null),
         sideTitle   : '학생공간',
         theadNum    : 'No',
         theadTitle  : '제목',
@@ -49,46 +59,30 @@ const Room = () => {
     const [room,     setRoom] = useState([]);
     const [search, setSearch] = useState([]);
 
+    const access = getCookie("access_token_cookie");
+    const refresh = getCookie("refresh_token_cookie");
     // const getRoomList = async () => {
-    //     try{
-    //         console.log("Now Loading...")
-    //         const res = await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
-    //             headers : {Cookies : `access_token_cookie=${getCookie("access_token_cookie")}`
-    //             },
-    //             withCredentials: true
-    //         });
-    //         // const res = await axios.get(`http://localhost:8000/r?pages=${query.pages}`,);
-    //         setRoom(res.data);
-    //         setSearch(res.data);
-    //         console.log("Finish Loading!");
-    //     } catch (err){
-    //         console.log(err)
-    //         alert('에러임')
-    //     }
-    // };
-
-    console.log(getCookie())
-
-    const getRoomList = async () => {
-        await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
-                headers : {
-                    "access_token_cookie" : getCookie("access_token_cookie"),
-                    "refresh_token_cookie" : getCookie("refresh_token_cookie")
-            },
-                // mode : 'cors',
-                withCredentials : true
-            }).then(response => {
-                setRoom(response.data);
-                setSearch(response.data);
-                console.log(response.data);
-                console.log('SUCCESS!');
-        }).catch((e) => {
-            console.log(e);
-            alert('Fail to Connect API');
-        })
-    }
+    //     await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
+    //             headers : {
+    //                 "access_token_cookie" : access,
+    //                 "refresh_token_cookie" : refresh
+    //         },
+    //             // mode : 'cors',
+    //             withCredentials : true
+    //         }).then(response => {
+    //             setRoom(response.data);
+    //             setSearch(response.data);
+    //             console.log(response);
+    //             console.log('SUCCESS!');
+    //     }).catch((e) => {
+    //         console.log(e);
+    //         alert('Fail to Connect API');
+    //     })
+    // }
     useEffect(() => {
-        getRoomList().then(r => console.log(r));
+        setRoom(data);
+        setSearch(data);
+        // getRoomList().then(r => console.log(r));
     }, []);
 
     // Search Section

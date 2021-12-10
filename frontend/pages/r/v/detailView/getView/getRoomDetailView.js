@@ -81,7 +81,7 @@ const GetRoomDetailView = (props) => {
     return (
         <div className='content'>
             <div className='pageTitle'>
-                {props.pageData.pageTitle}
+                {props.pageInfo.pageTitle}
             </div>
             <table className='detailTable'>
             {props.ssrData.map(data => (
@@ -129,7 +129,7 @@ const GetRoomDetailView = (props) => {
             </div>
             <div className='btnContainer'>
                 <button>
-                    <Link href = {{pathname : `/r?pages=${pages}`}}>
+                    <Link href = {{pathname : `/r` , query : {pages : pages}}}>
                         <a>목록으로</a>
                     </Link>
                 </button>
