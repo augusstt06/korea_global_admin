@@ -2,15 +2,11 @@ import React, {useState} from "react";
 import axios from "axios";
 import {LoginState} from "../recoilState/state";
 import {useRecoilState} from "recoil";
-import {AccessCookieValue,RefreshCookieValue} from "../recoilState/state";
 import {setAccessCookie, setRefreshCookie, getCookie} from "../Cookie/HandleCookie";
 
 const Login = () => {
     // Basic Section
     const [loginAtom, setLoginAtom] = useRecoilState(LoginState);
-    const [accessAtom, setAccessAtom] = useRecoilState(AccessCookieValue);
-    const [refreshAtom, setRefreshAtom] = useRecoilState(RefreshCookieValue);
-
     const changeLoginState = () => {
         setLoginAtom(!loginAtom);
     };
@@ -32,17 +28,13 @@ const Login = () => {
                 "password" : logIn.password
             });
             // 비동기 요청으로 변수에 Response 담은 후 Response Token을 쿠키에 넣어서 저장
-            console.log(res.data)
             setAccessCookie(res.data[0]);
-            setAccessAtom(res.data[0])
             setRefreshCookie(res.data[1]);
-            setRefreshAtom(res.data[1]);
             changeLoginState();
         } catch (err){
             console.log(err.response);
         }
     };
-    console.log(getCookie("access_token_cookie"))
     return (
         <>
         {getCookie("access_token_cookie") === undefined ?

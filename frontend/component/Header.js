@@ -43,7 +43,6 @@ const Header = () => {
                     {pageUrl[0].map(data => (
                         <div key={data.url}>
                             <Link href = {{pathname : data.url , query : {pages : data.query}}}>
-                            {/*<Link href = {{pathname : data.url}}>*/}
                                 <a>{data.name}</a>
                             </Link>
                         </div>
@@ -53,7 +52,6 @@ const Header = () => {
                     {pageUrl[0].map(data => (
                         <div key={data.name}>
                             <Link href={{pathname : data.url, query : {pages : data.query}}}>
-                            {/*<Link href={{pathname : data.url}}>*/}
                                 <a>{data.name}</a>
                             </Link>
                         </div>

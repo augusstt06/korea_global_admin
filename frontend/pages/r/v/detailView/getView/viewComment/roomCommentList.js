@@ -9,7 +9,7 @@ const RoomCommentList = (props) => {
                     <RoomComment ssrData             = {props.ssrData}
                                  username            = {data2.username}
                                  text                = {data2.text}
-                                 c_id                = {data2.boardId}
+                                 c_id                = {data2.id}
                                  replyComment        = {props.replyComment}
                                  clickReplyingSubmit = {props.clickReplyingSubmit}
                                  typingComment       = {props.typingComment}/>

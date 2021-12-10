@@ -10,9 +10,6 @@ export const setRefreshCookie = (value) => {
     return cookies.set("refresh_token_cookie", value, {path:'/'});
 }
 
-// export const setCookie = (value) => {
-//     return cookies.set("cookie", value, {path:'/'});
-// }
 export const getCookie = (name) => {
     return cookies.get(name)
 };

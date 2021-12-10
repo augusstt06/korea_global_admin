@@ -4,30 +4,9 @@ import axios from "axios";
 import Side from "../../../component/Side";
 import GetRoomDetailView from "./detailView/getView/getRoomDetailView";
 import PutRoomDetailView from "./detailView/putView/PutRoomDetailView";
-import {AccessCookieValue,RefreshCookieValue} from "../../../recoilState/state";
-import {useRecoilState} from "recoil";
-import {getCookie} from "../../../Cookie/HandleCookie";
 
-
-// export const getServerSideProps = async(context) => {
-//     const ssrUrl = `http://127.0.0.1:8000/r/v?board_id=${context.query.board_id}&pages=${context.query.pages}`
-//     const cookie = context.req ? context.req.cookie : '???';
-//     const res = await axios.get(ssrUrl, {
-//         headers : {
-//             "access_token_cookie" : cookie,
-//             "refresh_token_cookie" : cookie
-//         },
-//         mode : "cors",
-//         withCredentials : true
-//     });
-//     const data = res.data;
-//
-//     return {
-//         props : {data}
-//     }
-// }
 export const getServerSideProps = async(context) => {
-    const {req, query} = context;
+    const {query} = context;
     const ssrUrl = `http://127.0.0.1:8000/r/v?board_id=${query.board_id}&pages=${query.pages}`;
     const res = await axios.get(ssrUrl,{
         headers : (context.req ? {
@@ -36,12 +15,20 @@ export const getServerSideProps = async(context) => {
         mode : "cors",
         withCredentials : true
     });
+    const getUser = await axios.get('http://localhost:8000/protected',{
+        headers : (context.req ? {
+            Cookie : context.req.headers.cookie
+        } : "Error!"),
+        mode : "cors",
+        withCredentials : true
+    });
+    const user = getUser.data
     const data = res.data;
     return {
-        props : {data}
+        props : {data, user}
     }
 }
-const RoomView = ({data}) => {
+const RoomView = ({data, user}) => {
     // Page Info
     const router     = useRouter();
     const [sideInfo] = useState([
@@ -73,6 +60,7 @@ const RoomView = ({data}) => {
             <GetRoomDetailView pageInfo    = {pageInfo}
                                router      = {router}
                                ssrData     = {data}
+                               user = {user}
                                updateState = {updateState}/>
                 :
             <PutRoomDetailView pageInfo    = {pageInfo}

@@ -3,13 +3,9 @@ import {useRouter} from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
-import {useRecoilState} from "recoil";
-import {AccessCookieValue,RefreshCookieValue, LoginState} from "../../recoilState/state";
-import {getCookie} from "../../Cookie/HandleCookie";
-import headers from "../../next.config";
 
 export const getServerSideProps = async(context) => {
-    const {req, query} = context;
+    const {query} = context;
     const ssrUrl = `http://localhost:8000/r?pages=${query.pages}`
     const res = await axios.get(ssrUrl, {
         headers : (context.req ? {
@@ -28,11 +24,7 @@ const Room = ({data}) => {
     // Page Info
     const router = useRouter();
     const query  = router.query;
-    console.log(data)
 
-    const [accessAtom, setAccessAtom] = useRecoilState(AccessCookieValue);
-    const [refreshAtom, setRefreshAtom] = useRecoilState(RefreshCookieValue);
-    const [LoginAtom, setLoginAtom] = useRecoilState(LoginState);
     const [sideInfo] = useState([
         {id : 1, link : '/r', text : '자유', query : 'free'},
         {id : 2, link : '/r', text : '장터', query : 'market'},
@@ -55,34 +47,14 @@ const Room = ({data}) => {
         all     : '제목+내용'
     });
 
-    // API Request Section ( GET )
+    // Save SSR Data Section in Client
+
     const [room,     setRoom] = useState([]);
     const [search, setSearch] = useState([]);
 
-    const access = getCookie("access_token_cookie");
-    const refresh = getCookie("refresh_token_cookie");
-    // const getRoomList = async () => {
-    //     await axios.get(`http://localhost:8000/r?pages=${query.pages}`,{
-    //             headers : {
-    //                 "access_token_cookie" : access,
-    //                 "refresh_token_cookie" : refresh
-    //         },
-    //             // mode : 'cors',
-    //             withCredentials : true
-    //         }).then(response => {
-    //             setRoom(response.data);
-    //             setSearch(response.data);
-    //             console.log(response);
-    //             console.log('SUCCESS!');
-    //     }).catch((e) => {
-    //         console.log(e);
-    //         alert('Fail to Connect API');
-    //     })
-    // }
     useEffect(() => {
         setRoom(data);
         setSearch(data);
-        // getRoomList().then(r => console.log(r));
     }, []);
 
     // Search Section
