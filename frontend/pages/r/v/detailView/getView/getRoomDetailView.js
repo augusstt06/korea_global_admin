@@ -71,16 +71,15 @@ const GetRoomDetailView = (props) => {
             withCredentials : true
         }).then(r => {
             console.log(r),
-            alert('작성이 완료되었습니다!'),
+            alert('작성이 완료 되었습니다!'),
             window.location.reload()
         });
-        console.log('Replying Complete!');
     };
     const clickReplyingSubmit = (c_id) => {
         if(removeSpace(comment.reply)){
             replyComment(c_id);
         } else {
-            alert('내용을 입력해주세요')
+            alert('내용을 입력 해주세요')
         }
     };
 

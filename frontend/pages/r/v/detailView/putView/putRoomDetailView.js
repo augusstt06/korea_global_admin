@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {getCookie} from "../../../../../Cookie/HandleCookie";
 
 const PutRoomDetailView = (props) => {
     // Basic Section
@@ -22,19 +23,29 @@ const PutRoomDetailView = (props) => {
     // API Request Section ( PUT )
     const putApi = () => {
         console.log('Now Update...');
-        axios.put(`http://127.0.0.1:8000/r/v?board_id${board_id}`,{
+        axios.put(`http://localhost:8000/r/v?board_id=${board_id}`,{
             "title" : updateTitle.trim(),
             "text"  : updateText.trim()
-        });
-        console.log('Update Complete!');
+        },{
+            header : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+        }).then(r => {
+            console.log(r);
+            alert('수정이 완료 되었습니다!');
+            window.location.reload();
+        }).catch(e => {
+            console.log(e)
+        })
     };
     const clickUpdate = () => {
         if (removeSpace(updateTitle) !== 0 && removeSpace(updateText) !== 0){
             putApi();
-            alert('수정이 완료되었습니다!');
-            window.location.reload(true);
         } else {
-            alert('제목 또는 내용을 입력해주세요');
+            alert('제목 또는 내용을 입력 해주세요');
         }
     };
     return (

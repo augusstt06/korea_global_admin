@@ -4,23 +4,45 @@ import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
 
+// export const getServerSideProps = async(context) => {
+//     const {query} = context;
+//     const ssrUrl = `http://localhost:8000/r?pages=${query.pages}`
+//     const res = await axios.get(ssrUrl, {
+//         headers : (context.req.headers.cookie !== undefined ? {
+//             Cookie : context.req.headers.cookie
+//         } : '?'),
+//         mode : "cors",
+//         withCredentials : true
+//     });
+//     const data = res.data;
+//     return {
+//         props : {data}
+//     }
+// }
 export const getServerSideProps = async(context) => {
+    let data;
     const {query} = context;
     const ssrUrl = `http://localhost:8000/r?pages=${query.pages}`
-    const res = await axios.get(ssrUrl, {
-        headers : (context.req ? {
-            Cookie : context.req.headers.cookie
-        } : 'Error!'),
-        mode : "cors",
-        withCredentials : true
-    });
-    const data = res.data;
+    if(context.req.headers.cookie !== undefined){
+        const res = await axios.get(ssrUrl, {
+            headers : (context.req.headers.cookie !== undefined ? {
+                Cookie : context.req.headers.cookie
+            } : '?'),
+            mode : "cors",
+            withCredentials : true
+        });
+        data = res.data;
+
+    } else{
+        data = []
+    }
     return {
         props : {data}
     }
 }
 
 const Room = ({data}) => {
+    console.log(data.length)
     // Page Info
     const router = useRouter();
     const query  = router.query;
@@ -122,6 +144,7 @@ const Room = ({data}) => {
         return numList;
     };
     return (
+
         <div className='main'>
             <div className='component'>
                 <Side items = {[
@@ -129,6 +152,7 @@ const Room = ({data}) => {
                     {id : sideInfo[1].id, link : sideInfo[1].link, text : sideInfo[1].text, query : sideInfo[1].query},
                 ]} title = {pageInfo.sideTitle}/>
             </div>
+            { data.length !== 0 ?
             <div className='content'>
                 <div className='contentTop'>
                     <div className='pageTitle'>
@@ -197,6 +221,7 @@ const Room = ({data}) => {
                     </div>
                 </div>
             </div>
+                : <h2>로그인이 필요합니다</h2>}
         </div>
     )
 };

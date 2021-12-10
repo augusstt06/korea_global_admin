@@ -13,3 +13,6 @@ export const setRefreshCookie = (value) => {
 export const getCookie = (name) => {
     return cookies.get(name)
 };
+export const removeCookie = (name) => {
+    return cookies.remove(name)
+};
