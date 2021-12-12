@@ -39,11 +39,11 @@ const GetRoomDetailView = (props) => {
             mode : "cors",
             withCredentials : true
         }).then(r => {
-            console.log(r)
-            alert('작성이 완료되었습니다!');
-            window.location.reload()
+            console.log(r);
+            alert('작성 완료!');
+            window.location.reload();
         }).catch((e) => {
-            console.log(e)
+            console.log(e);
         })
     };
     const clickCommentSubmit = () => {
@@ -56,8 +56,8 @@ const GetRoomDetailView = (props) => {
 
     // POST (Reply)
     const replyComment = (c_id) => {
-        axios.post(`http://localhost:8000/r/v?board_id=${board_id}&pages=${pages}&c_id=${c_id}`, {
-            "text": comment.reply.trim()
+        axios.post(`http://localhost:8000/r/v?board_id=${board_id}&c_id=${c_id}&pages=${pages}`, {
+            "text": comment.reply
         },{
             headers : {
                 "access_token_cookie" : getCookie("access_token_cookie"),
@@ -66,10 +66,13 @@ const GetRoomDetailView = (props) => {
             mode : "cors",
             withCredentials : true
         }).then(r => {
-            console.log(r),
-            alert('작성이 완료 되었습니다!'),
-            window.location.reload()
-        });
+            console.log(r);
+            alert('작성 완료!');
+            window.location.reload();
+        }).catch(e => {
+            console.log(e);
+            alert("에러")
+        })
     };
     const clickReplyingSubmit = (c_id) => {
         if(removeSpace(comment.reply)){
@@ -89,12 +92,13 @@ const GetRoomDetailView = (props) => {
             },
             mode : "cors",
             withCredentials : true
-        })
-            .then(r => {
+        }).then(r => {
                 console.log(r),
-                alert('삭제가 완료되었습니다!'),
+                alert('삭제 완료!'),
                 props.router.push(`/r?pages=${pages}`)
-            });
+        }).catch(e => {
+            console.log(e);
+        })
     };
     const clickDelete = () => {
         deleteApi();
@@ -106,7 +110,7 @@ const GetRoomDetailView = (props) => {
             </div>
             <table className='detailTable'>
             {props.ssrData.map(data => (
-                <tbody key={data.id}>
+                <tbody key={data.text}>
                     <tr>
                         <td>{props.pageInfo.theadAuthor}</td>
                         <td>{data.username}</td>

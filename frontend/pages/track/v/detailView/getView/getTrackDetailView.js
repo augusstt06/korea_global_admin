@@ -3,6 +3,7 @@ import Link from "next/link";
 import axios from "axios";
 import { FiSend } from 'react-icons/fi';
 import TrackCommentList from "./viewComment/trackCommentList";
+import {getCookie} from "../../../../../Cookie/HandleCookie";
 
 const GetTrackDetailView = (props) => {
     // Basic Section
@@ -27,55 +28,83 @@ const GetTrackDetailView = (props) => {
     // // API Request Section
     //  POST (Comment_single)
     const postComment = () => {
-        console.log('Now Posting Comment_single...');
-        axios.post(`http://127.0.0.1:8000/track/v?board_id=${board_id}&pages=${pages}`, {
+        axios.post(`http://localhost:8000/track/v?board_id=${board_id}&pages=${pages}`, {
             "text": comment.comment
-        }).then(r => console.log(r));
-        console.log('Posting Comment_single Complete!');
+        },{
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+        }).then(r => {
+            console.log(r);
+            alert("작성 완료!");
+            window.location.reload();
+        }).catch(e => {
+            console.log(e);
+        })
     };
     const clickCommentSubmit = () => {
         if(removeSpace(comment.comment)){
             postComment();
-            alert('작성이 완료되었습니다!');
-            window.location.reload(true);
         } else {
             alert('내용을 입력해 주세요');
         }
     };
     // POST (Reply)
     const replyComment = (c_id) => {
-        console.log('Now Relying...');
-        axios.post(`http://127.0.0.1:8000/track/v?board_id=${board_id}&pages=${pages}&c_id=${c_id}`, {
+        axios.post(`http://localhost:3000/track/v?board_id=${board_id}&c_id=${c_id}&pages=${pages}`, {
             "text": comment.reply.trim()
-        }).then(r => console.log(r));
-        console.log('Replying Complete!');
+        }, {
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+        }).then(r => {
+            console.log(r);
+            alert("작성 완료!");
+            window.location.reload();
+        }).catch(e => {
+            console.log(e);
+        })
     };
     const clickReplyingSubmit = (c_id) => {
         if(removeSpace(comment.reply)){
-            history.pushState({c_id : c_id}, null, `${props.router.asPath}`+`&c_id=${c_id}`);
+            // history.pushState({c_id : c_id}, null, `${props.router.asPath}`+`&c_id=${c_id}`);
             replyComment(c_id);
-            alert('작성이 완료되었습니다!');
-            window.location.reload();
         } else {
             alert('내용을 입력해주세요')
         }
     };
     // DELETE
     const deleteApi = () => {
-        console.log('Now Delete...');
-        axios.delete(`http://127.0.0.1:8000/track/v?board_id=${board_id}&pages=${pages}`)
-            .then(r => console.log(r));
-        console.log('Delete Complete!');
+        axios.delete(`http://localhost:8000/track/v?board_id=${board_id}&pages=${pages}`, {
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+        }).then(r => {
+            console.log(r);
+            alert("삭제 완료!");
+            props.router.push(`/track?pages=${pages}`)
+        }).catch(e => {
+            console.log(e);
+        })
+
     };
     const clickDelete = () => {
         deleteApi();
-        alert('삭제가 완료되었습니다!');
-        props.router.push(`/track?pages=${pages}`);
     };
+    console.log(props)
     return (
         <div className='content'>
             <div className='pageTitle'>
-                {props.pageData.pageTitle}
+                {props.pageInfo.pageTitle}
             </div>
             <table className='detailTable'>
             {props.ssrData.map(data => (
@@ -123,18 +152,20 @@ const GetTrackDetailView = (props) => {
             </div>
             <div className='btnContainer'>
                 <button>
-                    <Link href = {{pathname : `/track?pages=${pages}`}}>
+                    <Link href = {{pathname : `/track`, query : {pages : pages}}}>
                         <a>목록으로</a>
                     </Link>
                 </button>
-                {/* 로그인 상태에 따라 수정/삭제 기능 활성화*/}
-                <button onClick={() => {props.updateState.setGoUpdate(!props.updateState.goUpdate)}}>
-                    <a>수정</a>
-                </button>
-                <button onClick={() => {clickDelete()}}>
-                    <a>삭제하기</a>
-                </button>
-                {/*    */}
+                {props.user === props.ssrData[0]["username"] ?
+                <>
+                    <button onClick={() => {props.updateState.setGoUpdate(!props.updateState.goUpdate)}}>
+                        <a>수정</a>
+                    </button>
+                    <button onClick={() => {clickDelete()}}>
+                        <a>삭제하기</a>
+                    </button>
+                </> : <></>
+                }
             </div>
         </div>
     )

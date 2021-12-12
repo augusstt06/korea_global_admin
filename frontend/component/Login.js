@@ -8,6 +8,7 @@ import {setAccessCookie, setRefreshCookie, getCookie, removeCookie} from "../Coo
 const Login = () => {
     // Basic Section
     const router = useRouter();
+
     const [loginAtom, setLoginAtom] = useRecoilState(LoginState);
     const changeLoginState = () => {
         setLoginAtom(!loginAtom);
@@ -28,6 +29,7 @@ const Login = () => {
             "username" : logIn.username,
             "password" : logIn.password
         }).then(r => {
+            console.log(r)
             setAccessCookie(r.data[0]);
             setRefreshCookie(r.data[1]);
             changeLoginState();
@@ -47,14 +49,17 @@ const Login = () => {
         }).then(r => {
             removeCookie("access_token_cookie");
             removeCookie("refresh_token_cookie");
-            if(router.pathname === '/r/v'){
-                history.go(-1)
-            } else{
-             window.location.reload()
+            switch(router.pathname){
+                case '/r/v' :
+                    router.push({pathname: '/r', query: { pages : "free" }});
+                case '/track/v' :
+                    router.push({pathname: '/track', query: { pages : "accounting" }});
+                default :
+                    window.location.reload()
             }
         }).catch(e => {
             console.log(e)
-        })
+        });
     };
 
     return (
@@ -88,5 +93,5 @@ const Login = () => {
         </>
     )
 };
-export default Login
+export default Login;
 

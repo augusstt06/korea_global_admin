@@ -6,28 +6,35 @@ import GetRoomDetailView from "./detailView/getView/getRoomDetailView";
 import PutRoomDetailView from "./detailView/putView/PutRoomDetailView";
 
 export const getServerSideProps = async(context) => {
+    let data;
+    let user;
     const {query} = context;
     const ssrUrl = `http://127.0.0.1:8000/r/v?board_id=${query.board_id}&pages=${query.pages}`;
-    const res = await axios.get(ssrUrl,{
-        headers : (context.req ? {
-            Cookie : context.req.headers.cookie
-        } : "Error!"),
-        mode : "cors",
-        withCredentials : true
-    });
-    const getUser = await axios.get('http://localhost:8000/protected',{
-        headers : (context.req ? {
-            Cookie : context.req.headers.cookie
-        } : "Error!"),
-        mode : "cors",
-        withCredentials : true
-    });
-    const user = getUser.data
-    const data = res.data;
-    return {
-        props : {data, user}
+    if(context.req.headers.cookie !== undefined){
+        const res = await axios.get(ssrUrl, {
+            headers : {
+                Cookie : context.req.headers.cookie
+            },
+            mode : "cors",
+            withCredentials : true
+        });
+        const getUser = await axios.get('http://localhost:8000/protected', {
+            headers : {
+                Cookie : context.req.headers.cookie
+            },
+            mode : "cors",
+            withCredentials : true
+        });
+        user = getUser.data
+        data = res.data;
+    } else {
+        data = null;
+        user = null;
     }
-};
+    return {
+        props : {data,user}
+    }
+}
 
 const RoomView = ({data, user}) => {
     // Page Info
@@ -57,17 +64,19 @@ const RoomView = ({data, user}) => {
                     {id : sideInfo[1].id, link : sideInfo[1].link, text : sideInfo[1].text, query : sideInfo[1].query},
                 ]} title = {pageInfo.sideTitle}/>
             </div>
-            {goUpdate === false?
-            <GetRoomDetailView pageInfo    = {pageInfo}
-                               router      = {router}
-                               ssrData     = {data}
-                               user = {user}
-                               updateState = {updateState}/>
-                :
-            <PutRoomDetailView pageInfo    = {pageInfo}
-                               router      = {router}
-                               ssrData     = {data}
-                               updateState = {updateState}/>
+            { data || user !== null ?
+                goUpdate === false ?
+                <GetRoomDetailView pageInfo    = {pageInfo}
+                           router      = {router}
+                           ssrData     = {data}
+                           user        = {user}
+                           updateState = {updateState}/>
+                    :
+                <PutRoomDetailView pageInfo    = {pageInfo}
+                                   router      = {router}
+                                   ssrData     = {data}
+                                   updateState = {updateState}/>
+                : <h2>로그인이 필요합니다</h2>
             }
         </div>
     )

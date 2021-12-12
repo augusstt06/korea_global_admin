@@ -4,7 +4,28 @@ import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
 
-const Track = () => {
+export const getServerSideProps = async(context) => {
+    let data;
+    const {query} = context;
+    const ssrUrl = `http://localhost:8000/track?pages=${query.pages}`
+    if(context.req.headers.cookie !== undefined){
+        const res = await axios.get(ssrUrl, {
+            headers : {
+                Cookie : context.req.headers.cookie
+            },
+            mode : "cors",
+            withCredentials : true
+        });
+        data = res.data;
+    } else {
+        data = null
+    }
+    return {
+        props : {data}
+    }
+}
+
+const Track = ({data}) => {
     // Page Info
     const router = useRouter();
     const query  = router.query;
@@ -16,10 +37,6 @@ const Track = () => {
         {id : 2, link : '/track', text : '회계/세무',   query : 'accounting'},
     ]);
     const [pageInfo] = useState({
-        pageTitle   : (router.query.pages === 'startup'       ? '창업' :
-                       router.query.pages === 'marketing'     ? '마케팅':
-                       router.query.pages === 'scm'           ? 'SCM' :
-                       router.query.pages === 'accounting'    ? '회계/세무' : null),
         sideTitle   : '트랙',
         theadNum    : 'No',
         theadTitle  : '제목',
@@ -38,17 +55,10 @@ const Track = () => {
     const [track,   setTrack] = useState([]);
     const [search, setSearch] = useState([]);
 
-    const getTrackList = async() => {
-        console.log('Now Loading...');
-        const res = await axios.get(`http://127.0.0.1:8000/track?pages=${query.pages}`);
-        setTrack(res.data);
-        setSearch(res.data);
-        console.log('Finish Loading!')
-    };
     useEffect(() => {
-        getTrackList()
-            .then(r => console.log(r));
-    }, []);
+        setTrack(data);
+        setSearch(data);
+    }, [query.pages]);
 
     // Search Section
     const [keyword,           setKeyword] = useState('');
@@ -114,7 +124,6 @@ const Track = () => {
         }
         return numList;
     };
-
     return (
         <div className='main'>
             <div className='component'>
@@ -125,10 +134,13 @@ const Track = () => {
                     {id : sideInfo[3].id, link : sideInfo[3].link, text : sideInfo[3].text, query : sideInfo[3].query},
                 ]} title = {pageInfo.sideTitle}/>
             </div>
+            { data !== null ?
             <div className='content'>
                 <div className='contentTop'>
                     <div className='pageTitle'>
-                        <a>{pageInfo.pageTitle}</a>
+                        {query.pages === "startup" ? "창업" :
+                        query.pages === "marketing" ? "마케팅" :
+                        query.pages === "scm" ? "SCM" : "회계/세무"}
                     </div>
                     <div className='searchContainer'>
                         <select onChange={selectOption}>
@@ -161,7 +173,7 @@ const Track = () => {
                     </thead>
                     <tbody>
                     {division()[page].map(data => (
-                        <tr key={data.title}>
+                        <tr key={data.text}>
                             <td>{data.id}</td>
                             <td>
                                 <Link href={{pathname : `/track/v`, query : { board_id : data.id , pages : query.pages}}}>
@@ -169,7 +181,7 @@ const Track = () => {
                                 </Link>
                             </td>
                             <td>{data.author}</td>
-                            <td><a>{data.updated_at[0,9]}</a></td>
+                            <td><a>{data.updated_at}</a></td>
                         </tr>
                     ))}
                     </tbody>
@@ -193,6 +205,7 @@ const Track = () => {
                     </div>
                 </div>
             </div>
+                : <h2>로그인이 필요합니다</h2> }
         </div>
     )
 };

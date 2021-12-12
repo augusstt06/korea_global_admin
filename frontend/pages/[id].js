@@ -1,18 +1,39 @@
 import React, {useState} from "react";
 import {useRouter} from "next/router";
+import axios from "axios";
 import Link from "next/link";
-import Side from "../../component/Side";
+import Side from "../component/Side";
 import { BsArrowReturnLeft} from "react-icons/bs";
 
-const Detail_main = () => {
-    // 함수는 Depth 3 넘지 않게 기능 별로 최대한 나눠서 작성하기
+// 나중에 메인 부분도 쿠키 요청하면 이 부분 바꾸기
+// 나중에 백엔드 코드 수정하면 이 부분도 바꾸기
+export const getServerSideProps = async(context) => {
+    let data;
+    const {query} = context;
+    const ssrUrl = `http://localhost:8000/${query.id}`
+    await axios.get(ssrUrl)
+        .then(r => {
+            if(r.data === undefined){
+                data = null
+            }else {
+                data = r.data
+            }
+        })
+        .catch(e => {
+            console.log(e)
+        })
 
-    // 필요 기능 : Get API Connect => Response Data Mapping => Rendering
-    //           Comment_single....
+    return {
+        props : {data}
+    }
+}
 
+const Detail_main = ({data}) => {
+    console.log(data)
     // Basic Section
     const router = useRouter();
     const query = router.query;
+
     const [option] = useState({
         pageTitle : '작성 글 상세',
         sideTitle : '아직 미정',

@@ -7,6 +7,7 @@ export const RoomComment = (props) => {
     const clickReply = () => {
         setReplyBtn(!replyBtn);
     };
+    console.log(props.c_id);
     return (
         <div className='commentList'>
             <div className='commentBox'>

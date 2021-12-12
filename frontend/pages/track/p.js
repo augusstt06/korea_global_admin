@@ -3,6 +3,7 @@ import {useRouter} from 'next/router';
 import axios from "axios";
 import Link from 'next/link';
 import Side from "../../component/Side";
+import {getCookie} from "../../Cookie/HandleCookie";
 
 const TrackPosting = () => {
     // Basic Section
@@ -10,7 +11,7 @@ const TrackPosting = () => {
     const query  = router.query;
     // 나중에 로그인 정보로 바꾸기
     const virtualName = 'mingyu'
-    console.log(query)
+
     const [pageInfo] = useState({
         pageTitle   : '글 작성',
         sideTitle   : '학생공간',
@@ -41,21 +42,29 @@ const TrackPosting = () => {
     };
 
     // API Request Section ( POST )
-    const postApi = () => {
-        console.log('Now Posting...');
-        axios.post(`http://127.0.0.1:8000/track/p?author=${virtualName}&category_id=${query.pages}`, {
-            "title": title.trim(),
+    const postApi = async() => {
+        await axios.post(`http://localhost:8000/track/p?pages=${query.pages}`,{
+            "title" : title.trim(),
             "text" : content.trim()
-        }).then(r => console.log(r));
-         console.log('Posting Complete!');
+        }, {
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+        }).then(r => {
+            console.log(r);
+            alert("작성 완료!");
+            router.push(`/track?pages=${query.pages}`)
+        }).catch(e => {
+            console.log(e);
+        })
     };
 
     const clickPost = () => {
         if(removeSpace(title) !== 0 && removeSpace(content) !== 0) {
-            postApi();
-            alert('작성이 완료되었습니다!');
-            router.push(`/track?pages=${query.pages}`)
-                .then(r => console.log(r));
+            postApi().then(r => r);
         } else {
             alert('제목 또는 내용을 입력해주세요.');
         }

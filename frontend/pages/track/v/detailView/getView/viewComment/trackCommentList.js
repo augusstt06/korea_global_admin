@@ -2,6 +2,7 @@ import React from "react";
 import {TrackComment, TrackReply} from "./trackComments";
 
 const TrackCommentList = (props) => {
+    console.log("리스트",props)
     return (
         <div className='commentList'>
             {props.ssrData.map(data => data.boardsComments.map(data2 => (
@@ -13,12 +14,10 @@ const TrackCommentList = (props) => {
                                   replyComment        = {props.replyComment}
                                   clickReplyingSubmit = {props.clickReplyingSubmit}
                                   typingComment       = {props.typingComment}/>
-                    <TrackReply ssr Data            = {props.ssrData}
-                                replyComment        = {props.replyComment}
+                    <TrackReply ssrData            = {props.ssrData}
                                 clickReplyingSubmit = {props.clickReplyingSubmit}
                                 typingComment       = {props.typingComment}
-                                commentsReplies     = {data2.commentsReplies}
-                                commentId           = {data2.boardId}/>
+                                commentsReplies     = {data2.commentsReplies}/>
 
                 </div>
             )))}

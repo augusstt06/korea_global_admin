@@ -48,10 +48,12 @@ const RoomPosting = () => {
             headers : {
                 "access_token_cookie" : getCookie("access_token_cookie"),
                 "refresh_token_cookie" : getCookie("refresh_token_cookie")
-            }, mode : "cors", withCredentials : true
+            },
+            mode : "cors",
+            withCredentials : true
         }).then(r => {
             console.log(r)
-            alert('작성이 완료되었습니다!');
+            alert('작성 완료!');
             router.push(`/r?pages=${query.pages}`);
         }).catch((e) => {
             console.log(e)

@@ -4,7 +4,7 @@ import Side from "../component/Side";
 import axios from "axios";
 
 export const getServerSideProps = async() => {
-    const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    const res = await axios.get('http://127.0.0.1:8000/');
     const data = res.data
     return {
         props : {data}
@@ -145,7 +145,7 @@ const Main = ({data}) => {
                         <tr key={data.id}>
                             <td>{data.id}</td>
                             <td>
-                                <Link href={{pathname : `/`}}>
+                                <Link href={{pathname : `/${data.id}`}}>
                                     {data.title}
                                 </Link>
                             </td>

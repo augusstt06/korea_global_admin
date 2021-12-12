@@ -2,7 +2,6 @@ import React from "react";
 
 const DmBox = (props) => {
     // props = deDetail (채팅 상세임)
-
     return (
         <>
         {props.dmDetail.length !== 0 ?

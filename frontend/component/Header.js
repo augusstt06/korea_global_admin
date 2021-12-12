@@ -11,14 +11,13 @@ const Header = () => {
     const pageUrl = useState([
         {name : '학생공간', url : '/r', query : 'free'},
         {name : '트랙', url : '/track', query :'accounting'},
-        {name : '쪽지함', url : '/dm'},
-        {name : '고려대학교 글로벌 경영', url : '/'}
+        {name : '쪽지함', url : '/dm'}
     ]);
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
-                <Link href = {pageUrl[0][3].url}>
-                    <a>{pageUrl[0][3].name}</a>
+                <Link href = '/'>
+                    <a>고려대학교 글로벌 경영</a>
                 </Link>
             </div>
             {click ?

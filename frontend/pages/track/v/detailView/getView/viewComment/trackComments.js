@@ -7,6 +7,7 @@ export const TrackComment = (props) => {
     const clickReply = () => {
         setReplyBtn(!replyBtn);
     };
+    console.log(props)
     return (
         <div className='commentList'>
             <div className='commentBox'>
@@ -35,12 +36,12 @@ export const TrackComment = (props) => {
     )
 };
 export const TrackReply = (props) => {
+    console.log(props)
     return (
         <div className='commentReply'>
             {props.commentsReplies.map(data => (
                 <div key={data.boardId}>
                     <TrackReplyComment ssrData  = {props.ssrData}
-                                       comment  = {props.comment}
                                        username = {data.username}
                                        text     = {data.text}/>
                 </div>
@@ -49,6 +50,7 @@ export const TrackReply = (props) => {
     )
 };
 export const TrackReplyComment = (props) => {
+    console.log(props)
     return (
         <div className='commentList'>
             <div className='commentBox'>
