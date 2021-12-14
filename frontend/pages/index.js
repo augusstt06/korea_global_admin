@@ -2,15 +2,9 @@ import React,{useState, useEffect} from 'react';
 import Link from 'next/link';
 import Side from "../component/Side";
 import axios from "axios";
+import {getCookie} from "../Cookie/HandleCookie";
 
-export const getServerSideProps = async() => {
-    const res = await axios.get('http://127.0.0.1:8000/');
-    const data = res.data
-    return {
-        props : {data}
-    };
-};
-const Main = ({data}) => {
+const Main = () => {
     // Basic Section
     const [option] = useState({
         pageTitle : '공지사항',
@@ -25,15 +19,33 @@ const Main = ({data}) => {
         body : '내용',
         all : '제목+내용'
     });
-
     // API Request Section
+    const getAnnounce = async() => {
+        if (getCookie("access_token_cookie") !== undefined) {
+            await axios.get(`http://localhost:8000/`,{
+            headers : {
+                "access_token_cookie" : getCookie("access_token_cookie"),
+                "refresh_token_cookie" : getCookie("refresh_token_cookie")
+            },
+            mode : "cors",
+            withCredentials : true
+            }).then(r => {
+                setMain(r.data);
+                setSearch(r.data);
+            }).catch(e => {
+                console.log(e)
+            })
+        } else {
+            setMain(null);
+        }
+    }
+
     const [main, setMain] = useState([]);
     const [search, setSearch] = useState([]);
 
     useEffect(() => {
-        setMain(data);
-        setSearch(data);
-    }, [data]);
+        getAnnounce().then(r=>console.log(r))
+    }, []);
 
     // Search Section
 
@@ -107,6 +119,7 @@ const Main = ({data}) => {
                     {id : 1, link : `/`, text : '아직 미정'}
                 ]} title='아직 미정'/>
             </div>
+            { main !== null ?
             <div className='content'>
                 <div className='contentTop'>
                     <div className='pageTitle'>
@@ -168,6 +181,7 @@ const Main = ({data}) => {
                     </div>
                 </div>
             </div>
+                : <h2>로그인이 필요합니다</h2>}
         </div>
     )
 };

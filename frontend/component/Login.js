@@ -32,6 +32,8 @@ const Login = () => {
             console.log(r)
             setAccessCookie(r.data[0]);
             setRefreshCookie(r.data[1]);
+            localStorage.setItem("access_token_cookie", r.data[0]);
+            localStorage.setItem("refresh_token_cookie", r.data[1]);
             changeLoginState();
             window.location.reload();
         }).catch(e => {
@@ -49,13 +51,14 @@ const Login = () => {
         }).then(r => {
             removeCookie("access_token_cookie");
             removeCookie("refresh_token_cookie");
+            localStorage.clear();
             switch(router.pathname){
                 case '/r/v' :
                     router.push({pathname: '/r', query: { pages : "free" }});
                 case '/track/v' :
                     router.push({pathname: '/track', query: { pages : "accounting" }});
                 default :
-                    window.location.reload()
+                    router.reload()
             }
         }).catch(e => {
             console.log(e)

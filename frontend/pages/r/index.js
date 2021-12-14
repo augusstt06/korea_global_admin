@@ -3,29 +3,6 @@ import {useRouter} from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import Side from "../../component/Side";
-import {getCookie} from "../../Cookie/HandleCookie";
-
-// export const getServerSideProps = async(context) => {
-//     let data;
-//     const {query} = context;
-//     const ssrUrl = `http://localhost:8000/r?pages=${query.pages}`
-//     if(context.req.headers.cookie !== undefined){
-//         const res = await axios.get(ssrUrl, {
-//             headers : {
-//                 Cookie: context.req.headers.cookie
-//             },
-//             mode : "cors",
-//             withCredentials : true
-//         });
-//         data = res.data;
-//     } else {
-//         data = null;
-//     //    여기에 리프레쉬로리디렉션
-//     }
-//     return {
-//         props : {data}
-//     }
-// };
 
 export const getServerSideProps = async(context) => {
     let data;
@@ -50,7 +27,6 @@ export const getServerSideProps = async(context) => {
 }
 
 const Room = ({data}) => {
-    console.log(getCookie("access_token_cookie"));
     // Page Info
     const router = useRouter();
     const query  = router.query;
@@ -148,8 +124,8 @@ const Room = ({data}) => {
         }
         return numList;
     };
-    return (
 
+    return (
         <div className='main'>
             <div className='component'>
                 <Side items = {[
