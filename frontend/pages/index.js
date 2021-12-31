@@ -19,6 +19,7 @@ const Main = () => {
         body : '내용',
         all : '제목+내용'
     });
+
     // API Request Section
     const getAnnounce = async() => {
         if (getCookie("access_token_cookie") !== undefined) {

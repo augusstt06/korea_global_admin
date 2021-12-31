@@ -1,17 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
 import Login from "./Login";
-
+import {getCookie} from "../Cookie/HandleCookie";
 
 const Side = (props) => {
     const items = props.items;
+    const user = getCookie("user_cookie");
 
     return (
         <nav className='Side'>
             <div className='login'>
-                <div>
-                    내 정보
-                </div>
+                {getCookie("access_token_cookie") !== undefined ?
+                <div>{user}님 안녕하세요</div>
+                    :
+                <div></div>
+                }
                 <Login/>
             </div>
             <div className='sideItem'>
@@ -21,7 +24,7 @@ const Side = (props) => {
                             <a className='sideDetail'>{item.text}</a>
                         </Link>
                     </div>
-                )) : <div>왜 시팔</div>}
+                )) : <div></div>}
             </div>
         </nav>
     )

@@ -103,6 +103,36 @@ const GetRoomDetailView = (props) => {
     const clickDelete = () => {
         deleteApi();
     };
+
+    const deleteComment = (comment_id,reply_id) => {
+        if(!reply_id){
+            axios.delete(`http://localhost:8000/r/v?board_id=${board_id}&comment_id=${comment_id}&pages=${pages}`,{
+                headers : {
+                    "access_token_cookie" : getCookie("access_token_cookie"),
+                    "refresh_token_cookie" : getCookie("refresh_token_cookie")
+                },
+                mode : "cors",
+                withCredentials : true
+            }).then(r => {
+                console.log(r);
+                alert("삭제완료!");
+                props.router.reload();
+            })
+        }else {
+            axios.delete(`http://localhost:8000/r/v?board_id=${board_id}&comment_id=${comment_id}&reply_id=${reply_id}&pages=${pages}`,{
+                headers : {
+                    "access_token_cookie" : getCookie("access_token_cookie"),
+                    "refresh_token_cookie" : getCookie("refresh_token_cookie")
+                },
+                mode : "cors",
+                withCredentials : true
+            }).then(r => {
+                console.log(r);
+                alert("삭제완료!");
+                props.router.reload();
+            })
+        }
+    }
     return (
         <div className='content'>
             <div className='pageTitle'>
@@ -150,6 +180,7 @@ const GetRoomDetailView = (props) => {
                                  comment             = {comment}
                                  typingComment       = {typingComment}
                                  replyComment        = {replyComment}
+                                 deleteComment       = {deleteComment}
                                  clickReplyingSubmit = {clickReplyingSubmit}/>
             </div>
             <div className='btnContainer'>

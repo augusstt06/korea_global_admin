@@ -38,7 +38,6 @@ const DirectMsg = () => {
     const getDmDetail = async(opponent) => {
         const res = await axios.get(`http://127.0.0.1:8000/dm?opponent=${opponent}`);
         setDmDetail(res.data);
-        setOpponentUser(opponent);
     };
     // const getOpponentId = (opponent) => {
     //     // 굳이 url 바꿀 필요가 있나...

@@ -8,6 +8,9 @@ export const setAccessCookie = (value) => {
 };
 export const setRefreshCookie = (value) => {
     return cookies.set("refresh_token_cookie", value, {path:'/'});
+};
+export const setUserCookie = (value) => {
+    return cookies.set("user_cookie", value, {path:'/'});
 }
 
 export const getCookie = (name) => {
