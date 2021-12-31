@@ -4,6 +4,8 @@ import Side from "../component/Side";
 import axios from "axios";
 import {getCookie} from "../Cookie/HandleCookie";
 
+// branch에서 pull
+
 const Main = () => {
     // Basic Section
     const [option] = useState({
