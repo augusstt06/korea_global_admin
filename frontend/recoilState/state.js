@@ -3,18 +3,16 @@ import {recoilPersist} from "recoil-persist";
 
 const {persistAtom} = recoilPersist();
 
-export const DetailAuthorParam = atom({
-    key : "DetailAuthorParam",
-    default : '',
-    effects_UNSTABLE : [persistAtom]
+export const LoginState = atom({
+    key : 'LoginState',
+    default : false
 });
-export const DetailCategoryParam = atom({
-    key : "DetailCategoryParam",
-    default : '',
-    effects_UNSTABLE : [persistAtom]
+
+export const AccessCookieValue = atom({
+    key : "AccessCookieValue",
+    default : ''
 });
-export const DetailIdParam = atom({
-    key : "DetailIdParam",
-    default : 0,
-    effects_UNSTABLE : [persistAtom]
-});
+export const RefreshCookieValue = atom({
+    key : "RefreshCookieValue",
+    default : ''
+})
