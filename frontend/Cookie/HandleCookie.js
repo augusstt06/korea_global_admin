@@ -1,6 +1,8 @@
 import React from "react";
 import Cookies from "universal-cookie/lib";
 
+// 나중에 쿠키 넘어오는거 확인 다시 하기
+
 const cookies = new Cookies();
 
 export const setAccessCookie = (value) => {

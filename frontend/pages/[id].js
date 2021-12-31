@@ -29,7 +29,7 @@ export const getServerSideProps = async(context) => {
 }
 
 const Detail_main = ({data}) => {
-    console.log(data)
+
     // Basic Section
     const router = useRouter();
     const query = router.query;
