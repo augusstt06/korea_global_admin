@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import Side from "../../component/Side";
+import styles from "../../styles/pages/Home.module.scss";
 
 export const getServerSideProps = async(context) => {
     let data;
@@ -31,10 +31,6 @@ const Room = ({data}) => {
     const router = useRouter();
     const query  = router.query;
 
-    const [sideInfo] = useState([
-        {id : 1, link : '/r', text : '자유', query : 'free'},
-        {id : 2, link : '/r', text : '장터', query : 'market'},
-    ]);
     const [pageInfo] = useState({
         sideTitle   : '학생공간',
         theadNum    : 'No',
@@ -126,85 +122,150 @@ const Room = ({data}) => {
     };
 
     return (
-        <div className='main'>
-            <div className='component'>
-                <Side items = {[
-                    {id : sideInfo[0].id, link : sideInfo[0].link, text : sideInfo[0].text, query : sideInfo[0].query},
-                    {id : sideInfo[1].id, link : sideInfo[1].link, text : sideInfo[1].text, query : sideInfo[1].query},
-                ]} title = {pageInfo.sideTitle}/>
-            </div>
+        <div className={styles.main}>
             { data !== null ?
-            <div className='content'>
-                <div className='contentTop'>
-                    <div className='pageTitle'>
-                        {query.pages === "free" ? <a>자유</a> :
-                        query.pages === "market" ? <a>장터</a> : <a>자유</a>}
-                    </div>
-                    <div className='searchContainer'>
-                        <select onChange={selectOption}>
-                            <option value='none'>{optionValue.default}</option>
-                            <option value='title'
-                                    name='option'>{optionValue.title}</option>
-                            <option value='content'
-                                    name='option'>{optionValue.body}</option>
-                            <option value='all'
-                                    name='option'>{optionValue.all}</option>
-                        </select>
-                        <input placeholder='검색어를 입력하세요'
-                               type='text'
-                               name='text'
-                               onChange={keywordInput}/>
-                        <button type='submit'
-                                onClick={clickSearch}>
-                            검색
-                        </button>
-                    </div>
-                </div>
-                <table className='boardTable'>
-                    <thead>
-                        <tr className='tableHead'>
-                            <th>{pageInfo.theadNum}</th>
-                            <th>{pageInfo.theadTitle}</th>
-                            <th>{pageInfo.theadAuthor}</th>
-                            <th>{pageInfo.theadDay}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {division()[page].map(data => (
-                        <tr key={data.id}>
-                            <td>{data.id}</td>
-                            <td>
-                                <Link href={{pathname : `/r/v`, query : { board_id : data.id , pages : router.query.pages}}}>
-                                    <a>{data.title}</a>
-                                </Link>
-                            </td>
-                            <td>{data.username}</td>
-                            <td><a>{data.createdAt}</a></td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-                <div className='contentBottom'>
-                    <div className='pagination'>
-                        {pagination().map(data => (
-                            <div key={data}>
-                                <button onClick={() => {setPage(data-1)}}>
-                                    {data}
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                    <div className='btnContainer'>
-                        <button>
-                            <Link href = {{pathname : pageInfo.postingLink , query : {author : 'mingyu',pages : query.pages}}}>
-                                <a>글 작성</a>
+            <>
+            <div className={styles.pageHeader}>
+                {query.pages === "free" ? <a>자유</a> :
+                query.pages === "market" ? <a>장터</a> : <a>자유</a>}
+            </div>
+            <div className={styles.pageSearch}>
+                    <select onChange={selectOption}>
+                        <option value='none'>{optionValue.default}</option>
+                        <option value='title'
+                                name='option'>{optionValue.title}</option>
+                        <option value='content'
+                                name='option'>{optionValue.body}</option>
+                        <option value='all'
+                                name='option'>{optionValue.all}</option>
+                    </select>
+                    <input placeholder='검색어를 입력하세요'
+                           type='text'
+                           name='text'
+                           onChange={keywordInput}/>
+                    <button type='submit'
+                            onClick={clickSearch}>
+                        검색
+                    </button>
+            </div>
+            <table className={styles.pageTable}>
+                <thead>
+                    <tr className='tableHead'>
+                        <th>{pageInfo.theadNum}</th>
+                        <th>{pageInfo.theadTitle}</th>
+                        <th>{pageInfo.theadAuthor}</th>
+                        <th>{pageInfo.theadDay}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {division()[page].map(data => (
+                    <tr key={data.id}>
+                        <td>{data.id}</td>
+                        <td>
+                            <Link href={{pathname : `/r/v`, query : { board_id : data.id , pages : router.query.pages}}}>
+                                <a>{data.title}</a>
                             </Link>
-                        </button>
-                    </div>
+                        </td>
+                        <td>{data.username}</td>
+                        <td><a>{data.createdAt}</a></td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+            <div className={styles.pageBottom}>
+                <div className={styles.pagination}>
+                    {pagination().map(data => (
+                        <div key={data} className={styles.btnContainer}>
+                            <button onClick={() => {setPage(data-1)}}>
+                                {data}
+                            </button>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.pagePost}>
+                    <button>
+                        <Link href = {{pathname : pageInfo.postingLink , query : {author : 'mingyu',pages : query.pages}}}>
+                            <a>글 작성</a>
+                        </Link>
+                    </button>
                 </div>
             </div>
-                : <h2>로그인이 필요합니다</h2>}
+            </>
+            : <h2>로그인이 필요합니다</h2>}
         </div>
+        // <div className='main'>
+        //     { data !== null ?
+        //     <div className='content'>
+        //         <div className='contentTop'>
+        //             <div className='pageTitle'>
+        //                 {query.pages === "free" ? <a>자유</a> :
+        //                 query.pages === "market" ? <a>장터</a> : <a>자유</a>}
+        //             </div>
+        //             <div className='searchContainer'>
+        //                 <select onChange={selectOption}>
+        //                     <option value='none'>{optionValue.default}</option>
+        //                     <option value='title'
+        //                             name='option'>{optionValue.title}</option>
+        //                     <option value='content'
+        //                             name='option'>{optionValue.body}</option>
+        //                     <option value='all'
+        //                             name='option'>{optionValue.all}</option>
+        //                 </select>
+        //                 <input placeholder='검색어를 입력하세요'
+        //                        type='text'
+        //                        name='text'
+        //                        onChange={keywordInput}/>
+        //                 <button type='submit'
+        //                         onClick={clickSearch}>
+        //                     검색
+        //                 </button>
+        //             </div>
+        //         </div>
+        //         <table className='boardTable'>
+        //             <thead>
+        //                 <tr className='tableHead'>
+        //                     <th>{pageInfo.theadNum}</th>
+        //                     <th>{pageInfo.theadTitle}</th>
+        //                     <th>{pageInfo.theadAuthor}</th>
+        //                     <th>{pageInfo.theadDay}</th>
+        //                 </tr>
+        //             </thead>
+        //             <tbody>
+        //             {division()[page].map(data => (
+        //                 <tr key={data.id}>
+        //                     <td>{data.id}</td>
+        //                     <td>
+        //                         <Link href={{pathname : `/r/v`, query : { board_id : data.id , pages : router.query.pages}}}>
+        //                             <a>{data.title}</a>
+        //                         </Link>
+        //                     </td>
+        //                     <td>{data.username}</td>
+        //                     <td><a>{data.createdAt}</a></td>
+        //                 </tr>
+        //             ))}
+        //             </tbody>
+        //         </table>
+        //         <div className='contentBottom'>
+        //             <div className='pagination'>
+        //                 {pagination().map(data => (
+        //                     <div key={data}>
+        //                         <button onClick={() => {setPage(data-1)}}>
+        //                             {data}
+        //                         </button>
+        //                     </div>
+        //                 ))}
+        //             </div>
+        //             <div className='btnContainer'>
+        //                 <button>
+        //                     <Link href = {{pathname : pageInfo.postingLink , query : {author : 'mingyu',pages : query.pages}}}>
+        //                         <a>글 작성</a>
+        //                     </Link>
+        //                 </button>
+        //             </div>
+        //         </div>
+        //     </div>
+        //         : <h2>로그인이 필요합니다</h2>}
+        // </div>
     )
 };
 

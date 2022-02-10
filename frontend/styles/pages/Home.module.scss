@@ -1,0 +1,106 @@
+.main{
+  width: 100%;
+  margin: 100px 40px;
+  padding: 15px 30px;
+  height: 75vh;
+  .pageHeader{
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  .pageSearch{
+    text-align: center;
+    margin-bottom: 15px;
+    select{
+      margin-right: 10px;
+      padding: 5px;
+      border: 0.7px;
+      border-radius: 15px;
+      outline: none;
+    }
+    input{
+      margin-right: 10px;
+      width: 40%;
+      padding: 5px;
+      border: 0.7px;
+      border-radius: 15px;
+      outline: none;
+    }
+    button{
+      padding: 5px;
+      border: 0.7px;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+  }
+  .pageTable{
+    width: 100%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    thead{
+      text-align: center;
+      font-size: 1.2rem;
+      tr{
+        th{
+          padding: 10px;
+          border-bottom: 1px solid black;
+          border-left: none;
+          &:last-child{
+            border-right: none;
+          }
+          &:nth-child(2){
+            width: 60%;
+          }
+        }
+      }
+    }
+    tbody{
+      text-align: center;
+      tr{
+        border-bottom: 1px dashed black;
+        td{
+          padding: 10px;
+          &:nth-child(2){
+            width: 60%;
+          }
+        }
+      }
+    }
+  }
+  .pageBottom{
+
+    .pagination{
+      padding: 10px 10px;
+      text-align: center;
+      .btnContainer{
+        button{
+          border: none;
+          border-radius: 20px;
+          padding: 5px;
+          background-color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+          &:hover{
+            background-color: rgba(126, 28, 40, 0.08);
+          }
+        }
+      }
+    }
+    .pagePost{
+      //background-color: chocolate;
+      float: right;
+      button{
+          border: none;
+          padding: 5px;
+          background-color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+        &:hover{
+            background-color: rgba(126, 28, 40, 0.08);
+          border: 1.2px solid black;
+          }
+      }
+    }
+  }
+}

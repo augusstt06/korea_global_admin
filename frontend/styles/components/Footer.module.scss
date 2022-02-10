@@ -1,0 +1,34 @@
+$componentColor : rgba(126, 26, 44, 0.9);
+
+.footer{
+  background-color: $componentColor;
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  bottom: 0;
+  .footerInfo{
+    padding: 5px 5px;
+    display: grid;
+    //grid-template-columns: 2.5fr 1.5fr 1.5fr 1.5fr;
+    height: 70%;
+    margin-bottom: 5px;
+    div{
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+    }
+  }
+
+  @media (max-width: 995px) {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    height: 60px;
+    width: 100%;
+    background-color: $componentColor;
+    .footerInfo{
+      height: 50%;
+      margin-bottom: 20px;
+    }
+  }
+}

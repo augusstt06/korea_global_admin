@@ -1,0 +1,219 @@
+$componentColor : rgba(136, 26, 44);
+
+.side{
+  background-color: $componentColor;
+  width: 100px;
+  height: 100vh;
+  margin-top: 80px;
+  position: fixed;
+  border-top: 2px solid black;
+  transform: translateX(-100px);
+  transition: all ease 1s;
+  z-index: 998;
+  .login{
+    width: 100%;
+    margin: 0;
+    padding-left: 5px;
+    padding-top: 30px;
+    height: 100%;
+    h4{
+      color: #fff;
+    }
+  }
+
+  .link{
+    width: 100%;
+    margin: 0;
+    padding-left: 5px;
+    padding-top: 30px;
+    height: 100%;
+    li{
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      height: 4%;
+      width: 100%;
+      a{
+        width: 90%;
+        padding: 5px;
+        &:hover{
+          background-color: #fff;
+          color: $componentColor;
+          transition: all ease 1s;
+          cursor: pointer;
+          font-weight: bold;
+        }
+      }
+    }
+    div{
+      .sideHead{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        a{
+          padding: 6px;
+          color: #fff;
+          font-size: 1.2rem;
+        }
+        .sideItem{
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          text-decoration-line: none;
+          span{
+            width: 90%;
+            text-align: left;
+            padding: 5px;
+            &:hover{
+              background-color: #fff;
+              color: $componentColor;
+              transition: all ease 1s;
+              cursor: pointer;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  .plus{
+    position: absolute;
+    display: flex;
+    background-color: $componentColor;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    top: 27%;
+    left: 75%;
+    border: none;
+    border-radius: 50%;
+    text-align: right;
+    padding: 10px;
+    transition: transform 1.25s;
+  }
+  .plusActive{
+    position: absolute;
+    display: flex;
+    background-color: $componentColor;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    top: 27%;
+    left: 75%;
+    border: none;
+    border-radius: 50%;
+    text-align: right;
+    padding: 10px;
+    transform: rotate(-315deg);
+    transition: transform 1.25s;
+  }
+}
+
+.sideActive{
+  background-color: $componentColor;
+  width: 100px;
+  height: 100vh;
+  margin-top: 80px;
+  position: fixed;
+  border-top: 2px solid black;
+  transition: all ease 1s;
+  transform: translateX(0px);
+  z-index: 998;
+
+  .login{
+    width: 100%;
+    margin: 0;
+    padding: 10px 5px;
+    text-align: center;
+    h4{
+      color: #fff;
+    }
+  }
+
+  .link{
+    width: 100%;
+    margin: 0;
+    padding-left: 5px;
+    height: 100%;
+    li{
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      height: 4%;
+      width: 100%;
+      a{
+        width: 90%;
+        padding: 5px;
+        &:hover{
+          background-color: #fff;
+          color: $componentColor;
+          transition: all ease 1s;
+          cursor: pointer;
+          font-weight: bold;
+        }
+      }
+    }
+    div{
+      .sideHead{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        a{
+          padding: 6px;
+          color: #fff;
+          font-size: 1.2rem;
+        }
+        .sideItem{
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          span{
+            width: 90%;
+            text-align: left;
+            padding: 5px;
+            &:hover{
+              background-color: #fff;
+              color: $componentColor;
+              transition: all ease 1s;
+              cursor: pointer;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  .plus{
+    position: absolute;
+    display: flex;
+    background-color: $componentColor;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    top: 27%;
+    left: 75%;
+    border: none;
+    border-radius: 50%;
+    text-align: right;
+    padding: 10px;
+    transition: transform 1.25s;
+  }
+  .plusActive{
+    position: absolute;
+    display: flex;
+    background-color: $componentColor;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    top: 27%;
+    left: 75%;
+    border: none;
+    border-radius: 50%;
+    text-align: right;
+    padding: 10px;
+    transform: rotate(-315deg);
+    transition: transform 1.25s;
+  }
+}

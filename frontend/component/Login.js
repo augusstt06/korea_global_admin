@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 import {setAccessCookie, setRefreshCookie, getCookie, removeCookie, setUserCookie} from "../Cookie/HandleCookie";
+import styles from "../styles/components/Login.module.scss";
 
 const Login = () => {
     // Basic Section
@@ -75,9 +76,13 @@ const Login = () => {
     return (
         <>
         {getCookie("access_token_cookie") === undefined ?
-            <div>
-                <div><a>로그인이 필요합니다</a></div>
-                <div className = 'inputLogin'>
+            <div className={styles.login}>
+                <div className={styles.loginText}>
+                    <a>로그인</a>
+                    {/*<br/>*/}
+                    {/*<a>필요합니다</a>*/}
+                </div>
+                <div className = {styles.loginArea}>
                     <input type='text'
                             placeholder ='ID'
                             name = 'username'
@@ -89,14 +94,14 @@ const Login = () => {
                             value = {logIn.password}
                             onChange = {changeInput}/>
                 </div>
-                <div>
-                    <button onClick={doLogin}>로그인</button>
+                <div className={styles.loginBtn}>
+                    <button onClick={doLogin}>확인</button>
                 </div>
             </div>
             :
-            <div>
+            <div className={styles.loginBtn}>
                 <button onClick={doLogout}>
-                    Log Out
+                    로그아웃
                 </button>
             </div>
         }

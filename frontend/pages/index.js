@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import Link from 'next/link';
-import Side from "../component/Side";
+import styles from "../styles/pages/Home.module.scss";
 import axios from "axios";
 import {getCookie} from "../Cookie/HandleCookie";
 
@@ -114,76 +114,131 @@ const Main = () => {
     };
 
     return (
-        <div className='main'>
-            <div className='component'>
-                <Side items = {[
-                    {id : 1, link : `/`, text : '아직 미정'}
-                ]} title='아직 미정'/>
+        <div className={styles.main}>
+            <div className={styles.pageHeader}>
+                {option.pageTitle}
             </div>
-            { main !== null ?
-            <div className='content'>
-                <div className='contentTop'>
-                    <div className='pageTitle'>
-                        <div>{option.pageTitle}</div>
-                    </div>
-                    <div className='searchContainer'>
-                        <select onChange={selectOption}>
-                            <option value='none'>{optionValue.default}</option>
-                            <option value='title'
-                                    name='option'>{optionValue.title}</option>
-                            <option value='body'
-                                    name='option'>{optionValue.body}</option>
-                            <option value='all'
-                                    name='option'>{optionValue.all}</option>
-                        </select>
-                        <input placeholder='검색어를 입력하세요'
-                               type='text'
-                               name='text'
-                               onChange={keywordInput}/>
-                        <button type='submit'
-                                onClick={clickSearch}>검색</button>
-                    </div>
-                </div>
-                <table className='boardTable'>
-                    <thead>
-                        <tr className='tableHead'>
-                            <th>{option.theadNum}</th>
-                            <th>{option.theadTitle}</th>
-                            <th>{option.theadAuthor}</th>
-                            <th>{option.theadDay}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {/* Response Data Mapping*/}
-                    {division()[page].map(data => (
-                        <tr key={data.id}>
-                            <td>{data.id}</td>
-                            <td>
-                                <Link href={{pathname : `/${data.id}`}}>
-                                    {data.title}
-                                </Link>
-                            </td>
-                            <td>{data.userId}</td>
-                            <td><a>2021.08.18</a></td>
-                        </tr>
+            <div className={styles.pageSearch}>
+                <select onChange={selectOption}>
+                    <option value='none'>{optionValue.default}</option>
+                    <option value='title'
+                            name='option'>{optionValue.title}</option>
+                    <option value='body'
+                            name='option'>{optionValue.body}</option>
+                    <option value='all'
+                            name='option'>{optionValue.all}</option>
+                </select>
+                <input placeholder='검색어를 입력하세요'
+                       type='text'
+                       name='text'
+                       onChange={keywordInput}/>
+                <button type='submit'
+                        onClick={clickSearch}>검색</button>
+            </div>
+            <table className={styles.pageTable}>
+                <thead>
+                    <tr>
+                        <th>{option.theadNum}</th>
+                        <th>{option.pageTitle}</th>
+                        <th>{option.theadAuthor}</th>
+                        <th>{option.theadDay}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {division()[page].map(data => (
+                    <tr key={data.id}>
+                        <td>{data.id}</td>
+                        <td>
+                            {data.title}
+                        </td>
+                        <td>{data.userId}</td>
+                        <td>2021.08.18</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+            <div>
+                <div>
+                    {pagination().map(data => (
+                        <div key={data}>
+                            <button onClick={() => {setPage(data-1)}}>
+                                {data}
+                            </button>
+                        </div>
                     ))}
-                    {/**/}
-                    </tbody>
-                </table>
-                <div className='contentBottom'>
-                    <div className='pagination'>
-                        {pagination().map(data => (
-                            <div key={data}>
-                                <button onClick={() => {setPage(data-1)}}>
-                                    {data}
-                                </button>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
-                : <h2>로그인이 필요합니다</h2>}
         </div>
+        // <div className='main'>
+        //     {/*<div className='component'>*/}
+        //     {/*    <Side items = {[*/}
+        //     {/*        {id : 1, link : `/`, text : '아직 미정'}*/}
+        //     {/*    ]} title='아직 미정'/>*/}
+        //     {/*</div>*/}
+        //     { main !== null ?
+        //     <div className='content'>
+        //         <div className='contentTop'>
+        //             <div className='pageTitle'>
+        //                 <div>{option.pageTitle}</div>
+        //             </div>
+        //             <div className='searchContainer'>
+        //                 <select onChange={selectOption}>
+        //                     <option value='none'>{optionValue.default}</option>
+        //                     <option value='title'
+        //                             name='option'>{optionValue.title}</option>
+        //                     <option value='body'
+        //                             name='option'>{optionValue.body}</option>
+        //                     <option value='all'
+        //                             name='option'>{optionValue.all}</option>
+        //                 </select>
+        //                 <input placeholder='검색어를 입력하세요'
+        //                        type='text'
+        //                        name='text'
+        //                        onChange={keywordInput}/>
+        //                 <button type='submit'
+        //                         onClick={clickSearch}>검색</button>
+        //             </div>
+        //         </div>
+        //         <table className='boardTable'>
+        //             <thead>
+        //                 <tr className='tableHead'>
+        //                     <th>{option.theadNum}</th>
+        //                     <th>{option.theadTitle}</th>
+        //                     <th>{option.theadAuthor}</th>
+        //                     <th>{option.theadDay}</th>
+        //                 </tr>
+        //             </thead>
+        //             <tbody>
+        //             {/* Response Data Mapping*/}
+        //             {division()[page].map(data => (
+        //                 <tr key={data.id}>
+        //                     <td>{data.id}</td>
+        //                     <td>
+        //                         <Link href={{pathname : `/${data.id}`}}>
+        //                             {data.title}
+        //                         </Link>
+        //                     </td>
+        //                     <td>{data.userId}</td>
+        //                     <td><a>2021.08.18</a></td>
+        //                 </tr>
+        //             ))}
+        //             {/**/}
+        //             </tbody>
+        //         </table>
+        //         <div className='contentBottom'>
+        //             <div className='pagination'>
+        //                 {pagination().map(data => (
+        //                     <div key={data}>
+        //                         <button onClick={() => {setPage(data-1)}}>
+        //                             {data}
+        //                         </button>
+        //                     </div>
+        //                 ))}
+        //             </div>
+        //         </div>
+        //     </div>
+        //         : <h2>로그인이 필요합니다</h2>}
+        // </div>
     )
 };
 

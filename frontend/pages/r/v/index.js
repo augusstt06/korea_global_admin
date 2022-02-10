@@ -67,10 +67,10 @@ const RoomView = ({data, user}) => {
             { data || user !== null ?
                 goUpdate === false ?
                 <GetRoomDetailView pageInfo    = {pageInfo}
-                           router      = {router}
-                           ssrData     = {data}
-                           user        = {user}
-                           updateState = {updateState}/>
+                                   router      = {router}
+                                   ssrData     = {data}
+                                   user        = {user}
+                                   updateState = {updateState}/>
                     :
                 <PutRoomDetailView pageInfo    = {pageInfo}
                                    router      = {router}

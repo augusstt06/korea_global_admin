@@ -1,0 +1,23 @@
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: monospace;
+  //background: rgba(126,26,44, 0.3);
+  background-color: rgba(126, 28, 40, 0.08);
+}
+*{
+  height: auto;
+  box-sizing: border-box;
+  text-decoration-line: none;
+  a:link{
+    color: black;
+  }
+  a:visited{
+    color: black;
+  }
+}
+
+content{
+  display: flex;
+}

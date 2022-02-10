@@ -1,0 +1,28 @@
+.login{
+  .loginText{
+    padding-bottom: 5px;
+    color: #fff;
+  }
+  .loginArea{
+    input{
+      width: 90px;
+      margin-bottom: 3px;
+      padding: 2px;
+      border: 0.7px;
+      //border-radius: 15px;
+      outline: none;
+    }
+  }
+  .loginBtn{
+      button{
+        background-color: #fff;
+        margin-top: 5px;
+        padding: 2px;
+        border: 0.7px;
+        width: 50px;
+        outline: none;
+        cursor: pointer;
+
+      }
+    }
+}

@@ -1,51 +1,52 @@
 import React, {useState} from 'react';
+import {useRouter} from "next/router";
 import Link from 'next/link';
-import { FaBars, FaTimes } from "react-icons/fa";
-import styles from '../styles/Header.module.scss';
+import {AiOutlinePlus} from "react-icons/ai";
+import styles from '../styles/components/Header.module.scss';
 
 const Header = () => {
-    const [click, setClick] = useState(false);
-    const handleClick = () => {
-        setClick(!click);
+    const router = useRouter();
+    const goHome = () => {
+        router.push('/');
     };
+
+    const [toggle, setToggle] = useState(false);
+    const clickToggle = () => {
+        setToggle(!toggle);
+    };
+
     const pageUrl = useState([
         {name : '학생공간', url : '/r', query : 'free'},
-        {name : '트랙', url : '/track', query :'accounting'},
+        {name : '트   랙', url : '/track', query :'accounting'},
         {name : '쪽지함', url : '/dm'}
     ]);
+
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
-                <Link href = '/'>
-                    <a>고려대학교 글로벌 경영</a>
-                </Link>
+                <a>Global</a>
+                <a>Business</a>
+                <div className={styles.home} onClick={goHome}>
+                    <a>Go</a>
+                    <a>Home</a>
+                </div>
             </div>
-            {click ?
-                <div className={styles.icon_click} onClick={handleClick}>
-                    <FaTimes />
-                </div> :
-                <div className={styles.icon} onClick={handleClick}>
-                    <FaBars />
-                </div>}
-            {click ?
-                <nav className={styles.menu_click} click={click ? 0 : 1}>
-                    {pageUrl[0].map(data => (
-                        <div key={data.url}>
-                            <Link href = {{pathname : data.url , query : {pages : data.query}}}>
-                                <a>{data.name}</a>
-                            </Link>
-                        </div>
-                    ))}
-                </nav> :
-                <nav className={styles.menu_noclick} click={click ? 0 : 1}>
-                    {pageUrl[0].map(data => (
-                        <div key={data.name}>
+            <div className={!toggle ? styles.menu : styles.menuActive}>
+                <ul>
+                {pageUrl[0].map(data => (
+                    <li key={data.url}>
+                        <a>
                             <Link href={{pathname : data.url, query : {pages : data.query}}}>
-                                <a>{data.name}</a>
+                                {data.name}
                             </Link>
-                        </div>
-                    ))}
-                </nav>}
+                        </a>
+                    </li>
+                ))}
+                </ul>
+            </div>
+            <div className={!toggle ? styles.plus : styles.plusActive}>
+                <h2 onClick={clickToggle}><AiOutlinePlus/></h2>
+            </div>
         </div>
     )
 }
